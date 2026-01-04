@@ -1,9 +1,76 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Created with Next.js and Tailwind CSS 4",
+  metadataBase: new URL("https://piotrzadka.dev"),
+  title: {
+    default: "Piotr Zadka | Full-stack Developer",
+    template: "%s | Piotr Zadka",
+  },
+  description:
+    "Full-stack developer specializing in React, Next.js, and AI-driven productivity. Building accessible, high-performance web applications.",
+  keywords: [
+    "Software Engineer",
+    "Full-stack Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Portfolio",
+    "Piotr Zadka",
+  ],
+  authors: [{ name: "Piotr Zadka", url: "https://piotrzadka.dev" }],
+  creator: "Piotr Zadka",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://piotrzadka.dev",
+    title: "Piotr Zadka | Full-stack Developer",
+    description:
+      "Full-stack developer specializing in React, Next.js, and AI-driven productivity.",
+    siteName: "Piotr Zadka Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Piotr Zadka | Full-stack Developer",
+    description:
+      "Full-stack developer specializing in React, Next.js, and AI-driven productivity.",
+    creator: "@piotrzadka",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -12,9 +79,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
+    >
+      <body className="antialiased font-sans bg-background text-foreground flex flex-col min-h-screen">
+        <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
+        <Header />
+        <main className="flex-1 relative z-10">{children}</main>
+        <Footer />
       </body>
     </html>
   );

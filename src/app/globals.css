@@ -1,17 +1,68 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-muted: var(--primary-muted);
+
+  --color-surface: var(--surface);
+  --color-border: var(--border);
 }
 
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* 
+  Color Palette from PLAN.md
+  Background (Dark): #0a0a0b
+  Background (Light): #fafafa
+  Foreground (Dark): #e5e5e5
+  Foreground (Light): #171717
+  Accent Primary: #14b8a6 (teal-500)
+  Accent Muted: #0d9488 (teal-600)
+  Surface: #18181b (zinc-900)
+  Border: #27272a (zinc-800)
+*/
+
+:root {
+  /* Default to Dark Mode */
+  --background: #0a0a0b;
+  --foreground: #e5e5e5;
+
+  --primary: #14b8a6;
+  --primary-muted: #0d9488;
+
+  --surface: #18181b;
+  --border: #27272a;
+}
+
+/* Light Mode Overrides (triggered by .light class on html/body) */
+.light {
+  --background: #fafafa;
+  --foreground: #171717;
+
+  /* Adjust surface/border for light mode if needed, 
+     keeping dark-mode-first aesthetic for now as per plan */
+  --surface: #ffffff;
+  --border: #e5e5e5;
 }
 
 body {
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Subtle Grid Pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  opacity: 0.05;
 }

@@ -1,22 +1,86 @@
+import { HeroSection } from "@/components/layout/HeroSection";
+import { ExperienceTimeline } from "@/components/layout/ExperienceTimeline";
+import { CaseStudyCard } from "@/components/layout/CaseStudyCard";
+import { ContactSection } from "@/components/layout/ContactSection";
+import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import { profile } from "@/data/profile";
+import { experience } from "@/data/experience";
+import { projects } from "@/data/projects";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-bold">Welcome to your new Portfolio</h1>
-        <p className="text-lg">
-          Powered by Next.js 16, React 19, and Tailwind CSS 4.
-        </p>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://nextjs.org/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read the docs
-          </a>
-        </div>
-      </main>
+    <div className="flex flex-col gap-0">
+      <HeroSection name={profile.name} tagline={profile.tagline} />
+
+      <Section className="bg-surface/30">
+        <Container>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+                Latest Experience
+              </h2>
+              <p className="text-muted-foreground max-w-2xl">
+                My professional journey in software engineering.
+              </p>
+            </div>
+            <Link href="/experience" className="hidden md:block">
+              <Button variant="ghost" className="gap-2">
+                View Full Timeline <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+
+          <ExperienceTimeline items={experience.slice(0, 2)} />
+
+          <div className="mt-8 md:hidden text-center">
+            <Link href="/experience">
+              <Button variant="outline" className="w-full">
+                View Full Timeline
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+                Featured Projects
+              </h2>
+              <p className="text-muted-foreground max-w-2xl">
+                A selection of projects that demonstrate my technical expertise.
+              </p>
+            </div>
+            <Link href="/projects" className="hidden md:block">
+              <Button variant="ghost" className="gap-2">
+                View All Projects <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.slice(0, 3).map((project) => (
+              <CaseStudyCard key={project.id} project={project} />
+            ))}
+          </div>
+
+          <div className="mt-12 md:hidden text-center">
+            <Link href="/projects">
+              <Button variant="outline" className="w-full">
+                View All Projects
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
+      <ContactSection email={profile.email} social={profile.social} />
     </div>
   );
 }

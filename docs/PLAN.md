@@ -3,11 +3,10 @@
 ## 1. Project Overview
 
 - **References**
-  - [Piotr Zadka CV](https://nextcloud.piotrzadka.dev/index.php/s/Men9EaFDCk2fy3a)
   - [Piotr Zadka GitHub Profile](https://github.com/piotrzadka)
 
 - **Purpose:** Build a portfolio website that communicates my professional narrative, showcases my craft, and establishes my personal brand as a developer.
-- **Target Audience:** Potential employers, clients, and collaborators.
+- **Target Audience:** Potential employers, clients, and recruiters.
 - **Success Criteria:** A visually distinctive, memorable portfolio that demonstrates technical expertise through its own implementation. Fast, accessible, and mobile-first.
 
 ---
@@ -92,75 +91,75 @@
 
 ### Phase 0: Design Foundation
 
-- [ ] Define design tokens in `globals.css` (colors, typography, spacing)
-- [ ] Set up dark/light mode CSS variables
-- [ ] Configure Inter and JetBrains Mono fonts
-- [ ] Create subtle grid background pattern
+- [x] Define design tokens in `globals.css` (colors, typography, spacing)
+- [x] Set up dark/light mode CSS variables
+- [x] Configure Inter and JetBrains Mono fonts
+- [x] Create subtle grid background pattern
 
 ### Phase 1: Architecture & Layout
 
-- [ ] Create `src/types/index.ts` with rich interfaces (Profile, Experience, CaseStudy, BlogPost)
-- [ ] Create shared layout (`Header`, `Footer`) with navigation
-- [ ] Implement dark/light mode toggle component
-- [ ] Set up smooth scroll and page transition foundations
+- [x] Create `src/types/index.ts` with rich interfaces (Profile, Experience, CaseStudy, BlogPost)
+- [x] Create shared layout (`Header`, `Footer`) with navigation
+- [x] Implement dark/light mode toggle component
+- [x] Set up smooth scroll and page transition foundations
 
 ### Phase 2: Data Layer
 
-- [ ] Create `src/data/profile.ts` (personal info, social links)
-- [ ] Create `src/data/experience.ts` (career timeline with impact statements)
-- [ ] Create `src/data/projects.ts` (case study structure)
-- [ ] Create `src/content/blog/` directory for MDX posts
+- [x] Create `src/data/profile.ts` (personal info, social links)
+- [x] Create `src/data/experience.ts` (career timeline with impact statements)
+- [x] Create `src/data/projects.ts` (case study structure)
+- [x] Create `src/content/blog/` directory for MDX posts
 
 ### Phase 3: Component Development
 
 **UI Primitives:**
 
-- [ ] `Container` - Max-width wrapper with responsive padding
-- [ ] `Section` - Semantic section with consistent spacing
-- [ ] `Button` - Primary/secondary variants with hover states
-- [ ] `Card` - Elevated surface with hover lift effect
-- [ ] `Badge` - Technology/skill tags
+- [x] `Container` - Max-width wrapper with responsive padding
+- [x] `Section` - Semantic section with consistent spacing
+- [x] `Button` - Primary/secondary variants with hover states
+- [x] `Card` - Elevated surface with hover lift effect
+- [x] `Badge` - Technology/skill tags
 
 **Feature Components:**
 
-- [ ] `HeroSection` - Animated typing effect, value proposition, CTA
-- [ ] `ExperienceTimeline` - Interactive, expandable career entries
-- [ ] `CaseStudyCard` - Project preview with image and summary
-- [ ] `CaseStudyDetail` - Full case study layout (problem/approach/results)
-- [ ] `ContactSection` - Contact info with social links
-- [ ] `AboutSection` - Personal story with photo
+- [x] `HeroSection` - Animated typing effect, value proposition, CTA
+- [x] `ExperienceTimeline` - Interactive, expandable career entries
+- [x] `CaseStudyCard` - Project preview with image and summary
+- [x] `CaseStudyDetail` - Full case study layout (problem/approach/results)
+- [x] `ContactSection` - Contact info with social links
+- [x] `AboutSection` - Personal story with photo
 
 **Blog System:**
 
-- [ ] Configure MDX with syntax highlighting
-- [ ] `PostList` - Blog index with previews
-- [ ] `PostLayout` - Individual post template with metadata
+- [x] Configure MDX with syntax highlighting
+- [x] `PostList` - Blog index with previews
+- [x] `PostLayout` - Individual post template with metadata
 
 ### Phase 4: Page Assembly
 
-- [ ] Build homepage (`/`) - Hero, Experience preview, Featured projects, Contact CTA
-- [ ] Build experience page (`/experience`) - Full timeline
-- [ ] Build projects page (`/projects`) - Case study grid
-- [ ] Build individual project pages (`/projects/[slug]`)
-- [ ] Build blog index (`/blog`)
-- [ ] Build blog post pages (`/blog/[slug]`)
-- [ ] Build about page (`/about`)
+- [x] Build homepage (`/`) - Hero, Experience preview, Featured projects, Contact CTA
+- [x] Build experience page (`/experience`) - Full timeline
+- [x] Build projects page (`/projects`) - Case study grid
+- [x] Build individual project pages (`/projects/[slug]`)
+- [x] Build blog index (`/blog`)
+- [x] Build blog post pages (`/blog/[slug]`)
+- [x] Build about page (`/about`)
 
 ### Phase 5: Content Population
 
-- [ ] Write hero copy and tagline
-- [ ] Populate experience data from CV (with impact statements)
-- [ ] Create 2-3 case study entries (problem/approach/results format)
-- [ ] Write about page content
-- [ ] Create 1 sample blog post (technical deep-dive)
+- [x] Write hero copy and tagline
+- [x] Populate experience data from CV (with impact statements)
+- [x] Create 2-3 case study entries (problem/approach/results format)
+- [x] Write about page content
+- [x] Create 1 sample blog post (technical deep-dive)
 
 ### Phase 6: Polish & Optimization
 
-- [ ] Verify mobile responsiveness (test at 320px, 768px, 1024px, 1440px)
-- [ ] Audit accessibility (color contrast, focus states, ARIA labels)
-- [ ] Configure SEO metadata (title, description, Open Graph, Twitter cards)
-- [ ] Add favicon and social preview image
-- [ ] Performance audit (Lighthouse score target: 90+)
+- [x] Verify mobile responsiveness (test at 320px, 768px, 1024px, 1440px)
+- [x] Audit accessibility (color contrast, focus states, ARIA labels)
+- [x] Configure SEO metadata (title, description, Open Graph, Twitter cards)
+- [x] Add favicon and social preview image
+- [x] Performance audit (Lighthouse score target: 90+)
 
 ### Phase 7: Deploy
 
