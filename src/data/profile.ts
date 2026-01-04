@@ -11,8 +11,7 @@ export const profile: Profile = {
   email: "piotr.zadka@gmail.com",
   social: {
     github: "https://github.com/piotrzadka",
-    linkedin: "https://linkedin.com/in/piotrzadka", // Assumed based on standard pattern, user can update if different
-    twitter: "https://twitter.com/piotrzadka", // Keeping from previous file as placeholder
+    linkedin: "https://linkedin.com/in/piotrzadka",
   },
   skills: [
     "React",

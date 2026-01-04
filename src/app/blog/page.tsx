@@ -10,6 +10,9 @@ import {
   CardFooter,
 } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
+import { ExternalLink } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { getSkillBadgeClassName } from "@/lib/skills";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -39,47 +42,62 @@ export default async function BlogPage() {
       <Section className="pt-8">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {posts.map((post) => (
-              <Link
-                key={post.id}
-                href={`/blog/${post.slug}`}
-                className="block group h-full"
-              >
-                <Card className="h-full transition-all hover:border-primary/50 hover:shadow-md">
-                  <CardHeader>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-muted-foreground">
-                        {post.date}
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        {post.readTime}
-                      </span>
-                    </div>
-                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">
-                      {post.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base line-clamp-3">
-                      {post.excerpt}
-                    </CardDescription>
-                  </CardContent>
-                  <CardFooter>
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="text-xs"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardFooter>
-                </Card>
-              </Link>
-            ))}
+            {posts.map((post) => {
+              const href = post.externalUrl || `/blog/${post.slug}`;
+              const isExternal = !!post.externalUrl;
+
+              return (
+                <Link
+                  key={post.id}
+                  href={href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="block group h-full"
+                >
+                  <Card className="h-full transition-all hover:border-primary/50 hover:shadow-md">
+                    <CardHeader>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-muted-foreground">
+                          {post.date}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {isExternal && (
+                            <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                          )}
+                          <span className="text-sm text-muted-foreground">
+                            {post.readTime}
+                          </span>
+                        </div>
+                      </div>
+                      <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                        {post.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base line-clamp-3">
+                        {post.excerpt}
+                      </CardDescription>
+                    </CardContent>
+                    <CardFooter>
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags?.map((tag) => (
+                          <Badge
+                            key={tag}
+                            variant="outline"
+                            className={cn(
+                              "text-xs",
+                              getSkillBadgeClassName(tag)
+                            )}
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </Container>
       </Section>

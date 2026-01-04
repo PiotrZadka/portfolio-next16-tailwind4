@@ -51,4 +51,5 @@ export interface BlogPost {
   readTime: string;
   tags: string[];
   content: string; // MDX content
+  externalUrl?: string; // Optional external link (e.g., Medium article)
 }

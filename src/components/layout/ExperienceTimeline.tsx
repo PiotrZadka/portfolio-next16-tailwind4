@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { ChevronDown, ChevronUp, Calendar, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getSkillBadgeClassName } from "@/lib/skills";
 
 interface ExperienceTimelineProps {
   items: Experience[];
@@ -131,7 +132,14 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                             </h4>
                             <div className="flex flex-wrap gap-2">
                               {item.technologies.map((tech) => (
-                                <Badge key={tech} variant="secondary">
+                                <Badge
+                                  key={tech}
+                                  variant="outline"
+                                  className={cn(
+                                    "text-xs",
+                                    getSkillBadgeClassName(tech)
+                                  )}
+                                >
                                   {tech}
                                 </Badge>
                               ))}

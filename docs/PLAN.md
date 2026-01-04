@@ -70,18 +70,34 @@
 
 - **Frontend:** Next.js 16 (App Router), React 19, and Tailwind CSS 4.
 - **Backend:** Next.js Server Actions (for contact form).
-- **Content (General):** Local TypeScript data files (in `src/data/`).
-- **Content (Blog):** MDX (Markdown + JSX) for rich posts with code highlighting.
+- **Content (Dynamic):** Sanity CMS for blog posts, projects, and experience data.
+- **Content (Static):** Local TypeScript data files (in `src/data/`) for rarely-changing data like profile info.
 - **Styling/UI:** Tailwind CSS 4 with CSS variables for theming.
 - **Fonts:** Next.js Font Optimization (Inter, JetBrains Mono).
 - **Animations:** CSS transitions + Tailwind animation utilities.
+
+### Content Management Strategy
+
+Sanity CMS will manage all frequently-updated content, enabling edits without code deployments:
+
+| Content Type          | Source              | Rationale                               |
+| --------------------- | ------------------- | --------------------------------------- |
+| Blog posts            | Sanity CMS          | Frequent updates, typo fixes, new posts |
+| Projects/Case studies | Sanity CMS          | Occasional updates, rich content        |
+| Experience timeline   | Sanity CMS          | Career updates without deploys          |
+| Profile info          | Local (`src/data/`) | Rarely changes, simple structure        |
+| Skills list           | Local (`src/data/`) | Rarely changes                          |
+
+**Workflow:** Edit in Sanity Studio → Save → Webhook triggers Vercel rebuild → Site updates (~30-60s)
 
 ---
 
 ## 5. Hosting & Infrastructure
 
 - **Hosting:** Vercel (Zero-config deployment via CLI).
+- **CMS:** Sanity (headless CMS with real-time editing).
 - **Domain:** piotrzadka.dev (Cloudflare DNS pointing to Vercel).
+- **CI/CD:** GitHub → Vercel (auto-deploy on push) + Sanity webhooks (rebuild on content change).
 
 ---
 
@@ -127,7 +143,7 @@
 - [x] `CaseStudyCard` - Project preview with image and summary
 - [x] `CaseStudyDetail` - Full case study layout (problem/approach/results)
 - [x] `ContactSection` - Contact info with social links
-- [x] `AboutSection` - Personal story with photo
+- [x] `AboutSection` - Personal story with animated code terminal
 
 **Blog System:**
 
@@ -161,13 +177,43 @@
 - [x] Add favicon and social preview image
 - [x] Performance audit (Lighthouse score target: 90+)
 
-### Phase 7: Deploy
+### Phase 7: Sanity CMS Integration
+
+- [x] Create Sanity project and install dependencies (`sanity`, `next-sanity`)
+- [x] Define Sanity schemas (blog posts, projects, experience)
+- [x] Set up Sanity Studio (embedded at `/studio`)
+- [x] Create Sanity client and GROQ queries
+- [x] Migrate blog pages to fetch from Sanity
+- [x] Migrate projects pages to fetch from Sanity
+- [x] Migrate experience data to fetch from Sanity
+- [x] Test content editing workflow in Sanity Studio
+- [x] Remove legacy MDX files and local data files (cleanup)
+
+### Phase 8: GitHub & Vercel Integration
+
+- [ ] Push code to GitHub repository
+- [ ] Connect GitHub repo to Vercel
+- [ ] Configure Environment Variables in Vercel dashboard
+- [ ] Configure Sanity webhook to trigger Vercel rebuilds
+- [ ] Test end-to-end: Sanity edit → webhook → Vercel rebuild → live update
+
+### Phase 9: Pre-Deployment QA
+
+- [ ] Manual testing of all pages and interactions
+- [ ] Verify Sanity content renders correctly
+- [ ] Test on multiple browsers (Chrome, Firefox, Safari)
+- [ ] Test on mobile devices
+- [ ] Fix any noticeable bugs
+- [ ] Final approval from owner
+
+### Phase 10: Production Deployment
 
 - [ ] Run `vercel login` to authenticate
 - [ ] Run `vercel link` to connect project
 - [ ] Run `vercel deploy --prod` for production deployment
 - [ ] Configure custom domain (piotrzadka.dev)
 - [ ] Verify live site functionality
+- [ ] Set up Sanity production dataset (if using separate dev/prod)
 
 ---
 
@@ -183,12 +229,13 @@ Initial posts to establish authority and voice:
 
 ## 8. Future Enhancements (Post-Launch)
 
+- [ ] Unit tests with Vitest (component and utility testing)
 - [ ] Contact form with Server Actions (email integration)
 - [ ] RSS feed for blog
 - [ ] Reading time estimates on blog posts
 - [ ] "Copy link" button on blog posts
 - [ ] Analytics (privacy-respecting, e.g., Plausible or Umami)
-- [ ] CMS migration (Sanity or Contentful) if content updates become frequent
+- [ ] Sanity Studio preview mode (live preview while editing)
 
 ---
 

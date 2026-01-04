@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { CaseStudy } from "@/types";
 import {
   Card,
@@ -12,6 +11,8 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { getSkillBadgeClassName } from "@/lib/skills";
 
 interface CaseStudyCardProps {
   project: CaseStudy;
@@ -47,12 +48,16 @@ export function CaseStudyCard({ project }: CaseStudyCardProps) {
 
       <CardContent className="flex-1">
         <div className="flex flex-wrap gap-2">
-          {project.technologies.slice(0, 4).map((tech) => (
-            <Badge key={tech} variant="secondary" className="text-xs">
+          {project.technologies?.slice(0, 4).map((tech) => (
+            <Badge
+              key={tech}
+              variant="outline"
+              className={cn("text-xs", getSkillBadgeClassName(tech))}
+            >
               {tech}
             </Badge>
           ))}
-          {project.technologies.length > 4 && (
+          {project.technologies?.length > 4 && (
             <Badge variant="outline" className="text-xs">
               +{project.technologies.length - 4}
             </Badge>

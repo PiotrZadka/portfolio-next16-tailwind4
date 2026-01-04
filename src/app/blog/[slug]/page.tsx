@@ -3,7 +3,9 @@ import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { PortableText } from "@portabletext/react";
+import { cn } from "@/lib/utils";
+import { getSkillBadgeClassName } from "@/lib/skills";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
@@ -71,8 +73,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <p className="text-xl text-muted-foreground mb-8">{post.excerpt}</p>
 
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
+            {post.tags?.map((tag) => (
+              <Badge
+                key={tag}
+                variant="outline"
+                className={cn("text-sm py-1 px-3", getSkillBadgeClassName(tag))}
+              >
                 {tag}
               </Badge>
             ))}
@@ -83,7 +89,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <Section>
         <Container className="max-w-3xl">
           <div className="prose prose-lg dark:prose-invert max-w-none">
-            <MDXRemote source={post.content} />
+            <PortableText value={post.content as any} />
           </div>
         </Container>
       </Section>

@@ -1,7 +1,7 @@
 import { ExperienceTimeline } from "@/components/layout/ExperienceTimeline";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { experience } from "@/data/experience";
+import { client } from "../../../sanity/lib/client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,23 @@ export const metadata: Metadata = {
   description: "My professional journey and career timeline.",
 };
 
-export default function ExperiencePage() {
+async function getExperience() {
+  const query = `*[_type == "experience"] | order(order asc) {
+    "id": _id,
+    company,
+    role,
+    startDate,
+    endDate,
+    description,
+    impact,
+    technologies
+  }`;
+  return await client.fetch(query);
+}
+
+export default async function ExperiencePage() {
+  const experience = await getExperience();
+
   return (
     <div className="flex flex-col">
       <Section className="pb-8 pt-24">

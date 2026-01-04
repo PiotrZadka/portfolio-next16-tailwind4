@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
-import { projects } from "@/data/projects";
+import { client } from "../../../../sanity/lib/client";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { getSkillBadgeClassName } from "@/lib/skills";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -14,11 +16,25 @@ interface ProjectPageProps {
   }>;
 }
 
+async function getProject(slug: string) {
+  const query = `*[_type == "project" && slug.current == $slug][0] {
+    "id": _id,
+    title,
+    "slug": slug.current,
+    summary,
+    "coverImage": coverImage.asset->url,
+    technologies,
+    links,
+    content
+  }`;
+  return await client.fetch(query, { slug });
+}
+
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProject(slug);
 
   if (!project) {
     return {
@@ -33,14 +49,16 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
+  const query = `*[_type == "project"] { "slug": slug.current }`;
+  const projects = await client.fetch(query);
+  return projects.map((project: any) => ({
     slug: project.slug,
   }));
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProject(slug);
 
   if (!project) {
     notFound();
@@ -66,7 +84,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </p>
 
           <div className="flex flex-wrap gap-4 mb-8">
-            {project.links.repo && (
+            {project.links?.repo && (
               <Link
                 href={project.links.repo}
                 target="_blank"
@@ -78,7 +96,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </Button>
               </Link>
             )}
-            {project.links.demo && (
+            {project.links?.demo && (
               <Link
                 href={project.links.demo}
                 target="_blank"
@@ -93,11 +111,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech) => (
+            {project.technologies?.map((tech: string) => (
               <Badge
                 key={tech}
-                variant="secondary"
-                className="text-sm py-1 px-3"
+                variant="outline"
+                className={cn(
+                  "text-sm py-1 px-3",
+                  getSkillBadgeClassName(tech)
+                )}
               >
                 {tech}
               </Badge>
@@ -109,26 +130,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Section>
         <Container className="max-w-4xl">
           <div className="space-y-12">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">The Problem</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {project.content.problem}
-              </p>
-            </div>
+            {project.content?.problem && (
+              <div>
+                <h2 className="text-2xl font-bold mb-4">The Problem</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {project.content.problem}
+                </p>
+              </div>
+            )}
 
-            <div>
-              <h2 className="text-2xl font-bold mb-4">The Approach</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {project.content.approach}
-              </p>
-            </div>
+            {project.content?.approach && (
+              <div>
+                <h2 className="text-2xl font-bold mb-4">The Approach</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {project.content.approach}
+                </p>
+              </div>
+            )}
 
-            <div>
-              <h2 className="text-2xl font-bold mb-4">The Results</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {project.content.results}
-              </p>
-            </div>
+            {project.content?.results && (
+              <div>
+                <h2 className="text-2xl font-bold mb-4">The Results</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {project.content.results}
+                </p>
+              </div>
+            )}
           </div>
         </Container>
       </Section>
