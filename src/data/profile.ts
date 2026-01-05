@@ -11,7 +11,7 @@ export const profile: Profile = {
   email: "piotr.zadka@gmail.com",
   social: {
     github: "https://github.com/piotrzadka",
-    linkedin: "https://linkedin.com/in/piotrzadka",
+    linkedin: "https://linkedin.com/in/piotr-zadka",
   },
   skills: [
     "React",

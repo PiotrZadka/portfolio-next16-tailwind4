@@ -32,9 +32,9 @@
 ### Color Palette
 
 - **Background (Dark):** `#0a0a0b` (near-black with subtle warmth)
-- **Background (Light):** `#fafafa` (soft white)
+- **Background (Light):** `#e2e8f0` (deep slate blue - easier on eyes)
 - **Foreground (Dark):** `#e5e5e5` (soft white text)
-- **Foreground (Light):** `#171717` (near-black text)
+- **Foreground (Light):** `#0f172a` (dark slate text)
 - **Accent Primary:** `#14b8a6` (teal-500 - modern, tech-forward)
 - **Accent Muted:** `#0d9488` (teal-600 - for hover states)
 - **Surface:** `#18181b` (zinc-900 - cards, elevated surfaces)

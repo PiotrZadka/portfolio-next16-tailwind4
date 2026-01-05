@@ -75,15 +75,15 @@
 
 /* Light Mode Overrides (triggered by .light class on html/body) */
 .light {
-  --background: #fafafa;
-  --foreground: #171717;
+  --background: #e2e8f0;
+  --foreground: #0f172a;
 
   /* Adjust surface/border for light mode for better contrast */
-  --surface: #f4f4f5;
-  --border: #d4d4d8;
+  --surface: #cbd5e1;
+  --border: #94a3b8;
 
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  --muted: #cbd5e1;
+  --muted-foreground: #475569;
 
   /* Syntax Highlighting (Light) */
   --syntax-keyword: #7c3aed;
