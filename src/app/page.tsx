@@ -11,6 +11,11 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 async function getData() {
+  const profileQuery = `*[_type == "profile"][0] {
+    resume,
+    "resumeFile": resumeFile.asset->url
+  }`;
+
   const experienceQuery = `*[_type == "experience"] | order(order asc) [0...2] {
     "id": _id,
     company,
@@ -32,23 +37,25 @@ async function getData() {
     links
   }`;
 
-  const [experience, projects] = await Promise.all([
+  const [profileData, experience, projects] = await Promise.all([
+    client.fetch(profileQuery),
     client.fetch(experienceQuery),
     client.fetch(projectsQuery),
   ]);
 
-  return { experience, projects };
+  return { profileData, experience, projects };
 }
 
 export default async function Home() {
-  const { experience, projects } = await getData();
+  const { profileData, experience, projects } = await getData();
+  const resumeUrl = profileData?.resumeFile || profileData?.resume;
 
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
         name={profile.name}
         tagline={profile.tagline}
-        resume={profile.resume}
+        resume={resumeUrl}
       />
 
       <Section className="bg-muted/50">

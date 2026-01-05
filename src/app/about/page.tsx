@@ -3,6 +3,7 @@ import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { profile } from "@/data/profile";
+import { client } from "../../../sanity/lib/client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,7 +12,23 @@ export const metadata: Metadata = {
     "Learn more about my background, skills, and professional journey.",
 };
 
-export default function AboutPage() {
+async function getProfileData() {
+  const query = `*[_type == "profile"][0] {
+    resume,
+    "resumeFile": resumeFile.asset->url
+  }`;
+  return await client.fetch(query);
+}
+
+export default async function AboutPage() {
+  const profileData = await getProfileData();
+  const resumeUrl = profileData?.resumeFile || profileData?.resume;
+
+  const mergedProfile = {
+    ...profile,
+    resume: resumeUrl,
+  };
+
   return (
     <div className="flex flex-col">
       <Section className="pb-8 pt-24">
@@ -25,7 +42,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <AboutSection profile={profile} />
+      <AboutSection profile={mergedProfile} />
 
       <ContactSection email={profile.email} social={profile.social} />
     </div>
