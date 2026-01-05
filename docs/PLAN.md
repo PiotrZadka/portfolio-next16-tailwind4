@@ -206,7 +206,7 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 - [x] Fix any noticeable bugs
 - [x] Final approval from owner
 
-### Phase 10: Production Deployment
+### Phase 10: Production Deployment (In Progress)
 
 - [ ] Run `vercel login` to authenticate
 - [ ] Run `vercel link` to connect project
