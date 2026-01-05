@@ -5,15 +5,20 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { FileText } from "lucide-react";
 
 interface HeroSectionProps {
   name: string;
   tagline: string;
+  resume?: string;
 }
 
-export function HeroSection({ name, tagline }: HeroSectionProps) {
+export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!isTyping) return;
@@ -31,6 +36,18 @@ export function HeroSection({ name, tagline }: HeroSectionProps) {
 
     return () => clearInterval(intervalId);
   }, [tagline, isTyping]);
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+        // Update URL without jumping
+        window.history.pushState(null, "", "#contact");
+      }
+    }
+  };
 
   return (
     <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden py-20">
@@ -65,14 +82,26 @@ export function HeroSection({ name, tagline }: HeroSectionProps) {
         >
           <Link href="/projects">
             <Button size="lg" className="w-full sm:w-auto">
-              View My Work
+              View My Projects
             </Button>
           </Link>
-          <Link href="/contact">
+          <Link href="/#contact" onClick={handleContactClick}>
             <Button variant="outline" size="lg" className="w-full sm:w-auto">
               Contact Me
             </Button>
           </Link>
+          {resume && (
+            <Link href={resume} target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto gap-2"
+              >
+                <FileText className="h-5 w-5" />
+                View CV
+              </Button>
+            </Link>
+          )}
         </motion.div>
       </Container>
 

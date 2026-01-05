@@ -11,7 +11,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ email, social }: ContactSectionProps) {
   return (
-    <section className="py-20 bg-surface/30">
+    <section id="contact" className="py-20 bg-muted/50">
       <Container className="text-center max-w-2xl">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
           Get In Touch

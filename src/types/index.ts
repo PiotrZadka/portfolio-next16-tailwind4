@@ -10,6 +10,7 @@ export interface Profile {
     linkedin: string;
     twitter?: string;
   };
+  resume?: string;
   skills: string[];
 }
 

@@ -4,29 +4,52 @@ import { useState, useEffect } from "react";
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check local storage or system preference on mount
-    const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
+    setMounted(true);
 
-    const initialTheme = savedTheme || systemTheme;
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle(
-      "light",
-      initialTheme === "light"
-    );
+    if (typeof window === "undefined") return;
+
+    try {
+      // Check local storage or system preference on mount
+      const savedTheme = localStorage.getItem("theme") as
+        | "dark"
+        | "light"
+        | null;
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+
+      const initialTheme = savedTheme || systemTheme;
+      setTheme(initialTheme);
+      document.documentElement.classList.toggle(
+        "light",
+        initialTheme === "light"
+      );
+    } catch (error) {
+      console.error("Failed to access theme preferences:", error);
+    }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("light", newTheme === "light");
+    if (typeof window === "undefined") return;
+
+    try {
+      const newTheme = theme === "dark" ? "light" : "dark";
+      setTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.classList.toggle("light", newTheme === "light");
+    } catch (error) {
+      console.error("Failed to save theme preference:", error);
+    }
   };
+
+  // Prevent hydration mismatch by not rendering the toggle until mounted
+  if (!mounted) {
+    return <div className="p-2 w-9 h-9" />; // Placeholder with same dimensions
+  }
 
   return (
     <button

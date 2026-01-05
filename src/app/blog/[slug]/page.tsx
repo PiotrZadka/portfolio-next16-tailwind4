@@ -51,7 +51,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article className="flex flex-col">
-      <Section className="pb-8 pt-24 bg-surface/30 border-b border-border/40">
+      <Section className="pb-8 pt-24 bg-muted/50 border-b border-border/40">
         <Container className="max-w-3xl">
           <Link
             href="/blog"

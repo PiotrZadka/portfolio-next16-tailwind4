@@ -65,7 +65,7 @@ export function CaseStudyCard({ project }: CaseStudyCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="flex justify-between border-t border-border/50 pt-4 relative z-10 bg-surface">
+      <CardFooter className="flex justify-between border-t border-border/50 pt-4 relative z-10">
         <div className="flex gap-2">
           {project.links.repo && (
             <Link

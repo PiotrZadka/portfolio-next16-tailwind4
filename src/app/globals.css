@@ -15,6 +15,22 @@
 
   --color-surface: var(--surface);
   --color-border: var(--border);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* Syntax Highlighting */
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-property: var(--syntax-property);
+  --color-syntax-function: var(--syntax-function);
+  --color-syntax-punctuation: var(--syntax-punctuation);
+
+  /* Terminal */
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-header: var(--terminal-header);
+  --color-terminal-text: var(--terminal-text);
+  --color-terminal-line-number: var(--terminal-line-number);
 }
 
 /* 
@@ -39,6 +55,22 @@
 
   --surface: #18181b;
   --border: #27272a;
+
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+
+  /* Syntax Highlighting (Dark) */
+  --syntax-keyword: #cba6f7;
+  --syntax-string: #a6e3a1;
+  --syntax-property: #89b4fa;
+  --syntax-function: #f9e2af;
+  --syntax-punctuation: #949cbb;
+
+  /* Terminal (Dark) */
+  --terminal-bg: #1e1e2e;
+  --terminal-header: #181825;
+  --terminal-text: #cdd6f4;
+  --terminal-line-number: #6c7086;
 }
 
 /* Light Mode Overrides (triggered by .light class on html/body) */
@@ -46,15 +78,61 @@
   --background: #fafafa;
   --foreground: #171717;
 
-  /* Adjust surface/border for light mode if needed, 
-     keeping dark-mode-first aesthetic for now as per plan */
-  --surface: #ffffff;
-  --border: #e5e5e5;
+  /* Adjust surface/border for light mode for better contrast */
+  --surface: #f4f4f5;
+  --border: #d4d4d8;
+
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+
+  /* Syntax Highlighting (Light) */
+  --syntax-keyword: #7c3aed;
+  --syntax-string: #059669;
+  --syntax-property: #2563eb;
+  --syntax-function: #d97706;
+  --syntax-punctuation: #71717a;
+
+  /* Terminal (Light) */
+  --terminal-bg: #ffffff;
+  --terminal-header: #f4f4f5;
+  --terminal-text: #1f2937;
+  --terminal-line-number: #9ca3af;
 }
 
+html,
 body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
   background-color: var(--background);
   color: var(--foreground);
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Typography Overrides */
+.prose {
+  --tw-prose-body: var(--muted-foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-bullets: var(--primary);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--primary);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+  --tw-prose-invert-body: var(--muted-foreground);
+  --tw-prose-invert-headings: var(--foreground);
+  --tw-prose-invert-links: var(--primary);
+  --tw-prose-invert-bold: var(--foreground);
+  --tw-prose-invert-bullets: var(--primary);
+  --tw-prose-invert-quotes: var(--foreground);
+  --tw-prose-invert-quote-borders: var(--primary);
+  --tw-prose-invert-hr: var(--border);
+  --tw-prose-invert-th-borders: var(--border);
+  --tw-prose-invert-td-borders: var(--border);
 }
 
 /* Subtle Grid Pattern */

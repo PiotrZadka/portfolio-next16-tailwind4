@@ -13,6 +13,7 @@ export const profile: Profile = {
     github: "https://github.com/piotrzadka",
     linkedin: "https://linkedin.com/in/piotrzadka",
   },
+  resume: "https://nextcloud.piotrzadka.dev/index.php/s/sQoccGk5ozsBGn4",
   skills: [
     "React",
     "TypeScript",

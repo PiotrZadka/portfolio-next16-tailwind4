@@ -29,7 +29,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   };
 
   return (
-    <div className="relative space-y-8 pl-8 md:pl-0">
+    <div className="relative space-y-8 pl-6 md:pl-0">
       {/* Vertical Line */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-1/2" />
 
@@ -46,7 +46,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
             )}
           >
             {/* Timeline Dot */}
-            <div className="absolute left-[-33px] top-6 h-4 w-4 rounded-full border-2 border-primary bg-background md:left-1/2 md:-translate-x-1/2 md:top-6 z-10" />
+            <div className="absolute left-[-24px] top-6 h-4 w-4 rounded-full border-2 border-primary bg-background md:left-1/2 md:-translate-x-1/2 md:top-6 z-10" />
 
             {/* Date (Desktop) */}
             <div

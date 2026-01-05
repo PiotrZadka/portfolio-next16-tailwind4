@@ -45,9 +45,13 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-0">
-      <HeroSection name={profile.name} tagline={profile.tagline} />
+      <HeroSection
+        name={profile.name}
+        tagline={profile.tagline}
+        resume={profile.resume}
+      />
 
-      <Section className="bg-surface/30">
+      <Section className="bg-muted/50">
         <Container>
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
