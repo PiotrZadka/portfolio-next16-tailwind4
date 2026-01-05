@@ -51,7 +51,7 @@ export function CaseStudyCard({ project }: CaseStudyCardProps) {
           {project.technologies?.slice(0, 4).map((tech) => (
             <Badge
               key={tech}
-              variant="outline"
+              variant="none"
               className={cn("text-xs", getSkillBadgeClassName(tech))}
             >
               {tech}

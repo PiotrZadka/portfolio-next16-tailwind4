@@ -83,7 +83,7 @@ export default async function BlogPage() {
                         {post.tags?.map((tag) => (
                           <Badge
                             key={tag}
-                            variant="outline"
+                            variant="none"
                             className={cn(
                               "text-xs",
                               getSkillBadgeClassName(tag)

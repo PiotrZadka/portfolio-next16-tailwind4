@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.tags?.map((tag) => (
               <Badge
                 key={tag}
-                variant="outline"
+                variant="none"
                 className={cn("text-sm py-1 px-3", getSkillBadgeClassName(tag))}
               >
                 {tag}

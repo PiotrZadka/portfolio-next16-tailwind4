@@ -114,7 +114,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.technologies?.map((tech: string) => (
               <Badge
                 key={tech}
-                variant="outline"
+                variant="none"
                 className={cn(
                   "text-sm py-1 px-3",
                   getSkillBadgeClassName(tech)

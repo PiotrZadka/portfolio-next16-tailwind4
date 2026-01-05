@@ -71,6 +71,11 @@
   --terminal-header: #181825;
   --terminal-text: #cdd6f4;
   --terminal-line-number: #6c7086;
+
+  /* Skill Pills (Dark) */
+  --pill-bg: #27272a; /* zinc-800 */
+  --pill-text: #e5e5e5;
+  --pill-border: #3f3f46; /* zinc-700 */
 }
 
 /* Light Mode Overrides (triggered by .light class on html/body) */
@@ -97,6 +102,11 @@
   --terminal-header: #f4f4f5;
   --terminal-text: #1f2937;
   --terminal-line-number: #9ca3af;
+
+  /* Skill Pills (Light) */
+  --pill-bg: #ffffff;
+  --pill-text: #000000;
+  --pill-border: #cbd5e1; /* slate-300 */
 }
 
 html,

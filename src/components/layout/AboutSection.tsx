@@ -51,7 +51,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
                 {profile.skills.map((skill) => (
                   <Badge
                     key={skill}
-                    variant="outline"
+                    variant="none"
                     className={cn(
                       "text-sm py-1 px-3",
                       getSkillBadgeClassName(skill)

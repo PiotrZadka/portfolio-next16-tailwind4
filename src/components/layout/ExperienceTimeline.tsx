@@ -134,7 +134,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                               {item.technologies.map((tech) => (
                                 <Badge
                                   key={tech}
-                                  variant="outline"
+                                  variant="none"
                                   className={cn(
                                     "text-xs",
                                     getSkillBadgeClassName(tech)

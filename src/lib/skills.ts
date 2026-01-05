@@ -60,16 +60,11 @@ export function getSkillBadgeClassName(skill: string) {
 
   switch (category) {
     case "frontend":
-      return "bg-blue-500/10 text-blue-500 border-blue-500/20 dark:bg-blue-500/20 dark:text-blue-400";
     case "backend":
-      return "bg-green-500/10 text-green-500 border-green-500/20 dark:bg-green-500/20 dark:text-green-400";
     case "devops":
-      return "bg-purple-500/10 text-purple-500 border-purple-500/20 dark:bg-purple-500/20 dark:text-purple-400";
     case "testing":
-      return "bg-amber-500/10 text-amber-500 border-amber-500/20 dark:bg-amber-500/20 dark:text-amber-400";
     case "tools":
-      return "bg-teal-500/10 text-teal-500 border-teal-500/20 dark:bg-teal-500/20 dark:text-teal-400";
     default:
-      return "bg-surface text-muted-foreground border-border";
+      return "bg-[var(--pill-bg)] text-[var(--pill-text)] border border-[var(--pill-border)] shadow-sm";
   }
 }
