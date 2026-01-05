@@ -192,10 +192,10 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 ### Phase 8: GitHub & Vercel Integration
 
 - [x] Push code to GitHub repository
-- [ ] Connect GitHub repo to Vercel
-- [ ] Configure Environment Variables in Vercel dashboard
-- [ ] Configure Sanity webhook to trigger Vercel rebuilds
-- [ ] Test end-to-end: Sanity edit → webhook → Vercel rebuild → live update
+- [x] Connect GitHub repo to Vercel
+- [x] Configure Environment Variables in Vercel dashboard
+- [x] Configure Sanity webhook to trigger Vercel rebuilds
+- [x] Test end-to-end: Sanity edit → webhook → Vercel rebuild → live update
 
 ### Phase 9: Pre-Deployment QA
 
@@ -208,12 +208,12 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 
 ### Phase 10: Production Deployment (In Progress)
 
-- [ ] Run `vercel login` to authenticate
-- [ ] Run `vercel link` to connect project
-- [ ] Run `vercel deploy --prod` for production deployment
-- [ ] Configure custom domain (piotrzadka.dev)
-- [ ] Verify live site functionality
-- [ ] Set up Sanity production dataset (if using separate dev/prod)
+- [x] Run `vercel login` to authenticate
+- [x] Run `vercel link` to connect project
+- [x] Run `vercel deploy --prod` for production deployment
+- [x] Configure custom domain (piotrzadka.dev)
+- [x] Verify live site functionality
+- [x] Set up Sanity production dataset (if using separate dev/prod)
 
 ---
 
