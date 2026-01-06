@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CaseStudy } from "@/types";
 import {
   Card,
@@ -22,13 +23,20 @@ export function CaseStudyCard({ project }: CaseStudyCardProps) {
   return (
     <Card className="overflow-hidden flex flex-col h-full group">
       <div className="relative h-48 w-full overflow-hidden bg-muted">
-        {/* Placeholder for image if not available, or use Next/Image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-surface flex items-center justify-center text-muted-foreground">
-          {/* In a real app, use project.coverImage with Next/Image */}
-          <span className="text-4xl font-bold opacity-20">
-            {project.title.charAt(0)}
-          </span>
-        </div>
+        {project.coverImage ? (
+          <Image
+            src={project.coverImage}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-surface flex items-center justify-center text-muted-foreground">
+            <span className="text-4xl font-bold opacity-20">
+              {project.title.charAt(0)}
+            </span>
+          </div>
+        )}
       </div>
 
       <CardHeader>

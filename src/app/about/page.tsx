@@ -14,6 +14,12 @@ export const metadata: Metadata = {
 
 async function getProfileData() {
   const query = `*[_type == "profile"][0] {
+    name,
+    title,
+    about,
+    location,
+    email,
+    social,
     resume,
     "resumeFile": resumeFile.asset->url
   }`;
@@ -26,6 +32,7 @@ export default async function AboutPage() {
 
   const mergedProfile = {
     ...profile,
+    ...profileData,
     resume: resumeUrl,
   };
 

@@ -8,6 +8,7 @@ import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 
 interface ProjectPageProps {
@@ -129,6 +130,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <Section>
         <Container className="max-w-4xl">
+          {project.coverImage && (
+            <div className="relative w-full aspect-video mb-12 rounded-lg overflow-hidden border border-border/50 shadow-sm">
+              <Image
+                src={project.coverImage}
+                alt={project.title}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          )}
+
           <div className="space-y-12">
             {project.content?.problem && (
               <div>

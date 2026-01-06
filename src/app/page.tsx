@@ -12,8 +12,13 @@ import { ArrowRight } from "lucide-react";
 
 async function getData() {
   const profileQuery = `*[_type == "profile"][0] {
+    name,
+    title,
+    tagline,
     resume,
-    "resumeFile": resumeFile.asset->url
+    "resumeFile": resumeFile.asset->url,
+    email,
+    social
   }`;
 
   const experienceQuery = `*[_type == "experience"] | order(order asc) [0...2] {
@@ -53,8 +58,8 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
-        name={profile.name}
-        tagline={profile.tagline}
+        name={profileData?.name || profile.name}
+        tagline={profileData?.tagline || profile.tagline}
         resume={resumeUrl}
       />
 
@@ -122,7 +127,10 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <ContactSection email={profile.email} social={profile.social} />
+      <ContactSection
+        email={profileData?.email || profile.email}
+        social={profileData?.social || profile.social}
+      />
     </div>
   );
 }
