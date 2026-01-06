@@ -22,7 +22,7 @@ export function Footer() {
               GitHub
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/piotr-zadka/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -30,7 +30,7 @@ export function Footer() {
               LinkedIn
             </Link>
             <Link
-              href="mailto:contact@piotrzadka.dev"
+              href="mailto:piotr.zadka@gmail.com"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               Email
