@@ -8,6 +8,7 @@
 ## What Are Profiles?
 
 Profiles are pre-configured component bundles in `registry.json` that users install:
+
 - **essential** - Minimal setup (openagent + core subagents)
 - **developer** - Full dev environment (all dev agents + tools)
 - **business** - Content/product focus (content agents + tools)
@@ -23,6 +24,7 @@ Profiles are pre-configured component bundles in `registry.json` that users inst
 **Result**: Users install a profile but don't get the new agents
 
 **Example** (v0.5.0 bug):
+
 ```json
 // ✅ Agent exists in components
 {
@@ -47,6 +49,7 @@ Profiles are pre-configured component bundles in `registry.json` that users inst
 When adding a new agent, **ALWAYS** check:
 
 ### 1. Agent Added to Components
+
 ```bash
 # Check agent exists in registry
 cat registry.json | jq '.components.agents[] | select(.id == "your-agent")'
@@ -55,24 +58,29 @@ cat registry.json | jq '.components.agents[] | select(.id == "your-agent")'
 ### 2. Agent Added to Appropriate Profiles
 
 **Development agents** → Add to:
+
 - ✅ `developer` profile
 - ✅ `full` profile
 - ✅ `advanced` profile
 
 **Content agents** → Add to:
+
 - ✅ `business` profile
 - ✅ `full` profile
 - ✅ `advanced` profile
 
 **Data agents** → Add to:
+
 - ✅ `business` profile (if business-focused)
 - ✅ `full` profile
 - ✅ `advanced` profile
 
 **Meta agents** → Add to:
+
 - ✅ `advanced` profile only
 
 **Core agents** → Add to:
+
 - ✅ `essential` profile
 - ✅ All other profiles
 
@@ -94,20 +102,25 @@ cat registry.json | jq '.profiles.full.components[] | select(. == "agent:your-ag
 ## Profile Assignment Rules
 
 ### Developer Profile
+
 **Include**:
+
 - Core agents (openagent, opencoder)
 - Development specialists (frontend, backend, devops, codebase)
 - All code subagents (tester, reviewer, coder-agent, build-agent)
 - Dev commands (commit, test, validate-repo)
-- Dev context (standards/code, standards/tests, workflows/*)
+- Dev context (standards/code, standards/tests, workflows/\*)
 
 **Exclude**:
+
 - Content agents (copywriter, technical-writer)
 - Data agents (data-analyst)
 - Meta agents (system-builder, repo-manager)
 
 ### Business Profile
+
 **Include**:
+
 - Core agent (openagent)
 - Content specialists (copywriter, technical-writer)
 - Data specialists (data-analyst)
@@ -115,21 +128,27 @@ cat registry.json | jq '.profiles.full.components[] | select(. == "agent:your-ag
 - Notification tools (telegram, notify)
 
 **Exclude**:
+
 - Development specialists
 - Code subagents
 - Meta agents
 
 ### Full Profile
+
 **Include**:
+
 - Everything from developer profile
 - Everything from business profile
 - All agents except meta agents
 
 **Exclude**:
+
 - Meta agents (system-builder, repo-manager)
 
 ### Advanced Profile
+
 **Include**:
+
 - Everything from full profile
 - Meta agents (system-builder, repo-manager)
 - Meta subagents (domain-analyzer, agent-generator, etc.)
@@ -153,13 +172,13 @@ agents=$(cat registry.json | jq -r '.components.agents[].id')
 for agent in $agents; do
   # Get agent category
   category=$(cat registry.json | jq -r ".components.agents[] | select(.id == \"$agent\") | .category")
-  
+
   # Check which profiles include this agent
   in_developer=$(cat registry.json | jq ".profiles.developer.components[] | select(. == \"agent:$agent\")" 2>/dev/null)
   in_business=$(cat registry.json | jq ".profiles.business.components[] | select(. == \"agent:$agent\")" 2>/dev/null)
   in_full=$(cat registry.json | jq ".profiles.full.components[] | select(. == \"agent:$agent\")" 2>/dev/null)
   in_advanced=$(cat registry.json | jq ".profiles.advanced.components[] | select(. == \"agent:$agent\")" 2>/dev/null)
-  
+
   # Validate based on category
   case $category in
     "development")
@@ -212,6 +231,7 @@ Save this as: `scripts/registry/validate-profile-coverage.sh`
 ### After Adding a New Agent
 
 1. **Add agent to components**:
+
    ```bash
    ./scripts/registry/auto-detect-components.sh --auto-add
    ```
@@ -220,26 +240,29 @@ Save this as: `scripts/registry/validate-profile-coverage.sh`
    Edit `registry.json` and add `"agent:your-agent"` to appropriate profiles
 
 3. **Validate registry**:
+
    ```bash
    ./scripts/registry/validate-registry.sh
    ```
 
 4. **Test local install**:
+
    ```bash
    # Test developer profile
    REGISTRY_URL="file://$(pwd)/registry.json" ./install.sh --list
-   
+
    # Verify agent appears in profile
    REGISTRY_URL="file://$(pwd)/registry.json" ./install.sh --list | grep "your-agent"
    ```
 
 5. **Test actual install**:
+
    ```bash
    # Install to temp directory
    mkdir -p /tmp/test-install
    cd /tmp/test-install
    REGISTRY_URL="file://$(pwd)/registry.json" bash <(curl -s https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) developer
-   
+
    # Check if agent was installed
    ls .opencode/agent/category/your-agent.md
    ```
@@ -249,6 +272,7 @@ Save this as: `scripts/registry/validate-profile-coverage.sh`
 ## Common Mistakes
 
 ### ❌ Mistake 1: Only Adding to Components
+
 ```json
 // Added to components
 "components": {
@@ -268,6 +292,7 @@ Save this as: `scripts/registry/validate-profile-coverage.sh`
 ```
 
 ### ❌ Mistake 2: Wrong Profile Assignment
+
 ```json
 // Development agent added to business profile
 "business": {
@@ -278,6 +303,7 @@ Save this as: `scripts/registry/validate-profile-coverage.sh`
 ```
 
 ### ❌ Mistake 3: Inconsistent Profile Coverage
+
 ```json
 // Added to full but not advanced
 "full": {
@@ -298,7 +324,7 @@ Save this as: `scripts/registry/validate-profile-coverage.sh`
 ✅ **Check all profiles** - Verify agent in correct profiles  
 ✅ **Test locally** - Install and verify before pushing  
 ✅ **Validate** - Run validation script after changes  
-✅ **Document** - Update CHANGELOG with profile changes  
+✅ **Document** - Update CHANGELOG with profile changes
 
 ---
 
@@ -320,12 +346,12 @@ Add profile validation to CI:
 ## Quick Reference
 
 | Agent Category | Essential | Developer | Business | Full | Advanced |
-|---------------|-----------|-----------|----------|------|----------|
-| core          | ✅        | ✅        | ✅       | ✅   | ✅       |
-| development   | ❌        | ✅        | ❌       | ✅   | ✅       |
-| content       | ❌        | ❌        | ✅       | ✅   | ✅       |
-| data          | ❌        | ❌        | ✅       | ✅   | ✅       |
-| meta          | ❌        | ❌        | ❌       | ❌   | ✅       |
+| -------------- | --------- | --------- | -------- | ---- | -------- |
+| core           | ✅        | ✅        | ✅       | ✅   | ✅       |
+| development    | ❌        | ✅        | ❌       | ✅   | ✅       |
+| content        | ❌        | ❌        | ✅       | ✅   | ✅       |
+| data           | ❌        | ❌        | ✅       | ✅   | ✅       |
+| meta           | ❌        | ❌        | ❌       | ❌   | ✅       |
 
 ---
 

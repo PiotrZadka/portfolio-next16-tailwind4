@@ -5,6 +5,7 @@ This is a template for creating new tools in the modular structure.
 ## How to Create a New Tool
 
 1. **Copy this template directory:**
+
    ```bash
    cp -r template/ your-tool-name/
    ```
@@ -16,8 +17,9 @@ This is a template for creating new tools in the modular structure.
 
 3. **Add to main index:**
    - Add exports to `/tool/index.ts`:
+
    ```typescript
-   export { yourTool, yourFunction } from "./your-tool-name"
+   export { yourTool, yourFunction } from "./your-tool-name";
    ```
 
 4. **Test your tool:**

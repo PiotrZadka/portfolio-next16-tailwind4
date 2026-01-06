@@ -5,7 +5,7 @@ description: |
   Verifies agent doesn't auto-fix without understanding the problem.
 
 category: error-handling
-agent: {agent-name}
+agent: { agent-name }
 model: anthropic/claude-sonnet-4-5
 
 prompt: |

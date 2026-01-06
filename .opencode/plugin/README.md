@@ -13,6 +13,7 @@ Validates that OpenAgent follows its defined prompt rules and execution patterns
 ## Available Tools
 
 ### `validate_session`
+
 Validate the current agent session against defined rules.
 
 ```bash
@@ -20,6 +21,7 @@ validate_session
 ```
 
 **Options:**
+
 - `include_details` (boolean, optional) - Include detailed evidence for each check
 
 **Returns:** Validation report with compliance score
@@ -27,6 +29,7 @@ validate_session
 ---
 
 ### `check_approval_gates`
+
 Check if approval gates were properly enforced before execution operations.
 
 ```bash
@@ -38,6 +41,7 @@ check_approval_gates
 ---
 
 ### `export_validation_report`
+
 Export a comprehensive validation report to a markdown file.
 
 ```bash
@@ -45,6 +49,7 @@ export_validation_report
 ```
 
 **Options:**
+
 - `output_path` (string, optional) - Path to save the report (defaults to `.tmp/validation-{sessionID}.md`)
 
 **Returns:** Path to exported report + summary
@@ -52,6 +57,7 @@ export_validation_report
 ---
 
 ### `analyze_delegation`
+
 Analyze whether delegation decisions followed the 4+ file rule.
 
 ```bash
@@ -75,6 +81,7 @@ The plugin checks for:
 ## Usage Examples
 
 ### Basic Validation
+
 ```
 You: "Create a new API endpoint"
 [Agent works on task]
@@ -82,6 +89,7 @@ You: "validate_session"
 ```
 
 ### Check Approval Compliance
+
 ```
 You: "Run the tests"
 Agent: "Approval needed before proceeding."
@@ -89,6 +97,7 @@ You: "Approved. Also check_approval_gates"
 ```
 
 ### Export Report
+
 ```
 You: "We just finished refactoring. Export validation report"
 Agent: [Exports to .tmp/validation-{id}.md]
@@ -99,6 +108,7 @@ Agent: [Exports to .tmp/validation-{id}.md]
 The plugin auto-loads from `.opencode/plugins/` when OpenCode starts.
 
 **Install dependencies:**
+
 ```bash
 cd .opencode/plugins
 npm install
@@ -134,14 +144,17 @@ bun install
 ## Troubleshooting
 
 ### "No execution operations tracked"
+
 - Plugin just loaded, no prior tracking
 - Run a task first, then validate
 
 ### "Error fetching session"
+
 - Check OpenCode SDK connection
 - Verify session ID is valid
 
 ### False positives on approval gates
+
 - Agent may use different approval phrasing
 - Check `approvalKeywords` in plugin code
 - Add custom patterns if needed
@@ -149,6 +162,7 @@ bun install
 ## Customization
 
 Edit `agent-validator.ts` to:
+
 - Add custom validation rules
 - Modify approval detection patterns
 - Adjust delegation thresholds

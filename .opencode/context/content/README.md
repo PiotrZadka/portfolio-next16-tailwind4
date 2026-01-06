@@ -5,9 +5,11 @@ This directory contains context files for content creation, copywriting, and com
 ## Available Context Files
 
 ### copywriting-frameworks.md
+
 Proven copywriting frameworks and persuasive writing techniques.
 
 **Topics covered**:
+
 - AIDA, PAS, BAB, FAB frameworks
 - Headline formulas
 - Emotional triggers (FOMO, social proof, authority)
@@ -17,9 +19,11 @@ Proven copywriting frameworks and persuasive writing techniques.
 **Used by**: copywriter
 
 ### tone-voice.md
+
 Maintaining consistent brand voice and adapting tone for different contexts.
 
 **Topics covered**:
+
 - Voice vs. tone distinction
 - Voice dimensions (formality, enthusiasm, expertise)
 - Tone guidelines by context (marketing, docs, errors, support)

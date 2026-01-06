@@ -10,6 +10,7 @@
 Categories are domain-based groupings that organize agents, context files, and tests by expertise area.
 
 **Benefits**:
+
 - **Scalability** - Easy to add new domains
 - **Discovery** - Find agents by domain
 - **Organization** - Clear structure
@@ -20,9 +21,11 @@ Categories are domain-based groupings that organize agents, context files, and t
 ## Available Categories
 
 ### Core (`core/`)
+
 **Purpose**: Essential system agents (always available)
 
 **Agents**:
+
 - openagent, opencoder, system-builder
 
 **When to use**: System-level tasks, orchestration
@@ -32,12 +35,15 @@ Categories are domain-based groupings that organize agents, context files, and t
 ---
 
 ### Development (`development/`)
+
 **Purpose**: Software development specialists
 
 **Agents**:
+
 - frontend-specialist, backend-specialist, devops-specialist, codebase-agent
 
 **Context**:
+
 - clean-code.md, react-patterns.md, api-design.md
 
 **When to use**: Building applications, dev tasks
@@ -47,12 +53,15 @@ Categories are domain-based groupings that organize agents, context files, and t
 ---
 
 ### Content (`content/`)
+
 **Purpose**: Content creation specialists
 
 **Agents**:
+
 - copywriter, technical-writer
 
 **Context**:
+
 - copywriting-frameworks.md, tone-voice.md
 
 **When to use**: Writing, documentation, marketing
@@ -62,12 +71,15 @@ Categories are domain-based groupings that organize agents, context files, and t
 ---
 
 ### Data (`data/`)
+
 **Purpose**: Data analysis specialists
 
 **Agents**:
+
 - data-analyst
 
 **Context**:
+
 - (Ready for data-specific context)
 
 **When to use**: Data tasks, analysis, reporting
@@ -77,12 +89,15 @@ Categories are domain-based groupings that organize agents, context files, and t
 ---
 
 ### Product (`product/`)
+
 **Purpose**: Product management specialists
 
 **Agents**:
+
 - (Ready for product agents)
 
 **Context**:
+
 - (Ready for product context)
 
 **When to use**: Product strategy, roadmaps, requirements
@@ -92,12 +107,15 @@ Categories are domain-based groupings that organize agents, context files, and t
 ---
 
 ### Learning (`learning/`)
+
 **Purpose**: Education and coaching specialists
 
 **Agents**:
+
 - (Ready for learning agents)
 
 **Context**:
+
 - (Ready for learning context)
 
 **When to use**: Teaching, training, curriculum
@@ -160,6 +178,7 @@ Each category has a metadata file:
 ```
 
 **Fields**:
+
 - `name`: Display name
 - `description`: Brief description
 - `icon`: Emoji icon
@@ -175,19 +194,19 @@ Each category has a metadata file:
 ✅ **Lowercase** - `development`, not `Development`  
 ✅ **Singular** - `content`, not `contents`  
 ✅ **Descriptive** - Clear domain name  
-✅ **Consistent** - Follow existing patterns  
+✅ **Consistent** - Follow existing patterns
 
 ### Agent Names
 
 ✅ **Kebab-case** - `frontend-specialist.md`  
 ✅ **Descriptive** - Clear purpose  
-✅ **Suffix** - Use `-specialist`, `-agent`, `-writer` as appropriate  
+✅ **Suffix** - Use `-specialist`, `-agent`, `-writer` as appropriate
 
 ### Context Names
 
 ✅ **Kebab-case** - `react-patterns.md`  
 ✅ **Descriptive** - Clear topic  
-✅ **Specific** - Focused on one topic  
+✅ **Specific** - Focused on one topic
 
 ---
 
@@ -283,26 +302,28 @@ EOF
 ✅ **Distinct domain** - Clear expertise area  
 ✅ **Multiple agents** - Plan for 2+ agents  
 ✅ **Shared context** - Common knowledge to share  
-✅ **User demand** - Requested by users  
+✅ **User demand** - Requested by users
 
 ### When NOT to Create a Category
 
 ❌ **Single agent** - Use existing category  
 ❌ **Overlapping** - Fits in existing category  
 ❌ **Too specific** - Too narrow focus  
-❌ **Unclear domain** - Not well-defined  
+❌ **Unclear domain** - Not well-defined
 
 ---
 
 ## Category vs Subagent
 
 ### Use Category Agent When:
+
 - User-facing specialist
 - Broad domain expertise
 - Direct invocation by user
 - Example: `frontend-specialist`
 
 ### Use Subagent When:
+
 - Delegated subtask
 - Narrow focus
 - Invoked by other agents
@@ -341,21 +362,21 @@ Loads: `.opencode/context/development/react-patterns.md`
 ✅ **Clear categories** - Well-defined domains  
 ✅ **Consistent naming** - Follow conventions  
 ✅ **Proper metadata** - Complete 0-category.json  
-✅ **README files** - Document each category  
+✅ **README files** - Document each category
 
 ### Scalability
 
 ✅ **Modular** - Categories are independent  
 ✅ **Extensible** - Easy to add new categories  
 ✅ **Maintainable** - Clear structure  
-✅ **Testable** - Each category has tests  
+✅ **Testable** - Each category has tests
 
 ### Discovery
 
 ✅ **Descriptive names** - Clear purpose  
 ✅ **Good descriptions** - Explain when to use  
 ✅ **Proper tags** - Aid discovery  
-✅ **Documentation** - Document in README  
+✅ **Documentation** - Document in README
 
 ---
 
@@ -387,10 +408,12 @@ Loads: `.opencode/context/development/react-patterns.md`
 ### Backward Compatibility
 
 Old paths still work:
+
 - `openagent` → resolves to `core/openagent`
 - `opencoder` → resolves to `core/opencoder`
 
 New agents use category paths:
+
 - `development/frontend-specialist`
 - `content/copywriter`
 

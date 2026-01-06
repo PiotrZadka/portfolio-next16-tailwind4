@@ -22,26 +22,25 @@ description: "Generate comprehensive test suites for OpenCode agents with 8 esse
 </task>
 
 <critical_rules priority="absolute" enforcement="strict">
-  <rule id="complete_coverage">
-    MUST generate all 8 test types - no partial test suites
-  </rule>
-  <rule id="yaml_validity">
-    All test files MUST be valid YAML with proper structure
-  </rule>
-  <rule id="behavior_specificity">
-    Each test MUST have specific, measurable behavior expectations
-  </rule>
-  <rule id="agent_awareness">
-    Tests MUST be tailored to the specific agent's capabilities and workflow
-  </rule>
+<rule id="complete_coverage">
+MUST generate all 8 test types - no partial test suites
+</rule>
+<rule id="yaml_validity">
+All test files MUST be valid YAML with proper structure
+</rule>
+<rule id="behavior_specificity">
+Each test MUST have specific, measurable behavior expectations
+</rule>
+<rule id="agent_awareness">
+Tests MUST be tailored to the specific agent's capabilities and workflow
+</rule>
 </critical_rules>
 
 <workflow_execution>
-  <stage id="1" name="AnalyzeAgent">
-    <action>Read and analyze target agent to understand its behavior</action>
-    <process>
-      1. Read agent file from `.opencode/agent/{agent-name}.md`
-      
+<stage id="1" name="AnalyzeAgent">
+<action>Read and analyze target agent to understand its behavior</action>
+<process> 1. Read agent file from `.opencode/agent/{agent-name}.md`
+
       2. Extract key characteristics:
          - Agent type (primary/subagent)
          - Required tools (read, write, edit, bash, task, etc.)
@@ -51,7 +50,7 @@ description: "Generate comprehensive test suites for OpenCode agents with 8 esse
          - Response patterns (prefixes, formats)
          - Context loading requirements
          - Validation behaviors
-      
+
       3. Identify agent-specific behaviors:
          - Does it require approval before execution?
          - Does it delegate to subagents?
@@ -60,7 +59,7 @@ description: "Generate comprehensive test suites for OpenCode agents with 8 esse
          - Does it handle errors gracefully?
          - Does it support multiple languages?
          - Does it provide handoff recommendations?
-      
+
       4. Determine test adaptations needed:
          - Adjust approval expectations
          - Customize delegation tests
@@ -68,6 +67,7 @@ description: "Generate comprehensive test suites for OpenCode agents with 8 esse
          - Adapt error handling tests
     </process>
     <checkpoint>Agent analyzed, key behaviors identified, test adaptations planned</checkpoint>
+
   </stage>
 
   <stage id="2" name="CreateTestStructure">
@@ -809,15 +809,12 @@ description: "Generate comprehensive test suites for OpenCode agents with 8 esse
 </workflow_execution>
 
 <test_templates>
-  <template name="planning-approval">
-    <purpose>Verify plan-first approach with approval gate</purpose>
-    <key_behaviors>
-      - Creates plan before implementation
-      - Requests approval explicitly
-      - No execution without approval
-    </key_behaviors>
-  </template>
-  
+<template name="planning-approval">
+<purpose>Verify plan-first approach with approval gate</purpose>
+<key_behaviors> - Creates plan before implementation - Requests approval explicitly - No execution without approval
+</key_behaviors>
+</template>
+
   <template name="context-loading">
     <purpose>Ensure context loaded before code execution</purpose>
     <key_behaviors>

@@ -5,9 +5,11 @@ This directory contains context files for software development best practices, p
 ## Available Context Files
 
 ### clean-code.md
+
 Core coding standards and best practices for writing clean, maintainable code across all languages.
 
 **Topics covered**:
+
 - Meaningful naming conventions
 - Function design principles
 - Error handling patterns
@@ -16,9 +18,11 @@ Core coding standards and best practices for writing clean, maintainable code ac
 **Used by**: frontend-specialist, backend-specialist, devops-specialist, codebase-agent
 
 ### react-patterns.md
+
 Modern React patterns, hooks usage, and component design principles.
 
 **Topics covered**:
+
 - Functional components and hooks
 - Custom hooks for reusable logic
 - State management patterns
@@ -28,9 +32,11 @@ Modern React patterns, hooks usage, and component design principles.
 **Used by**: frontend-specialist
 
 ### api-design.md
+
 REST API design principles, GraphQL patterns, and API versioning strategies.
 
 **Topics covered**:
+
 - RESTful resource design
 - HTTP methods and status codes
 - GraphQL schema design

@@ -21,6 +21,7 @@ permissions:
 
 <critical_context_requirement>
 BEFORE any write/edit operations, ALWAYS load:
+
 - @.opencode/context/core/standards/code.md - Code quality standards (REQUIRED)
 
 WHY: Without code standards, you'll create inconsistent HTML/CSS that doesn't match project conventions.
@@ -94,28 +95,35 @@ Always include:
 
 <context_loading>
 **Core context (ALWAYS auto-loaded via @)**:
+
 - @.opencode/context/core/standards/code.md - Code quality standards (REQUIRED before write/edit)
 
 **Just-in-time context (load per stage using read tool)**:
 
 **On first design request**:
+
 - Read @.opencode/context/core/workflows/design-iteration.md to understand the 4-stage workflow
 
 **Stage 1 (Layout)**:
+
 - No additional context needed - use ASCII wireframes
 
 **Stage 2 (Theme)**:
+
 - Read @.opencode/context/development/design-systems.md for theme patterns
 - Read @.opencode/context/development/ui-styling-standards.md for CSS conventions
 
 **Stage 3 (Animation)**:
+
 - Read @.opencode/context/development/animation-patterns.md for micro-interaction patterns
 
 **Stage 4 (Implementation)**:
+
 - Read @.opencode/context/development/design-assets.md for images, icons, CDN resources
 - Reference previously loaded styling standards
 
 **On iteration requests**:
+
 - Read existing design file first
 - Load only context needed for requested changes
 
@@ -123,13 +131,14 @@ Always include:
 </context_loading>
 
 <file_naming>
+
 - Initial design: `{name}_1.html` (e.g., `dashboard_1.html`)
 - First iteration: `{name}_1_1.html`
 - Second iteration: `{name}_1_2.html`
 - New design: `{name}_2.html`
 - Theme files: `theme_1.css`, `theme_2.css`
 - Location: `design_iterations/` folder
-</file_naming>
+  </file_naming>
 
 <examples>
   <example name="Create Landing Page">

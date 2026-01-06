@@ -13,14 +13,18 @@ Voice is your brand's personality - it stays consistent. Tone is how that voice 
 ## Voice vs. Tone
 
 ### Voice (Consistent)
+
 Your brand's personality that never changes:
+
 - Professional but approachable
 - Knowledgeable but not condescending
 - Confident but humble
 - Clear and direct
 
 ### Tone (Adaptive)
+
 How voice adapts to context:
+
 - **Error messages**: Apologetic, helpful
 - **Success messages**: Encouraging, celebratory
 - **Marketing**: Enthusiastic, persuasive
@@ -34,16 +38,19 @@ How voice adapts to context:
 **Formal** ←→ **Casual**
 
 **Formal**:
+
 ```
 "We appreciate your business and look forward to serving you."
 ```
 
 **Casual**:
+
 ```
 "Thanks for choosing us! We're excited to work with you."
 ```
 
 **Choose based on**:
+
 - Industry norms
 - Audience expectations
 - Context (legal vs. social)
@@ -53,16 +60,19 @@ How voice adapts to context:
 **Reserved** ←→ **Enthusiastic**
 
 **Reserved**:
+
 ```
 "Your account has been created successfully."
 ```
 
 **Enthusiastic**:
+
 ```
 "Welcome aboard! Your account is ready to go! 🎉"
 ```
 
 **Choose based on**:
+
 - Moment significance
 - User emotional state
 - Brand personality
@@ -72,17 +82,20 @@ How voice adapts to context:
 **Educational** ←→ **Expert**
 
 **Educational**:
+
 ```
-"Let's walk through this step by step. First, click the 
+"Let's walk through this step by step. First, click the
 'Settings' button in the top right corner."
 ```
 
 **Expert**:
+
 ```
 "Navigate to Settings > Advanced > API Configuration."
 ```
 
 **Choose based on**:
+
 - User expertise level
 - Content complexity
 - Context (onboarding vs. advanced docs)
@@ -92,26 +105,30 @@ How voice adapts to context:
 ### 1. Marketing Copy
 
 **Characteristics**:
+
 - Enthusiastic and persuasive
 - Benefit-focused
 - Action-oriented
 - Emotionally engaging
 
 **Example**:
+
 ```
-"Transform your workflow in minutes, not months. Join 10,000+ 
+"Transform your workflow in minutes, not months. Join 10,000+
 teams who've already made the switch."
 ```
 
 ### 2. Product Documentation
 
 **Characteristics**:
+
 - Clear and instructional
 - Step-by-step
 - Neutral tone
 - Technically accurate
 
 **Example**:
+
 ```
 "To configure authentication:
 1. Navigate to Settings > Security
@@ -122,31 +139,36 @@ teams who've already made the switch."
 ### 3. Error Messages
 
 **Characteristics**:
+
 - Apologetic but not overly so
 - Explain what happened
 - Provide clear next steps
 - Never blame the user
 
 **Bad**:
+
 ```
 "Error: Invalid input. Try again."
 ```
 
 **Good**:
+
 ```
-"We couldn't process your request because the email format 
+"We couldn't process your request because the email format
 isn't valid. Please check and try again."
 ```
 
 ### 4. Success Messages
 
 **Characteristics**:
+
 - Positive and encouraging
 - Confirm what happened
 - Suggest next steps
 - Celebrate wins
 
 **Example**:
+
 ```
 "Great! Your changes have been saved. Ready to publish?"
 ```
@@ -154,29 +176,33 @@ isn't valid. Please check and try again."
 ### 5. Support Communication
 
 **Characteristics**:
+
 - Empathetic and understanding
 - Solution-focused
 - Patient and helpful
 - Personalized
 
 **Example**:
+
 ```
-"I understand how frustrating this must be. Let's get this 
-sorted out for you. Can you tell me what you see when you 
+"I understand how frustrating this must be. Let's get this
+sorted out for you. Can you tell me what you see when you
 click the 'Export' button?"
 ```
 
 ### 6. Onboarding
 
 **Characteristics**:
+
 - Welcoming and encouraging
 - Educational without overwhelming
 - Progressive disclosure
 - Celebrate small wins
 
 **Example**:
+
 ```
-"Welcome! Let's get you set up in 3 quick steps. 
+"Welcome! Let's get you set up in 3 quick steps.
 First, let's create your workspace."
 ```
 
@@ -185,12 +211,14 @@ First, let's create your workspace."
 ### 1. Be Clear and Concise
 
 **Before**:
+
 ```
-"In order to facilitate the process of account creation, 
+"In order to facilitate the process of account creation,
 it is necessary for you to provide your email address."
 ```
 
 **After**:
+
 ```
 "Enter your email to create your account."
 ```
@@ -198,11 +226,13 @@ it is necessary for you to provide your email address."
 ### 2. Use Active Voice
 
 **Passive**:
+
 ```
 "Your password has been reset by our system."
 ```
 
 **Active**:
+
 ```
 "We've reset your password."
 ```
@@ -210,11 +240,13 @@ it is necessary for you to provide your email address."
 ### 3. Write for Humans
 
 **Robotic**:
+
 ```
 "Operation completed successfully. Proceed to next step."
 ```
 
 **Human**:
+
 ```
 "All set! What would you like to do next?"
 ```
@@ -222,11 +254,13 @@ it is necessary for you to provide your email address."
 ### 4. Be Inclusive
 
 **Exclusive**:
+
 ```
 "Hey guys, check out our new feature!"
 ```
 
 **Inclusive**:
+
 ```
 "Check out our new feature!"
 ```
@@ -234,11 +268,13 @@ it is necessary for you to provide your email address."
 ### 5. Avoid Jargon
 
 **Jargon-heavy**:
+
 ```
 "Leverage our API to synergize your tech stack."
 ```
 
 **Clear**:
+
 ```
 "Connect our API to your existing tools."
 ```
@@ -248,26 +284,31 @@ it is necessary for you to provide your email address."
 ### User Emotional State → Appropriate Tone
 
 **User is frustrated** → Empathetic, solution-focused
+
 ```
 "I know this is frustrating. Let's fix this together."
 ```
 
 **User achieved something** → Celebratory, encouraging
+
 ```
 "Awesome work! You've completed your first project."
 ```
 
 **User is confused** → Patient, educational
+
 ```
 "No worries! Let me break this down for you."
 ```
 
 **User made an error** → Helpful, non-judgmental
+
 ```
 "Looks like there's a small issue. Here's how to fix it."
 ```
 
 **User is new** → Welcoming, supportive
+
 ```
 "Welcome! We're here to help you get started."
 ```
@@ -275,6 +316,7 @@ it is necessary for you to provide your email address."
 ## Brand Voice Examples
 
 ### Example 1: Tech Startup (Friendly, Modern)
+
 ```
 Voice: Approachable, innovative, helpful
 Tone variations:
@@ -284,6 +326,7 @@ Tone variations:
 ```
 
 ### Example 2: Enterprise SaaS (Professional, Trustworthy)
+
 ```
 Voice: Professional, reliable, expert
 Tone variations:
@@ -293,6 +336,7 @@ Tone variations:
 ```
 
 ### Example 3: Creative Tool (Inspiring, Playful)
+
 ```
 Voice: Creative, inspiring, fun
 Tone variations:
@@ -328,6 +372,7 @@ Tone variations:
 ## Voice & Tone Checklist
 
 Before publishing, verify:
+
 - [ ] Does this sound like our brand?
 - [ ] Is the tone appropriate for the context?
 - [ ] Is it clear and easy to understand?

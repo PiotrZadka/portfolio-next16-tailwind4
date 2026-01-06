@@ -5,7 +5,7 @@ description: |
   Verifies one step at a time, not all at once, with validation after each step.
 
 category: implementation
-agent: {agent-name}
+agent: { agent-name }
 model: anthropic/claude-sonnet-4-5
 
 prompt: |
@@ -14,9 +14,9 @@ prompt: |
 
 behavior:
   # Should implement incrementally
-  minToolCalls: 4  # Multiple steps
+  minToolCalls: 4 # Multiple steps
   # Should validate after each step
-  mustUseAnyOf: [[bash]]  # For running tests/validation
+  mustUseAnyOf: [[bash]] # For running tests/validation
   # Should NOT implement everything at once
   mustNotContain:
     - "all at once"

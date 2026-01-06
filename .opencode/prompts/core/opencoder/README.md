@@ -2,11 +2,12 @@
 
 ## Capabilities Matrix
 
-| Variant | Code Quality | TDD Support | Incremental Dev | Build Checks | Test Execution | Pass Rate | Last Tested |
-|---------|--------------|-------------|-----------------|--------------|----------------|-----------|-------------|
-| default | ✅ | ✅ | ✅ | ✅ | ✅ | Not yet tested | - |
+| Variant | Code Quality | TDD Support | Incremental Dev | Build Checks | Test Execution | Pass Rate      | Last Tested |
+| ------- | ------------ | ----------- | --------------- | ------------ | -------------- | -------------- | ----------- |
+| default | ✅           | ✅          | ✅              | ✅           | ✅             | Not yet tested | -           |
 
 **Legend:**
+
 - ✅ Works reliably
 - ⚠️ Partial/inconsistent
 - ❌ Does not work
@@ -15,6 +16,7 @@
 ## Variants
 
 ### `default.md`
+
 - **Target**: Claude Sonnet 4.5 (anthropic/claude-sonnet-4-5)
 - **Focus**: Clean, maintainable code with TDD workflow
 - **Status**: Stable, used in all PRs

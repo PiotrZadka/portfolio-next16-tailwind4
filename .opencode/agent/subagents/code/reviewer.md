@@ -52,6 +52,7 @@ Then give a short summary of the review.
 - Risk level (including security risk) and recommended follow-ups
 
 **Context Loading:**
+
 - Load project patterns and security guidelines
 - Analyze code against established conventions
 - Flag deviations from team standards

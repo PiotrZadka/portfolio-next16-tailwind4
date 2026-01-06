@@ -5,6 +5,7 @@
 ## Overview
 
 This command system helps you create production-ready OpenCode agents with:
+
 - ✅ **Minimal prompts** (~500 tokens at "right altitude")
 - ✅ **Single agent + tools** (not multi-agent for coding)
 - ✅ **Just-in-time context** (loaded on demand, not pre-loaded)
@@ -37,6 +38,7 @@ This command system helps you create production-ready OpenCode agents with:
 **Finding**: "Most coding tasks involve fewer truly parallelizable tasks than research" (Anthropic 2025)
 
 **Why this matters**:
+
 - Code changes are deeply dependent on each other
 - Sub-agents can't coordinate edits to the same file
 - Agents waste time duplicating work
@@ -44,6 +46,7 @@ This command system helps you create production-ready OpenCode agents with:
 - Code is sequential
 
 **Application**:
+
 - Use ONE lead agent with tool-based sub-functions
 - NOT autonomous sub-agents for coding
 - Multi-agent only for truly independent tasks:
@@ -63,6 +66,7 @@ This command system helps you create production-ready OpenCode agents with:
 | Fails to guide behavior | Flexible but specific | Brittle, hard to maintain |
 
 **Application**:
+
 - System prompt: Minimal (~500 tokens)
 - Clear heuristics, not exhaustive rules
 - Examples > edge case lists
@@ -73,11 +77,13 @@ This command system helps you create production-ready OpenCode agents with:
 **Finding**: "Agents discover context layer by layer. File metadata guides behavior. Prevents drowning in irrelevant information"
 
 **Context Management Layers**:
+
 1. **System prompt**: Minimal (~500 tokens). Clear heuristics, not exhaustive rules.
 2. **Just-in-time retrieval**: Tools that agents call to load context on demand (file paths, not full content)
 3. **Working memory**: Keep only what's needed for the current task
 
 **Why this beats pre-loading**:
+
 - Agents discover context layer by layer
 - File metadata (size, name, timestamps) guide behavior
 - Prevents "drowning in irrelevant information"
@@ -92,27 +98,32 @@ This command system helps you create production-ready OpenCode agents with:
 # Project Context
 
 ## Bash Commands
+
 - npm run test: Run unit tests
 - npm run lint: Check code style
 - npm run typecheck: Check TypeScript
 
 ## Code Style
+
 - Use ES modules (import/export)
 - Destructure imports when possible
 - Use async/await, not callbacks
 
 ## Common Files & Patterns
+
 - API handlers in src/handlers/
 - Business logic in src/logic/
 - Tests mirror source structure
 
 ## Workflow Rules
+
 - Always run typecheck before committing
 - Don't modify test files when writing implementation
 - Use git history to understand WHY, not WHAT
 ```
 
 **Benefits**:
+
 - Eliminates repetitive context-loading
 - Shared across team (check into git)
 - Tuned like any prompt (run through prompt improvers)
@@ -122,12 +133,14 @@ This command system helps you create production-ready OpenCode agents with:
 **Finding**: "Tool ambiguity is one of the biggest failure modes"
 
 **Bad tool design**:
+
 ```markdown
 tool: "search_code"
-description: "search code"  # Ambiguous!
+description: "search code" # Ambiguous!
 ```
 
 **Good tool design**:
+
 ```markdown
 tool: "read_file"
 purpose: "Load a specific file for analysis or modification"
@@ -142,12 +155,14 @@ when_not_to_use: "You already have the file content in context"
 **Finding**: "Improved instruction-following and reasoning efficiency for complex decomposition"
 
 **Before jumping to code, trigger extended thinking**:
+
 ```
-"Think about how to approach this problem. What files need to change? 
+"Think about how to approach this problem. What files need to change?
 What are the dependencies? What should we test?"
 ```
 
 **Phrases mapped to thinking budget**:
+
 - "think" = basic
 - "think hard" = 2x budget
 - "think harder" = 3x budget
@@ -160,11 +175,13 @@ What are the dependencies? What should we test?"
 **Design workflows where agent can call multiple tools simultaneously**:
 
 **Can do in parallel**:
+
 - Run linter
 - Execute tests
 - Check type errors
 
 **NOT in parallel** (sequential):
+
 - Apply fix, then test
 
 ### 8. Outcome-Focused Evaluation
@@ -172,12 +189,14 @@ What are the dependencies? What should we test?"
 **Finding**: "Token usage explains 80% of performance variance. Number of tool calls ~10%. Model choice ~10%"
 
 **What to measure**:
+
 - ✅ Does it solve the task?
 - ✅ Token usage reasonable?
 - ✅ Tool calls appropriate?
 - ❌ NOT: "Did it follow exact steps I imagined?"
 
 **Application**:
+
 - Optimize for using enough tokens to solve the problem
 - Don't minimize tool calls (some redundancy is fine)
 - Evaluate on real failure cases, not synthetic tests
@@ -260,6 +279,7 @@ Every agent gets 8 comprehensive tests:
 Based on failure modes found in production:
 
 **Don't**:
+
 - ❌ Create sub-agents for dependent tasks (code is sequential)
 - ❌ Pre-load entire codebase into context (use just-in-time retrieval)
 - ❌ Write exhaustive edge case lists in prompts (brittle, hard to maintain)
@@ -269,6 +289,7 @@ Based on failure modes found in production:
 - ❌ Minimize tool calls (some redundancy is fine)
 
 **Do**:
+
 - ✅ Let agents discover context via tools
 - ✅ Use examples instead of rules
 - ✅ Keep system prompt minimal (~500 tokens)
@@ -363,11 +384,9 @@ npm test -- --agent=my-agent-name --test=planning-approval-001
 - **Anthropic Multi-Agent Research** (Sept-Dec 2025)
   - Single agent + tools > multi-agent for coding
   - Token usage explains 80% of performance variance
-  
 - **Context Engineering Best Practices** (Sept 2025)
   - "Find the smallest possible set of high-signal tokens"
   - Just-in-time retrieval beats pre-loading
-  
 - **Claude Code Production Patterns**
   - CLAUDE.md pattern for project context
   - Extended thinking for complex decomposition
@@ -376,7 +395,8 @@ npm test -- --agent=my-agent-name --test=planning-approval-001
 ## Support
 
 For questions or issues:
-1. Check existing agents: 
+
+1. Check existing agents:
    - Core agents: `.opencode/agent/core/openagent.md`, `.opencode/agent/core/opencoder.md`
    - Development agents: `.opencode/agent/development/frontend-specialist.md`
    - Content agents: `.opencode/agent/content/copywriter.md`

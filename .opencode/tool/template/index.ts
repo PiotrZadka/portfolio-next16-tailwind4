@@ -1,9 +1,9 @@
-import { tool } from "@opencode-ai/plugin/tool"
+import { tool } from "@opencode-ai/plugin/tool";
 
 // Example tool implementation
 export async function exampleFunction(input: string): Promise<string> {
   // Your tool logic here
-  return `Processed: ${input}`
+  return `Processed: ${input}`;
 }
 
 // Tool definition for OpenCode agent system
@@ -14,12 +14,12 @@ export const exampleTool = tool({
   },
   async execute(args, context) {
     try {
-      return await exampleFunction(args.input)
+      return await exampleFunction(args.input);
     } catch (error) {
-      return `Error: ${error.message}`
+      return `Error: ${error.message}`;
     }
   },
-})
+});
 
 // Default export
-export default exampleTool
+export default exampleTool;

@@ -1,4 +1,5 @@
 <!-- Context: development/animation-patterns | Priority: high | Version: 1.0 | Updated: 2025-12-09 -->
+
 # Animation Patterns
 
 ## Overview
@@ -21,6 +22,7 @@ Standards and patterns for UI animations, micro-interactions, and transitions. A
 **Format**: `element: duration easing [properties] modifiers`
 
 **Symbols**:
+
 - `→` = transition from → to
 - `±` = oscillate/shake
 - `↗` = increase
@@ -30,6 +32,7 @@ Standards and patterns for UI animations, micro-interactions, and transitions. A
 - `+Nms` = delay N milliseconds
 
 **Properties**:
+
 - `Y` = translateY
 - `X` = translateX
 - `S` = scale
@@ -38,6 +41,7 @@ Standards and patterns for UI animations, micro-interactions, and transitions. A
 - `bg` = background
 
 **Example**: `button: 200ms ease-out [S1→1.05, α0.8→1]`
+
 - Button scales from 1 to 1.05 and fades from 0.8 to 1 over 200ms with ease-out
 
 ---
@@ -76,11 +80,13 @@ elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 ### Performance Guidelines
 
 **60fps Animations** (GPU-accelerated):
+
 - ✅ `transform` (translate, scale, rotate)
 - ✅ `opacity`
 - ✅ `filter` (with caution)
 
 **Avoid** (causes reflow/repaint):
+
 - ❌ `width`, `height`
 - ❌ `top`, `left`, `right`, `bottom`
 - ❌ `margin`, `padding`
@@ -94,7 +100,9 @@ elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 ```css
 /* Hover - subtle lift */
 .button {
-  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out;
 }
 .button:hover {
   transform: translateY(-2px);
@@ -124,6 +132,7 @@ elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 ```
 
 **Micro-syntax**:
+
 ```
 buttonHover: 200ms ease-out [Y0→-2, shadow↗]
 buttonPress: 100ms ease-in [S1→0.95]
@@ -135,7 +144,9 @@ ripple: 400ms ease-out [S0→2, α1→0]
 ```css
 /* Hover - lift and shadow */
 .card {
-  transition: transform 300ms ease-out, box-shadow 300ms ease-out;
+  transition:
+    transform 300ms ease-out,
+    box-shadow 300ms ease-out;
 }
 .card:hover {
   transform: translateY(-4px);
@@ -151,6 +162,7 @@ ripple: 400ms ease-out [S0→2, α1→0]
 ```
 
 **Micro-syntax**:
+
 ```
 cardHover: 300ms ease-out [Y0→-4, shadow↗]
 cardSelect: 200ms ease-out [S1→1.02, bg→accent]
@@ -164,8 +176,12 @@ cardSelect: 200ms ease-out [S1→1.02, bg→accent]
   animation: fadeIn 300ms ease-out;
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Modal slide up and fade */
@@ -200,6 +216,7 @@ cardSelect: 200ms ease-out [S1→1.02, bg→accent]
 ```
 
 **Micro-syntax**:
+
 ```
 backdrop: 300ms ease-out [α0→1]
 modalEnter: 350ms ease-out [Y+40→0, α0→1]
@@ -227,6 +244,7 @@ modalExit: 250ms ease-in [Y0→+40, α1→0]
 ```
 
 **Micro-syntax**:
+
 ```
 dropdown: 200ms ease-out [scaleY0.95→1, α0→1]
 ```
@@ -266,6 +284,7 @@ dropdown: 200ms ease-out [scaleY0.95→1, α0→1]
 ```
 
 **Micro-syntax**:
+
 ```
 sidebar: 350ms ease-out [X-280→0, α0→1]
 overlay: 300ms ease-out [α0→1, blur0→4px]
@@ -315,6 +334,7 @@ overlay: 300ms ease-out [α0→1, blur0→4px]
 ```
 
 **Micro-syntax**:
+
 ```
 userMsg: 400ms ease-out [Y+20→0, X+10→0, S0.9→1]
 aiMsg: 600ms bounce [Y+15→0, S0.95→1] +200ms
@@ -334,7 +354,9 @@ aiMsg: 600ms bounce [Y+15→0, S0.95→1] +200ms
   animation-delay: 400ms;
 }
 @keyframes typingDot {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 0.4;
   }
@@ -346,6 +368,7 @@ aiMsg: 600ms bounce [Y+15→0, S0.95→1] +200ms
 ```
 
 **Micro-syntax**:
+
 ```
 typing: 1400ms ∞ [Y±8, α0.4→1] stagger+200ms
 ```
@@ -358,7 +381,8 @@ typing: 1400ms ∞ [Y±8, α0.4→1] stagger+200ms
   animation: pulse 2000ms infinite;
 }
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     scale: 1;
   }
@@ -370,6 +394,7 @@ typing: 1400ms ∞ [Y±8, α0.4→1] stagger+200ms
 ```
 
 **Micro-syntax**:
+
 ```
 status: 2000ms ∞ [α1→0.6→1, S1→1.05→1]
 ```
@@ -397,6 +422,7 @@ status: 2000ms ∞ [α1→0.6→1, S1→1.05→1]
 ```
 
 **Micro-syntax**:
+
 ```
 inputFocus: 200ms ease-out [S1→1.01, shadow+ring]
 inputBlur: 150ms ease-in [S1.01→1, shadow-ring]
@@ -410,9 +436,16 @@ inputBlur: 150ms ease-in [S1.01→1, shadow-ring]
   animation: shake 400ms ease-in-out;
 }
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 /* Success checkmark */
@@ -432,6 +465,7 @@ inputBlur: 150ms ease-in [S1.01→1, shadow-ring]
 ```
 
 **Micro-syntax**:
+
 ```
 error: 400ms ease-in-out [X±5] shake
 success: 600ms bounce [S0→1.2, R0→360°, α0→1]
@@ -456,12 +490,17 @@ success: 600ms bounce [S0→1.2, R0→360°, α0→1]
   background-size: 200% 100%;
 }
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 ```
 
 **Micro-syntax**:
+
 ```
 skeleton: 2000ms ∞ [bg: muted↔accent]
 ```
@@ -474,23 +513,40 @@ skeleton: 2000ms ∞ [bg: muted↔accent]
   animation: spin 1000ms linear infinite;
 }
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Pulsing dots */
 .loading-dots span {
   animation: dotPulse 1500ms infinite;
 }
-.loading-dots span:nth-child(2) { animation-delay: 200ms; }
-.loading-dots span:nth-child(3) { animation-delay: 400ms; }
+.loading-dots span:nth-child(2) {
+  animation-delay: 200ms;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay: 400ms;
+}
 @keyframes dotPulse {
-  0%, 80%, 100% { opacity: 0.3; scale: 0.8; }
-  40% { opacity: 1; scale: 1; }
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    scale: 0.8;
+  }
+  40% {
+    opacity: 1;
+    scale: 1;
+  }
 }
 ```
 
 **Micro-syntax**:
+
 ```
 spinner: 1000ms ∞ linear [R360°]
 dotPulse: 1500ms ∞ [α0.3→1→0.3, S0.8→1→0.8] stagger+200ms
@@ -504,13 +560,20 @@ dotPulse: 1500ms ∞ [α0.3→1→0.3, S0.8→1→0.8] stagger+200ms
   animation: progress 2000ms ease-in-out infinite;
 }
 @keyframes progress {
-  0% { transform: translateX(-100%); }
-  50% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 ```
 
 **Micro-syntax**:
+
 ```
 progress: 2000ms ∞ ease-in-out [X-100%→0→100%]
 ```
@@ -526,7 +589,9 @@ progress: 2000ms ∞ ease-in-out [X-100%→0→100%]
 .fade-in-on-scroll {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 500ms ease-out, transform 500ms ease-out;
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
 }
 .fade-in-on-scroll.visible {
   opacity: 1;
@@ -535,6 +600,7 @@ progress: 2000ms ∞ ease-in-out [X-100%→0→100%]
 ```
 
 **Micro-syntax**:
+
 ```
 scrollFadeIn: 500ms ease-out [Y+40→0, α0→1]
 ```
@@ -553,12 +619,18 @@ html {
   animation-iteration-count: 3;
 }
 @keyframes scrollHint {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
 }
 ```
 
 **Micro-syntax**:
+
 ```
 autoScroll: 400ms smooth
 scrollHint: 800ms ∞×3 [Y±5]
@@ -576,8 +648,12 @@ scrollHint: 800ms ∞×3 [Y±5]
   animation: fadeOut 200ms ease-in;
 }
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 /* Page fade in */
@@ -585,12 +661,17 @@ scrollHint: 800ms ∞×3 [Y±5]
   animation: fadeIn 300ms ease-out;
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 ```
 
 **Micro-syntax**:
+
 ```
 pageExit: 200ms ease-in [α1→0]
 pageEnter: 300ms ease-out [α0→1]
@@ -608,7 +689,7 @@ pageEnter: 300ms ease-out [α0→1]
   position: relative;
 }
 .link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -623,6 +704,7 @@ pageEnter: 300ms ease-out [α0→1]
 ```
 
 **Micro-syntax**:
+
 ```
 linkHover: 250ms ease-out [width0→100%]
 ```
@@ -643,6 +725,7 @@ linkHover: 250ms ease-out [width0→100%]
 ```
 
 **Micro-syntax**:
+
 ```
 toggle: 200ms ease-out [X0→20, bg→accent]
 ```
@@ -660,7 +743,7 @@ aiMsg: 600ms bounce [Y+15→0, S0.95→1] +200ms
 typing: 1400ms ∞ [Y±8, α0.4→1] stagger+200ms
 status: 300ms ease-out [α0.6→1, S1→1.05→1]
 
-## Interface Transitions  
+## Interface Transitions
 sidebar: 350ms ease-out [X-280→0, α0→1]
 overlay: 300ms [α0→1, blur0→4px]
 input: 200ms [S1→1.01, shadow+ring] focus

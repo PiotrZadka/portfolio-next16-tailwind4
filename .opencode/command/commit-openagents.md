@@ -29,6 +29,7 @@ git branch -a | grep -E "chore/version-bump|docs/auto-sync" | wc -l
 ```
 
 **Intelligent Analysis:**
+
 - 🔍 **Version Sync Check**: Compare VERSION file with latest git tag
   - If VERSION > latest tag → Suggest creating missing release
   - If tags are missing → Offer to trigger release workflow
@@ -45,6 +46,7 @@ git branch -a | grep -E "chore/version-bump|docs/auto-sync" | wc -l
   - Recent activity
 
 **Present Analysis:**
+
 ```
 📊 Repo Health Check:
 - Current branch: <branch>
@@ -64,6 +66,7 @@ Would you like to:
 ```
 
 **If user chooses "Fix issues":**
+
 - Offer to trigger `create-release.yml` workflow for missing tags
 - Offer to clean up stale branches
 - Offer to audit workflows if problems detected
@@ -71,6 +74,7 @@ Would you like to:
 ### 2. **Pre-Commit Validation (Optional)**
 
 **Ask user:**
+
 ```
 Would you like to run smoke tests before committing? (y/n)
 - y: Run validation tests
@@ -78,16 +82,19 @@ Would you like to run smoke tests before committing? (y/n)
 ```
 
 **If user chooses to run tests:**
+
 ```bash
 cd evals/framework && npm run eval:sdk -- --agent=core/openagent --pattern="**/smoke-test.yaml"
 cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/smoke-test.yaml"
 ```
 
 **Validation Rules:**
+
 - ⚠️ If tests fail, ask user if they want to proceed or fix issues first
 - ✅ Tests are optional - user can skip and commit directly
 
 ### 3. **Analyze Changes**
+
 - Run `git status` to see all untracked files
 - Run `git diff` to see both staged and unstaged changes
 - Run `git log --oneline -5` to see recent commit style
@@ -98,7 +105,9 @@ cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/s
   - If workflow disabled/deleted → Ask for confirmation
 
 ### 4. **Stage Files Intelligently**
+
 **Auto-stage based on change type:**
+
 - If modifying evals framework → stage `evals/framework/`
 - If modifying core agents → stage `.opencode/agent/core/`
 - If modifying development agents → stage `.opencode/agent/development/`
@@ -116,6 +125,7 @@ cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/s
 - If user provides specific files → stage only those
 
 **Never auto-stage:**
+
 - `node_modules/`
 - `.env` files
 - `test_tmp/` or temporary directories
@@ -124,6 +134,7 @@ cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/s
 ### 5. **Generate Commit Message**
 
 **Follow Conventional Commits (NO EMOJIS):**
+
 ```
 <type>(<scope>): <description>
 
@@ -131,6 +142,7 @@ cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/s
 ```
 
 **Types for this repo:**
+
 - `feat` - New features (agents, commands, tools)
 - `fix` - Bug fixes
 - `refactor` - Code restructuring without behavior change
@@ -141,6 +153,7 @@ cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/s
 - `perf` - Performance improvements
 
 **Scopes for this repo:**
+
 - `evals` - Evaluation framework changes
 - `agents/core` - Core agents (openagent, opencoder)
 - `agents/meta` - Meta agents (system-builder, repo-manager)
@@ -161,6 +174,7 @@ cd evals/framework && npm run eval:sdk -- --agent=core/opencoder --pattern="**/s
 - `registry` - Registry.json changes
 
 **Examples:**
+
 ```
 feat(evals): add parallel test execution support
 fix(agents/core): correct delegation logic in openagent
@@ -180,6 +194,7 @@ ci: add automatic version bumping workflow
 ### 6. **Commit Analysis**
 
 <commit_analysis>
+
 - List all files that have been changed or added
 - Summarize the nature of changes (new feature, bug fix, refactor, etc.)
 - Identify the primary scope (evals, agents, scripts, etc.)
@@ -189,9 +204,10 @@ ci: add automatic version bumping workflow
 - Draft a concise commit message focusing on "why" not "what"
 - Ensure message follows conventional commit format
 - Verify message is specific and not generic
-</commit_analysis>
+  </commit_analysis>
 
 ### 7. **Execute Commit**
+
 ```bash
 git add <relevant-files>
 git commit -m "<type>(<scope>): <description>"
@@ -201,6 +217,7 @@ git status  # Verify commit succeeded
 ### 8. **Post-Commit Actions**
 
 **Ask user:**
+
 ```
 ✅ Commit created: <commit-hash>
 📝 Message: <commit-message>
@@ -212,6 +229,7 @@ Would you like to:
 ```
 
 **If user chooses push:**
+
 ```bash
 git push origin <current-branch>
 ```
@@ -219,6 +237,7 @@ git push origin <current-branch>
 **Then inform based on commit type:**
 
 **For workflow changes (`.github/workflows/`):**
+
 ```
 🚀 Pushed workflow changes!
 
@@ -234,6 +253,7 @@ This will trigger:
 ```
 
 **For feature/fix commits to main:**
+
 ```
 🚀 Pushed to main!
 
@@ -251,6 +271,7 @@ Expected flow:
 ```
 
 **For other commits:**
+
 ```
 🚀 Pushed to remote!
 
@@ -267,6 +288,7 @@ This will trigger:
 When committing workflow changes or when issues are detected, provide intelligent guidance:
 
 **1. Version & Release Sync**
+
 ```bash
 # Check if version and tags are in sync
 VERSION=$(cat VERSION)
@@ -285,6 +307,7 @@ fi
 ```
 
 **2. Stale Branch Cleanup**
+
 ```bash
 # Detect stale automation branches
 STALE_BRANCHES=$(git branch -a | grep -E "chore/version-bump|docs/auto-sync" | wc -l)
@@ -300,6 +323,7 @@ fi
 ```
 
 **3. Workflow Health Check**
+
 ```bash
 # Check for common workflow issues
 if [ -f .github/workflows/post-merge.yml.disabled ]; then
@@ -321,6 +345,7 @@ fi
 **4. Workflow Documentation**
 
 When new workflows are added, offer to update documentation:
+
 ```
 ✅ New workflow detected: <workflow-name>.yml
 
@@ -333,6 +358,7 @@ Would you like to:
 ### Workflow Commit Best Practices
 
 **For workflow changes, always:**
+
 - Test workflow syntax before committing
 - Document what the workflow does
 - Explain why changes were made
@@ -340,6 +366,7 @@ Would you like to:
 - Update workflow audit documentation
 
 **Commit message format for workflows:**
+
 ```
 ci(workflows): <what changed>
 
@@ -349,6 +376,7 @@ Testing: <how to test>
 ```
 
 **Example:**
+
 ```
 ci(workflows): add automatic release creation workflow
 
@@ -360,7 +388,9 @@ Testing: Manually trigger workflow with: gh workflow run create-release.yml
 ## Repository-Specific Rules
 
 ### Version Bumping (Automatic via CI/CD)
+
 Commits trigger automatic version bumps:
+
 - `feat:` → minor bump (0.0.1 → 0.1.0)
 - `fix:` → patch bump (0.0.1 → 0.0.2)
 - `feat!:` or `BREAKING CHANGE:` → major bump (0.1.0 → 1.0.0)
@@ -368,24 +398,30 @@ Commits trigger automatic version bumps:
 - Default → patch bump (0.0.1 → 0.0.2)
 
 ### Files to Always Check
+
 Before committing, verify these are in sync:
+
 - `VERSION` file
 - `package.json` version
 - `CHANGELOG.md` (if manually updated)
 
 ### Pre-Commit Hooks
+
 This repo may have pre-commit hooks that:
+
 - Run linting
 - Format code
 - Run type checks
 
 **If hooks modify files:**
+
 - Automatically amend the commit to include hook changes
 - Inform user that files were auto-formatted
 
 ## Error Handling
 
 ### If Smoke Tests Fail
+
 ```
 ⚠️ Smoke tests failed for <agent-name>
 
@@ -402,6 +438,7 @@ What would you like to do?
 ```
 
 ### If No Changes Detected
+
 ```
 ℹ️ No changes to commit. Working tree is clean.
 
@@ -415,6 +452,7 @@ Would you like to:
 ```
 
 ### If Merge Conflicts
+
 ```
 ⚠️ Merge conflicts detected. Please resolve conflicts first.
 
@@ -464,6 +502,7 @@ Run: git status
    - Required: Must pass before merge
 
 **Workflow Flow for Version Bumps:**
+
 ```
 1. Merge feat/fix PR to main
    ↓
@@ -498,6 +537,7 @@ Run: git status
 ### Common Workflows
 
 **Feature Addition:**
+
 ```bash
 # 1. Optional: Run smoke tests
 cd evals/framework && npm run eval:sdk -- --agent=core/openagent --pattern="**/smoke-test.yaml"
@@ -511,6 +551,7 @@ git push origin main
 ```
 
 **Bug Fix:**
+
 ```bash
 git add <files>
 git commit -m "fix(agents/core): correct delegation threshold logic"
@@ -518,6 +559,7 @@ git push origin main
 ```
 
 **Documentation:**
+
 ```bash
 git add docs/
 git commit -m "docs(guides): update testing documentation"
@@ -525,6 +567,7 @@ git push origin main
 ```
 
 **Refactoring:**
+
 ```bash
 git add evals/framework/src/
 git commit -m "refactor(evals): extract validation logic into separate module"
@@ -534,6 +577,7 @@ git push origin main
 ## Success Criteria
 
 A successful commit should:
+
 - ✅ Follow conventional commit format (NO EMOJIS)
 - ✅ Have appropriate scope with category path (e.g., agents/core, subagents/code)
 - ✅ Be atomic (single purpose)

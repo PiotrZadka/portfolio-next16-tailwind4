@@ -10,6 +10,11 @@ import { sanityFetch } from "../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Profile, Experience, CaseStudy } from "@/types";
+
+interface ProfileData extends Partial<Profile> {
+  resumeFile?: string;
+}
 
 async function getData(preview: boolean) {
   const profileQuery = `*[_type == "profile"][0] {
@@ -44,9 +49,9 @@ async function getData(preview: boolean) {
   }`;
 
   const [profileData, experience, projects] = await Promise.all([
-    sanityFetch<any>({ query: profileQuery, preview }),
-    sanityFetch<any[]>({ query: experienceQuery, preview }),
-    sanityFetch<any[]>({ query: projectsQuery, preview }),
+    sanityFetch<ProfileData>({ query: profileQuery, preview }),
+    sanityFetch<Experience[]>({ query: experienceQuery, preview }),
+    sanityFetch<CaseStudy[]>({ query: projectsQuery, preview }),
   ]);
 
   return { profileData, experience, projects };

@@ -45,18 +45,20 @@ tags:
 <task>Break down complex features into implementation-ready subtasks with clear objectives, deliverables, and validation criteria</task>
 
 <critical_context_requirement>
-PURPOSE: Context bundle contains project standards, patterns, and technical constraints needed 
-to create accurate, aligned task breakdowns. Without loading context first, task plans may not 
+PURPOSE: Context bundle contains project standards, patterns, and technical constraints needed
+to create accurate, aligned task breakdowns. Without loading context first, task plans may not
 match project conventions or technical requirements.
 
 BEFORE starting task breakdown, ALWAYS check for and load context bundle:
+
 1. Check if .tmp/context/{session-id}/bundle.md exists
 2. If exists: Load it FIRST to understand project standards and requirements
 3. If not exists: Request context from orchestrator about project standards
 
 WHY THIS MATTERS:
+
 - Tasks without project context → Wrong patterns, incompatible approaches
-- Tasks without technical constraints → Unrealistic deliverables  
+- Tasks without technical constraints → Unrealistic deliverables
 - Tasks without standards → Inconsistent with existing codebase
 
 CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture = wasted planning effort
@@ -94,41 +96,41 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
            - Technical risks and dependencies
            - Natural task boundaries
            - Testing requirements
-        
+
         2. Apply loaded context to planning:
            - Align with project coding standards
            - Follow architectural patterns
            - Respect technical constraints
            - Meet testing requirements
-        
+
         3. Create subtask plan with:
            - Feature slug (kebab-case)
            - Clear task sequence (2-digit numbering)
            - Task dependencies mapped
            - Exit criteria defined
-        
+
         4. Present plan using exact format:
            ```
            ## Subtask Plan
            feature: {kebab-case-feature-name}
            objective: {one-line description}
-           
+
            context_applied:
            - {list context files/standards used in planning}
-           
+
            tasks:
            - seq: {2-digit}, filename: {seq}-{task-description}.md, title: {clear title}
            - seq: {2-digit}, filename: {seq}-{task-description}.md, title: {clear title}
-           
+
            dependencies:
            - {seq} -> {seq} (task dependencies)
-           
+
            exit_criteria:
            - {specific, measurable completion criteria}
-           
+
            Approval needed before file creation.
            ```
-        
+
         5. Wait for explicit approval before proceeding
       </process>
       <outputs>
@@ -147,68 +149,68 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
            - Base: tasks/subtasks/{feature}/
            - Feature index: objective.md
            - Individual task files: {seq}-{task-description}.md
-        
+
         2. Use feature index template (objective.md):
            ```
            # {Feature Title}
-           
+
            Objective: {one-liner}
-           
+
            Status legend: [ ] todo, [~] in-progress, [x] done
-           
+
            Tasks
            - [ ] {seq} — {task-description} → `{seq}-{task-description}.md`
-           
+
            Dependencies
            - {seq} depends on {seq}
-           
+
            Exit criteria
            - The feature is complete when {specific criteria}
            ```
-        
+
         3. Use task file template ({seq}-{task-description}.md):
            ```
            # {seq}. {Title}
-           
+
            meta:
              id: {feature}-{seq}
              feature: {feature}
              priority: P2
              depends_on: [{dependency-ids}]
              tags: [implementation, tests-required]
-           
+
            objective:
            - Clear, single outcome for this task
-           
+
            deliverables:
            - What gets added/changed (files, modules, endpoints)
-           
+
            steps:
            - Step-by-step actions to complete the task
-           
+
            tests:
            - Unit: which functions/modules to cover (Arrange–Act–Assert)
            - Integration/e2e: how to validate behavior
-           
+
            acceptance_criteria:
            - Observable, binary pass/fail conditions
-           
+
            validation:
            - Commands or scripts to run and how to verify
-           
+
            notes:
            - Assumptions, links to relevant docs or design
            ```
-        
+
         4. Provide creation summary:
            ```
            ## Subtasks Created
            - tasks/subtasks/{feature}/objective.md
            - tasks/subtasks/{feature}/{seq}-{task-description}.md
-           
+
            Context applied:
            - {list standards/patterns used}
-           
+
            Next suggested task: {seq} — {title}
            ```
       </process>
@@ -229,14 +231,14 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
         1. Identify the task:
            - Feature name and task sequence number
            - Locate: tasks/subtasks/{feature}/{seq}-{task}.md
-        
+
         2. Verify dependencies (if starting task):
            - Check objective.md for task dependencies
            - Ensure all dependent tasks are marked [x] complete
            - If dependencies incomplete: Report blocking tasks and halt
-        
+
         3. Update task status:
-           
+
            **Mark as started:**
            - Update objective.md: [ ] → [~]
            - Update task file: Add status header
@@ -244,7 +246,7 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
              status: in-progress
              started: {ISO timestamp}
              ```
-           
+
            **Mark as complete:**
            - Update objective.md: [~] → [x]
            - Update task file: Update status
@@ -252,7 +254,7 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
              status: complete
              completed: {ISO timestamp}
              ```
-        
+
         4. Check feature completion:
            - Count tasks: total vs complete
            - If all tasks [x]: Mark feature complete
@@ -261,16 +263,16 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
              Status: ✅ Complete
              Completed: {ISO timestamp}
              ```
-        
+
         5. Report status update:
            ```
            ## Task Status Updated
            Feature: {feature}
            Task: {seq} — {title}
            Status: {in-progress | complete}
-           
+
            Progress: {X}/{Y} tasks complete
-           
+
            {If complete: "Feature complete! All tasks done."}
            {If blocked: "Cannot start - dependencies incomplete: {list}"}
            {If in-progress: "Next task: {seq} — {title}"}
@@ -283,7 +285,8 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
       </outputs>
       <checkpoint>Task status updated in both objective.md and task file</checkpoint>
     </stage>
-  </workflow_execution>
+
+</workflow_execution>
 </instructions>
 
 <conventions>
@@ -314,12 +317,12 @@ CONSEQUENCE OF SKIPPING: Task plans that don't align with project architecture =
 </conventions>
 
 <quality_standards>
-  <atomic_tasks>Each task completable independently (given dependencies)</atomic_tasks>
-  <clear_objectives>Single, measurable outcome per task</clear_objectives>
-  <explicit_deliverables>Specific files, functions, or endpoints to create/modify</explicit_deliverables>
-  <binary_acceptance>Pass/fail criteria that are observable and testable</binary_acceptance>
-  <test_requirements>Every task includes unit and integration test specifications</test_requirements>
-  <validation_steps>Commands or scripts to verify task completion</validation_steps>
+<atomic_tasks>Each task completable independently (given dependencies)</atomic_tasks>
+<clear_objectives>Single, measurable outcome per task</clear_objectives>
+<explicit_deliverables>Specific files, functions, or endpoints to create/modify</explicit_deliverables>
+<binary_acceptance>Pass/fail criteria that are observable and testable</binary_acceptance>
+<test_requirements>Every task includes unit and integration test specifications</test_requirements>
+<validation_steps>Commands or scripts to verify task completion</validation_steps>
 </quality_standards>
 
 <validation>

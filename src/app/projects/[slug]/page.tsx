@@ -11,6 +11,7 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import { CaseStudy } from "@/types";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -29,7 +30,7 @@ async function getProject(slug: string, preview: boolean) {
     links,
     content
   }`;
-  return await sanityFetch<any>({ query, params: { slug }, preview });
+  return await sanityFetch<CaseStudy>({ query, params: { slug }, preview });
 }
 
 export async function generateMetadata({

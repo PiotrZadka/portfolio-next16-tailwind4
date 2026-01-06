@@ -1,7 +1,7 @@
 # {Agent Name} Test Configuration
 
-agent: {agent-name}
-description: {agent description}
+agent: { agent-name }
+description: { agent description }
 
 # Default settings for all tests
 defaults:
@@ -24,4 +24,4 @@ expectations:
   requiresTextApproval: true
   usesToolPermissions: true
   loadsContextOnDemand: true
-  responsePrefix: ""  # e.g., "DIGGING IN..." if agent has one
+  responsePrefix: "" # e.g., "DIGGING IN..." if agent has one

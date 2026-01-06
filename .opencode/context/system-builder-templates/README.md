@@ -5,6 +5,7 @@ This directory contains reusable templates for generating context-aware AI syste
 ## Template Categories
 
 ### Agent Templates
+
 - `orchestrator-template.md` - Main coordinator agent pattern
 - `subagent-template.md` - Specialized subagent pattern
 - `research-agent-template.md` - Research/information gathering pattern
@@ -12,21 +13,25 @@ This directory contains reusable templates for generating context-aware AI syste
 - `processing-agent-template.md` - Data transformation pattern
 
 ### Context Templates
+
 - `domain-knowledge-template.md` - Domain concept documentation
 - `process-workflow-template.md` - Process/workflow documentation
 - `standards-template.md` - Quality and validation standards
 - `template-pattern-template.md` - Reusable output templates
 
 ### Workflow Templates
+
 - `simple-workflow-template.md` - Linear 3-5 stage workflow
 - `moderate-workflow-template.md` - Multi-step with decisions
 - `complex-workflow-template.md` - Multi-agent coordination
 
 ### Command Templates
+
 - `simple-command-template.md` - Single parameter command
 - `parameterized-command-template.md` - Multi-parameter with flags
 
 ### Documentation Templates
+
 - `readme-template.md` - System overview README
 - `architecture-template.md` - Architecture documentation
 - `testing-template.md` - Testing checklist
@@ -38,6 +43,7 @@ These templates are used by the system-builder subagents to generate consistent,
 high-quality files following research-backed patterns.
 
 Each template includes:
+
 - XML structure with optimal component ordering
 - Placeholder markers for customization
 - Example content
@@ -47,6 +53,7 @@ Each template includes:
 ## Template Variables
 
 Templates use these variable patterns:
+
 - `{domain}` - Domain name
 - `{agent_name}` - Agent name
 - `{purpose}` - Purpose description
@@ -56,6 +63,7 @@ Templates use these variable patterns:
 ## Quality Standards
 
 All templates follow:
+
 - Stanford/Anthropic XML research patterns
 - Optimal component ordering (context→role→task→instructions)
 - Hierarchical context structure

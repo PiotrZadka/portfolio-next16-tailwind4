@@ -5,7 +5,7 @@ description: |
   Verifies agent decomposes problems before jumping to implementation.
 
 category: implementation
-agent: {agent-name}
+agent: { agent-name }
 model: anthropic/claude-sonnet-4-5
 
 prompt: |
@@ -24,7 +24,7 @@ behavior:
   # Should NOT jump straight to implementation
   mustNotUseInFirstN:
     tools: [write, edit]
-    n: 3  # First 3 tool calls
+    n: 3 # First 3 tool calls
 
 expectedViolations:
   - rule: extended-thinking

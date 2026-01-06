@@ -235,7 +235,7 @@ Initial posts to establish authority and voice:
 - [ ] Reading time estimates on blog posts
 - [ ] "Copy link" button on blog posts
 - [ ] Analytics (privacy-respecting, e.g., Plausible or Umami)
-- [ ] Sanity Studio preview mode (live preview while editing)
+- [x] Sanity Studio preview mode (live preview while editing)
 
 ---
 

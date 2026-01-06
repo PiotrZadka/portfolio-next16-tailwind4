@@ -30,6 +30,7 @@ The Agent Validator Plugin is a real-time monitoring and validation system for O
 The plugin auto-loads from `.opencode/plugin/` when OpenCode starts.
 
 **Install dependencies:**
+
 ```bash
 cd ~/.opencode/plugin
 npm install
@@ -38,6 +39,7 @@ bun install
 ```
 
 **Verify installation:**
+
 ```bash
 opencode --agent openagent
 > "analyze_agent_usage"
@@ -48,6 +50,7 @@ If you see agent tracking data, the plugin is working! ✅
 ### Your First Validation
 
 1. **Start a session and do some work:**
+
    ```bash
    opencode --agent openagent
    > "Run pwd command"
@@ -56,6 +59,7 @@ If you see agent tracking data, the plugin is working! ✅
    ```
 
 2. **Check what was tracked:**
+
    ```bash
    > "analyze_agent_usage"
    ```
@@ -76,11 +80,13 @@ The plugin provides 7 validation tools:
 **Purpose:** Show which agents were active and what tools they used
 
 **Usage:**
+
 ```bash
 analyze_agent_usage
 ```
 
 **Example Output:**
+
 ```
 ## Agent Usage Report
 
@@ -103,6 +109,7 @@ analyze_agent_usage
 ```
 
 **When to use:**
+
 - After agent switches to verify tracking
 - To see tool usage patterns
 - To debug which agent did what
@@ -114,6 +121,7 @@ analyze_agent_usage
 **Purpose:** Comprehensive validation of agent behavior against defined rules
 
 **Usage:**
+
 ```bash
 validate_session
 # or with details
@@ -121,6 +129,7 @@ validate_session --include_details true
 ```
 
 **Example Output:**
+
 ```
 ## Validation Report
 
@@ -134,6 +143,7 @@ validate_session --include_details true
 ```
 
 **What it checks:**
+
 - Approval gate enforcement
 - Tool usage patterns
 - Context loading behavior
@@ -141,6 +151,7 @@ validate_session --include_details true
 - Critical rule compliance
 
 **When to use:**
+
 - After completing a complex task
 - To verify agent followed its prompt
 - Before finalizing work
@@ -153,11 +164,13 @@ validate_session --include_details true
 **Purpose:** Verify approval gates were enforced before execution operations
 
 **Usage:**
+
 ```bash
 check_approval_gates
 ```
 
 **Example Output:**
+
 ```
 ✅ Approval gate compliance: PASSED
 
@@ -165,6 +178,7 @@ All 3 execution operation(s) were properly approved.
 ```
 
 **Or if violations found:**
+
 ```
 ⚠️ Approval gate compliance: FAILED
 
@@ -176,6 +190,7 @@ Critical rule violated: approval_gate
 ```
 
 **When to use:**
+
 - After bash/write/edit/task operations
 - To verify safety compliance
 - When auditing agent behavior
@@ -187,11 +202,13 @@ Critical rule violated: approval_gate
 **Purpose:** Show all context files that were read during the session
 
 **Usage:**
+
 ```bash
 analyze_context_reads
 ```
 
 **Example Output:**
+
 ```
 ## Context Files Read
 
@@ -210,6 +227,7 @@ analyze_context_reads
 ```
 
 **When to use:**
+
 - To verify agent loaded required context
 - To understand which standards were applied
 - To debug context loading issues
@@ -221,11 +239,13 @@ analyze_context_reads
 **Purpose:** Verify required context files were read BEFORE executing tasks
 
 **Usage:**
+
 ```bash
 check_context_compliance
 ```
 
 **Example Output:**
+
 ```
 ## Context Loading Compliance
 
@@ -247,6 +267,7 @@ According to OpenAgent prompt, the agent should:
 ```
 
 **Context loading rules:**
+
 - Writing code → should read `standards/code.md`
 - Writing docs → should read `standards/docs.md`
 - Writing tests → should read `standards/tests.md`
@@ -254,6 +275,7 @@ According to OpenAgent prompt, the agent should:
 - Delegating → should read `workflows/delegation.md`
 
 **When to use:**
+
 - To verify lazy loading is working
 - To ensure standards are being followed
 - To debug why agent isn't following patterns
@@ -265,11 +287,13 @@ According to OpenAgent prompt, the agent should:
 **Purpose:** Analyze delegation decisions against the 4+ file rule
 
 **Usage:**
+
 ```bash
 analyze_delegation
 ```
 
 **Example Output:**
+
 ```
 ## Delegation Analysis
 
@@ -284,6 +308,7 @@ analyze_delegation
 ```
 
 **When to use:**
+
 - After complex multi-file tasks
 - To verify delegation logic
 - To tune delegation thresholds
@@ -295,12 +320,14 @@ analyze_delegation
 **Purpose:** Inspect what the validator is tracking (for debugging)
 
 **Usage:**
+
 ```bash
 debug_validator
 ```
 
 **Example Output:**
-```
+
+````
 ## Debug Information
 
 ```json
@@ -323,14 +350,16 @@ debug_validator
   },
   "allBehaviorLogs": 7
 }
-```
+````
 
 **Analysis:**
+
 - Behavior log entries for this session: 7
 - Total behavior log entries: 7
 - Messages in session: 5
 - Tool execution tracker: Active
-```
+
+````
 
 **When to use:**
 - When validation tools aren't working as expected
@@ -349,9 +378,10 @@ debug_validator
 export_validation_report
 # or specify path
 export_validation_report --output_path ./reports/validation.md
-```
+````
 
 **Example Output:**
+
 ```
 ✅ Validation report exported to: .tmp/validation-abc12345.md
 
@@ -360,6 +390,7 @@ export_validation_report --output_path ./reports/validation.md
 ```
 
 **Generated report includes:**
+
 - Full validation summary
 - Detailed checks with evidence
 - Tool usage timeline
@@ -368,6 +399,7 @@ export_validation_report --output_path ./reports/validation.md
 - Compliance scores
 
 **When to use:**
+
 - To save validation results for review
 - To share compliance reports
 - To track agent behavior over time
@@ -388,19 +420,19 @@ export_validation_report --output_path ./reports/validation.md
 ### Severity Levels
 
 - **✅ Info** - Informational, no issues
-- **⚠️  Warning** - Non-critical issue, should review
+- **⚠️ Warning** - Non-critical issue, should review
 - **❌ Error** - Critical rule violation, must fix
 
 ### Common Validation Checks
 
-| Check | What It Validates | Pass Criteria |
-|-------|------------------|---------------|
-| `approval_gate_enforcement` | Approval requested before execution | Approval language found before bash/write/edit/task |
-| `stop_on_failure` | No auto-fix after errors | Agent stops and reports errors instead of fixing |
-| `lazy_context_loading` | Context loaded only when needed | Context files read match task requirements |
-| `delegation_appropriateness` | Delegation follows 4+ file rule | Delegated when 4+ files, or didn't delegate when <4 |
-| `context_loading_compliance` | Context loaded BEFORE execution | Required context file read before task execution |
-| `tool_usage` | Tool calls tracked | All tool invocations logged |
+| Check                        | What It Validates                   | Pass Criteria                                       |
+| ---------------------------- | ----------------------------------- | --------------------------------------------------- |
+| `approval_gate_enforcement`  | Approval requested before execution | Approval language found before bash/write/edit/task |
+| `stop_on_failure`            | No auto-fix after errors            | Agent stops and reports errors instead of fixing    |
+| `lazy_context_loading`       | Context loaded only when needed     | Context files read match task requirements          |
+| `delegation_appropriateness` | Delegation follows 4+ file rule     | Delegated when 4+ files, or didn't delegate when <4 |
+| `context_loading_compliance` | Context loaded BEFORE execution     | Required context file read before task execution    |
+| `tool_usage`                 | Tool calls tracked                  | All tool invocations logged                         |
 
 ---
 
@@ -518,6 +550,7 @@ opencode --agent openagent
 **Cause:** Plugin just loaded, no tracking data yet
 
 **Solution:**
+
 1. Perform some actions (bash, read, write, etc.)
 2. Then run validation tools
 3. Plugin tracks from session start, so early checks may show no data
@@ -529,6 +562,7 @@ opencode --agent openagent
 **Cause:** No bash/write/edit/task operations performed yet
 
 **Solution:**
+
 1. Run a command that requires execution (e.g., "run pwd")
 2. Then check approval gates
 3. Read-only operations (read, list) don't trigger approval gates
@@ -540,11 +574,13 @@ opencode --agent openagent
 **Cause:** Agent used different approval phrasing than expected
 
 **Solution:**
+
 1. Check the approval keywords in `agent-validator.ts` (lines 12-22)
 2. Add custom patterns if your agent uses different phrasing
 3. Current keywords: "approval", "approve", "proceed", "confirm", "permission", etc.
 
 **Example customization:**
+
 ```typescript
 const approvalKeywords = [
   "approval",
@@ -559,7 +595,7 @@ const approvalKeywords = [
   // Add your custom patterns:
   "ready to execute",
   "waiting for go-ahead",
-]
+];
 ```
 
 ---
@@ -569,6 +605,7 @@ const approvalKeywords = [
 **Cause:** Timing issue - context read after task started
 
 **Solution:**
+
 1. Verify agent reads context BEFORE execution (not during/after)
 2. Check timeline in `analyze_context_reads`
 3. Agent should follow: Detect task → Read context → Execute
@@ -580,6 +617,7 @@ const approvalKeywords = [
 **Cause:** Agent name not properly captured
 
 **Solution:**
+
 1. Run `debug_validator` to see raw tracking data
 2. Check `sessionAgentTracker` in debug output
 3. Verify agent name is being passed in `chat.message` hook
@@ -591,6 +629,7 @@ const approvalKeywords = [
 **Cause:** No validation checks were performed
 
 **Solution:**
+
 1. Ensure you've performed actions that trigger checks
 2. Run `debug_validator` to see what's tracked
 3. Try a simple task first (e.g., "run pwd")
@@ -604,6 +643,7 @@ const approvalKeywords = [
 Edit `.opencode/plugin/agent-validator.ts` to customize:
 
 **1. Add custom approval keywords:**
+
 ```typescript
 // Line 12-22
 const approvalKeywords = [
@@ -611,37 +651,40 @@ const approvalKeywords = [
   "approve",
   // Add yours:
   "your custom phrase",
-]
+];
 ```
 
 **2. Adjust delegation threshold:**
+
 ```typescript
 // Line 768
-const shouldDelegate = writeEditCount >= 4  // Change 4 to your threshold
+const shouldDelegate = writeEditCount >= 4; // Change 4 to your threshold
 ```
 
 **3. Add custom context loading rules:**
+
 ```typescript
 // Line 824-851
 const contextRules = [
   {
     taskKeywords: ["your task type"],
     requiredFile: "your/context/file.md",
-    taskType: "your task name"
+    taskType: "your task name",
   },
   // ... existing rules
-]
+];
 ```
 
 **4. Change severity levels:**
+
 ```typescript
 // Line 719-726
 checks.push({
   rule: "your_rule",
   passed: condition,
-  severity: "error",  // Change to "warning" or "info"
+  severity: "error", // Change to "warning" or "info"
   details: "Your message",
-})
+});
 ```
 
 ---
@@ -684,10 +727,10 @@ your_custom_tool: tool({
   },
   async execute(args, context) {
     const { sessionID } = context
-    
+
     // Your validation logic here
     const result = analyzeYourMetric(sessionID)
-    
+
     return formatYourReport(result)
   },
 }),
@@ -703,7 +746,7 @@ Add custom event tracking:
 // In the event() hook:
 async event(input) {
   const { event } = input
-  
+
   // Track your custom event
   if (event.type === "your.custom.event") {
     behaviorLog.push({
@@ -726,6 +769,7 @@ async event(input) {
 ### Example 1: Testing Agent Tracking
 
 **Session:**
+
 ```bash
 $ opencode --agent openagent
 
@@ -741,6 +785,7 @@ Agent: Let me run some tests to generate tracking data.
 ```
 
 **Result:**
+
 ```
 ## Agent Usage Report
 
@@ -763,6 +808,7 @@ Agent: Let me run some tests to generate tracking data.
 ### Example 2: Detecting Agent Switch
 
 **Session:**
+
 ```bash
 $ opencode --agent build
 [Do some work with build agent]
@@ -774,6 +820,7 @@ $ opencode --agent openagent
 ```
 
 **Result:**
+
 ```
 ## Agent Usage Report
 
@@ -802,6 +849,7 @@ $ opencode --agent openagent
 ### Example 3: Approval Gate Validation
 
 **Session:**
+
 ```bash
 > "Run npm install"
 
@@ -818,6 +866,7 @@ Agent: ## Proposed Plan
 ```
 
 **Result:**
+
 ```
 ✅ Approval gate compliance: PASSED
 
@@ -831,24 +880,31 @@ All 1 execution operation(s) were properly approved.
 ## Best Practices
 
 ### 1. Validate After Complex Tasks
+
 Always run validation after multi-step or complex tasks to ensure compliance.
 
 ### 2. Export Reports for Auditing
+
 Use `export_validation_report` to keep records of agent behavior over time.
 
 ### 3. Check Context Loading
+
 Verify agents are loading the right context files with `check_context_compliance`.
 
 ### 4. Monitor Agent Switches
+
 Use `analyze_agent_usage` to track delegation and agent switching patterns.
 
 ### 5. Debug Early
+
 If something seems off, run `debug_validator` immediately to see raw data.
 
 ### 6. Customize for Your Needs
+
 Adjust validation rules, thresholds, and keywords to match your workflow.
 
 ### 7. Integrate with Workflows
+
 Add validation checks to your development workflow or CI/CD pipeline.
 
 ---
@@ -856,27 +912,35 @@ Add validation checks to your development workflow or CI/CD pipeline.
 ## FAQ
 
 ### Q: Does the plugin slow down OpenCode?
+
 **A:** No, tracking is lightweight and runs asynchronously. Minimal performance impact.
 
 ### Q: Can I disable specific validation checks?
+
 **A:** Yes, edit `agent-validator.ts` and comment out checks you don't need.
 
 ### Q: Does validation data persist across sessions?
+
 **A:** No, tracking is per-session. Each new OpenCode session starts fresh.
 
 ### Q: Can I track custom metrics?
+
 **A:** Yes, add custom event tracking and validation tools (see Advanced Usage).
 
 ### Q: What if I get false positives?
+
 **A:** Customize approval keywords and validation patterns in `agent-validator.ts`.
 
 ### Q: Can I use this with other agents?
+
 **A:** Yes, the plugin tracks any agent running in OpenCode.
 
 ### Q: How do I reset tracking data?
+
 **A:** Restart OpenCode - tracking resets on each session start.
 
 ### Q: Can I export data in JSON format?
+
 **A:** Currently exports as Markdown. You can modify `generateDetailedReport()` for JSON.
 
 ---

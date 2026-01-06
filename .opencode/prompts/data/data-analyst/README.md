@@ -10,11 +10,11 @@ This is optimized for **Claude** (Anthropic models) and serves as the baseline.
 
 This directory is ready for model-specific optimizations:
 
-| Variant | Model Family | Status | Best For |
-|---------|--------------|--------|----------|
-| gpt.md | GPT | 📝 Not yet created | GPT-4, GPT-4o |
-| llama.md | Llama/OSS | 📝 Not yet created | Llama, Qwen, DeepSeek |
-| gemini.md | Gemini | 📝 Not yet created | Gemini Pro, Gemini Ultra |
+| Variant   | Model Family | Status             | Best For                 |
+| --------- | ------------ | ------------------ | ------------------------ |
+| gpt.md    | GPT          | 📝 Not yet created | GPT-4, GPT-4o            |
+| llama.md  | Llama/OSS    | 📝 Not yet created | Llama, Qwen, DeepSeek    |
+| gemini.md | Gemini       | 📝 Not yet created | Gemini Pro, Gemini Ultra |
 
 ## Testing Variants
 
@@ -31,9 +31,9 @@ npm run eval:sdk -- --agent=data/data-analyst --prompt-variant=llama
 
 ## Results
 
-| Variant | Pass Rate | Notes |
-|---------|-----------|-------|
-| default (agent file) | - | Not yet tested |
-| gpt | - | Not yet created |
-| llama | - | Not yet created |
-| gemini | - | Not yet created |
+| Variant              | Pass Rate | Notes           |
+| -------------------- | --------- | --------------- |
+| default (agent file) | -         | Not yet tested  |
+| gpt                  | -         | Not yet created |
+| llama                | -         | Not yet created |
+| gemini               | -         | Not yet created |

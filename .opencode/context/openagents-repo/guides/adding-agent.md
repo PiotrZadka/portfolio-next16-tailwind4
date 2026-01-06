@@ -8,6 +8,7 @@
 ## Overview
 
 Adding a new agent involves:
+
 1. Creating the agent file
 2. Creating test structure
 3. Updating the registry
@@ -304,6 +305,7 @@ Before considering the agent complete:
 ## Next Steps
 
 After adding agent:
+
 1. **Test thoroughly** → Load `guides/testing-agent.md`
 2. **Add more tests** → Approval gate, context loading, etc.
 3. **Update docs** → Add to README or docs/

@@ -7,7 +7,7 @@ tools:
   write: true
   edit: true
   bash: true
-  task: false  # Only if delegates to subagents
+  task: false # Only if delegates to subagents
   glob: true
   grep: true
 permissions:

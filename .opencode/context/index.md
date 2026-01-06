@@ -5,6 +5,7 @@
 Path: `.opencode/context/core/{category}/{file}`
 
 ### Quick Map
+
 ```
 code        → standards/code.md       [critical] implement, refactor, architecture
 docs        → standards/docs.md       [critical] write docs, README, documentation
@@ -29,6 +30,7 @@ sessions    → workflows/sessions.md   [medium]   session management, cleanup
 ## Category-Specific Context
 
 ### Development
+
 Path: `.opencode/context/development/{file}`
 
 ```
@@ -40,6 +42,7 @@ api-design      → development/api-design.md      [high] REST, GraphQL, API ver
 **Used by**: frontend-specialist, backend-specialist, devops-specialist, codebase-agent
 
 ### Content
+
 Path: `.opencode/context/content/{file}`
 
 ```
@@ -50,19 +53,22 @@ tone-voice      → content/tone-voice.md             [high] brand voice, tone g
 **Used by**: copywriter, technical-writer
 
 ### Product
+
 Path: `.opencode/context/product/{file}`
 
-*No context files yet. Category ready for product-related context.*
+_No context files yet. Category ready for product-related context._
 
 ### Data
+
 Path: `.opencode/context/data/{file}`
 
-*No context files yet. Category ready for data-related context.*
+_No context files yet. Category ready for data-related context._
 
 ### Learning
+
 Path: `.opencode/context/learning/{file}`
 
-*No context files yet. Category ready for learning-related context.*
+_No context files yet. Category ready for learning-related context._
 
 ---
 
@@ -73,11 +79,13 @@ Path: `.opencode/context/openagents-repo/{file}`
 **Purpose**: Context for working on the OpenAgents repository itself (not user projects)
 
 ### Quick Start (Load First)
+
 ```
 quick-start     → openagents-repo/quick-start.md     [critical] orientation, common commands
 ```
 
 ### Core Concepts (Load Before Working)
+
 ```
 agents          → openagents-repo/core-concepts/agents.md     [critical] how agents work
 evals           → openagents-repo/core-concepts/evals.md      [critical] how testing works
@@ -86,6 +94,7 @@ categories      → openagents-repo/core-concepts/categories.md [high]     how o
 ```
 
 ### Guides (Task-Specific Workflows)
+
 ```
 adding-agent    → openagents-repo/guides/adding-agent.md      [high] step-by-step agent creation
 testing-agent   → openagents-repo/guides/testing-agent.md     [high] testing workflow
@@ -95,22 +104,26 @@ debugging       → openagents-repo/guides/debugging.md         [medium] trouble
 ```
 
 ### Lookup (Quick Reference)
+
 ```
 file-locations  → openagents-repo/lookup/file-locations.md    [medium] where everything is
 commands        → openagents-repo/lookup/commands.md          [medium] command reference
 ```
 
 ### Templates (For Subagent Coordination)
+
 ```
 context-bundle  → openagents-repo/templates/context-bundle-template.md [high] template for delegating to subagents
 ```
 
 ### Examples (Reference Implementations)
+
 ```
 bundle-example  → openagents-repo/examples/context-bundle-example.md [medium] example context bundle
 ```
 
 **Loading Strategy**:
+
 - **First time**: Load `quick-start.md`
 - **Add agent**: Load `quick-start.md` + `core-concepts/agents.md` + `guides/adding-agent.md`
 - **Test agent**: Load `quick-start.md` + `core-concepts/evals.md` + `guides/testing-agent.md`
@@ -118,6 +131,7 @@ bundle-example  → openagents-repo/examples/context-bundle-example.md [medium] 
 - **Find files**: Load `quick-start.md` + `lookup/file-locations.md`
 
 **Use When**:
+
 - Adding new agents, commands, or tools to OpenAgents
 - Modifying eval framework or registry system
 - Working on OpenAgents infrastructure
@@ -125,6 +139,7 @@ bundle-example  → openagents-repo/examples/context-bundle-example.md [medium] 
 - Writing OpenAgents documentation
 
 **Don't Use When**:
+
 - Working on user projects (use project-specific context)
 - General coding tasks (use core/standards/)
 

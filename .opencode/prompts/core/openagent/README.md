@@ -22,15 +22,16 @@ open ../results/index.html
 
 ## 📊 Capabilities Matrix
 
-| Variant | Model Family | Approval Gate | Context Loading | Stop on Failure | Delegation | Tool Usage | Pass Rate | Status |
-|---------|--------------|---------------|-----------------|-----------------|------------|------------|-----------|--------|
-| `default` | Claude | ✅ | ✅ | ✅ | ✅ | ✅ | 7/7 (100%) | ✅ Stable |
-| `gpt` | GPT | ✅ | ✅ | ✅ | ✅ | ✅ | 7/7 (100%) | ✅ Stable |
-| `gemini` | Gemini | ✅ | ✅ | ✅ | ✅ | ✅ | 7/7 (100%) | ✅ Stable |
-| `grok` | Grok | ✅ | ✅ | ✅ | ✅ | ✅ | 7/7 (100%) | ✅ Stable |
-| `llama` | Llama/OSS | ✅ | ✅ | ✅ | ✅ | ✅ | 7/7 (100%) | ✅ Stable |
+| Variant   | Model Family | Approval Gate | Context Loading | Stop on Failure | Delegation | Tool Usage | Pass Rate  | Status    |
+| --------- | ------------ | ------------- | --------------- | --------------- | ---------- | ---------- | ---------- | --------- |
+| `default` | Claude       | ✅            | ✅              | ✅              | ✅         | ✅         | 7/7 (100%) | ✅ Stable |
+| `gpt`     | GPT          | ✅            | ✅              | ✅              | ✅         | ✅         | 7/7 (100%) | ✅ Stable |
+| `gemini`  | Gemini       | ✅            | ✅              | ✅              | ✅         | ✅         | 7/7 (100%) | ✅ Stable |
+| `grok`    | Grok         | ✅            | ✅              | ✅              | ✅         | ✅         | 7/7 (100%) | ✅ Stable |
+| `llama`   | Llama/OSS    | ✅            | ✅              | ✅              | ✅         | ✅         | 7/7 (100%) | ✅ Stable |
 
 **Legend:**
+
 - ✅ Works reliably (passes tests)
 - ⚠️ Partial/inconsistent
 - ❌ Does not work
@@ -47,15 +48,18 @@ open ../results/index.html
 ### `default.md` - Claude Optimized
 
 **Target Models:**
+
 - `anthropic/claude-sonnet-4-20250514` (primary)
 - `anthropic/claude-3-5-sonnet-20241022`
 
 **Optimizations:**
+
 - Structured with `<context>` tags for Claude's context handling
 - Detailed workflow stages with checkpoints
 - Emphasis on safety rules and approval gates
 
 **Test Results:**
+
 ```json
 {
   "total_tests": 7,
@@ -75,16 +79,19 @@ open ../results/index.html
 ### `gpt.md` - GPT-4 Optimized
 
 **Target Models:**
+
 - `openai/gpt-4o`
 - `openai/gpt-4-turbo`
 - `openai/gpt-4o-mini`
 
 **Optimizations:**
+
 - Structured with clear sections and headers
 - Explicit instructions for tool usage
 - Emphasis on step-by-step reasoning
 
 **Test Results:**
+
 ```json
 {
   "total_tests": 7,
@@ -104,16 +111,19 @@ open ../results/index.html
 ### `gemini.md` - Gemini Optimized
 
 **Target Models:**
+
 - `google/gemini-2.0-flash-exp`
 - `google/gemini-2.5-flash`
 - `google/gemini-pro`
 
 **Optimizations:**
+
 - Structured for Gemini's instruction-following
 - Clear role definitions
 - Emphasis on safety and validation
 
 **Test Results:**
+
 ```json
 {
   "total_tests": 7,
@@ -133,15 +143,18 @@ open ../results/index.html
 ### `grok.md` - Grok Optimized
 
 **Target Models:**
+
 - `opencode/grok-code-fast` (free tier)
 - `x-ai/grok-beta`
 
 **Optimizations:**
+
 - Concise, direct instructions
 - Emphasis on practical execution
 - Optimized for Grok's coding focus
 
 **Test Results:**
+
 ```json
 {
   "total_tests": 7,
@@ -161,18 +174,21 @@ open ../results/index.html
 ### `llama.md` - Llama/OSS Optimized
 
 **Target Models:**
+
 - `ollama/llama3.2`
 - `ollama/qwen2.5`
 - `ollama/deepseek-r1`
 - Other open-source models
 
 **Optimizations:**
+
 - Clear, structured instructions
 - Explicit examples and patterns
 - Optimized for smaller model context windows
 - Emphasis on tool usage patterns
 
 **Test Results:**
+
 ```json
 {
   "total_tests": 7,
@@ -230,12 +246,14 @@ cat results/llama-results.json
 All variants are tested against the **Core Test Suite** which validates:
 
 ### Critical Rules (4 tests)
+
 1. ✅ **Approval Gate** - Requests approval before execution
 2. ✅ **Context Loading** - Loads required context files
 3. ✅ **Stop on Failure** - Stops and reports errors
 4. ✅ **Report First** - Reports before fixing
 
 ### Functionality (3 tests)
+
 5. ✅ **Simple Tasks** - Handles tasks directly (no unnecessary delegation)
 6. ✅ **Delegation** - Delegates appropriately to subagents
 7. ✅ **Tool Usage** - Uses proper tools (read/grep vs bash)
@@ -272,6 +290,7 @@ last_tested: 2025-12-08
 ### Step 3: Customize Prompt
 
 Edit the prompt content for your target model:
+
 - Adjust instruction style
 - Modify examples
 - Change emphasis areas
@@ -291,6 +310,7 @@ npm run eval:sdk -- --agent=openagent --prompt-variant=my-variant --suite=core-t
 ### Step 5: Document Results
 
 Update this README with:
+
 - Test results (pass rate, timing)
 - Known issues or limitations
 - Recommended use cases
@@ -309,6 +329,7 @@ Update this README with:
 ### Result Files
 
 **Per-variant results** (`results/{variant}-results.json`):
+
 ```json
 {
   "variant": "llama",
@@ -325,6 +346,7 @@ Update this README with:
 ```
 
 **Dashboard** (`evals/results/index.html`):
+
 - Filter by variant
 - Compare pass rates
 - View detailed test results
@@ -405,6 +427,7 @@ open ../results/index.html
 ### Promoting a Variant to Default
 
 A variant can become the new default if it:
+
 1. Shows significant improvement in test results
 2. Works reliably across multiple models
 3. Has been tested by multiple contributors

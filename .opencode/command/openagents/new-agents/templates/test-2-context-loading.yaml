@@ -5,7 +5,7 @@ description: |
   Verifies context is loaded BEFORE any write/edit operations (just-in-time retrieval).
 
 category: context-loading
-agent: {agent-name}
+agent: { agent-name }
 model: anthropic/claude-sonnet-4-5
 
 prompt: |
@@ -14,8 +14,8 @@ prompt: |
 behavior:
   # Should read context files first
   mustUseInOrder:
-    - [read]  # Context files
-    - [write, edit]  # Then code
+    - [read] # Context files
+    - [write, edit] # Then code
   # Should reference standards/context
   mustContain:
     - "standard"

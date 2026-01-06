@@ -46,6 +46,7 @@ opencode run "validate_session" --continue
 ## What to Test
 
 ### Test 1: Approval Gate Detection
+
 ```
 You: "Create a new file called test.txt with 'hello world'"
 Expected: Agent should request approval before write
@@ -54,6 +55,7 @@ Expected: Should show approval gate check
 ```
 
 ### Test 2: Tool Tracking
+
 ```
 You: "Read the README.md file"
 Then: "validate_session"
@@ -61,6 +63,7 @@ Expected: Should show tool_usage check for 'read'
 ```
 
 ### Test 3: Delegation Analysis
+
 ```
 You: "Refactor these 5 files: a.ts, b.ts, c.ts, d.ts, e.ts"
 Expected: Agent should delegate (4+ files)
@@ -69,6 +72,7 @@ Expected: Should show appropriate delegation
 ```
 
 ### Test 4: Export Report
+
 ```
 After any task:
 You: "export_validation_report"
@@ -83,11 +87,13 @@ When working correctly, you should see:
 ## Validation Report
 
 **Score:** 95%
+
 - ✅ Passed: 4
-- ⚠️  Warnings: 0
+- ⚠️ Warnings: 0
 - ❌ Failed: 0
 
 ### ✅ Checks Passed
+
 - **tool_usage**: Used 2 tool(s): read, bash
 - **approval_gate_enforcement**: Properly requested approval before 1 execution op(s)
 - **lazy_context_loading**: Lazy-loaded 1 context file(s)

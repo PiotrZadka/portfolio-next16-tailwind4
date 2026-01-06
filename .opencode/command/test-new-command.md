@@ -21,6 +21,7 @@ This is a test command created to verify that the auto-detection system works.
 ## Testing
 
 This file should be:
+
 1. Detected by `auto-detect-components.sh`
 2. Added to registry.json automatically
 3. Validated by `validate-registry.sh`

@@ -13,6 +13,7 @@ This collection of tools allows you to edit and analyze images using Google's Ge
 ## Available Tools
 
 ### `/gemini` - Simple Image Editor
+
 Edit an image using file path or data URL:
 
 ```bash
@@ -21,6 +22,7 @@ Edit an image using file path or data URL:
 ```
 
 ### `/gemini_multiple_edit` - Advanced Image Editor
+
 Same functionality as `/gemini` but from the multiple tools file:
 
 ```bash
@@ -28,6 +30,7 @@ Same functionality as `/gemini` but from the multiple tools file:
 ```
 
 ### `/gemini_multiple_analyze` - Image Analysis
+
 Analyze an image without editing it:
 
 ```bash
@@ -36,6 +39,7 @@ Analyze an image without editing it:
 ```
 
 ### `/gemini_edit` - Auto-Detection Plugin
+
 1. Paste an image directly into your OpenCode chat
 2. Use the command with just the prompt:
 

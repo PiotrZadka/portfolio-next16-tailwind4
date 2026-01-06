@@ -64,40 +64,40 @@ opencode-agents/
 
 ## Where Is...?
 
-| Component | Location |
-|-----------|----------|
-| **Core agents** | `.opencode/agent/core/` |
-| **Category agents** | `.opencode/agent/{category}/` |
-| **Subagents** | `.opencode/agent/subagents/` |
-| **Commands** | `.opencode/command/` |
-| **Context files** | `.opencode/context/` |
-| **Prompt variants** | `.opencode/prompts/{category}/{agent}/` |
-| **Tools** | `.opencode/tool/` |
-| **Plugins** | `.opencode/plugin/` |
-| **Agent tests** | `evals/agents/{category}/{agent}/` |
-| **Eval framework** | `evals/framework/src/` |
-| **Registry scripts** | `scripts/registry/` |
-| **Validation scripts** | `scripts/validation/` |
-| **Documentation** | `docs/` |
-| **Registry** | `registry.json` |
-| **Installer** | `install.sh` |
-| **Version** | `VERSION` |
+| Component              | Location                                |
+| ---------------------- | --------------------------------------- |
+| **Core agents**        | `.opencode/agent/core/`                 |
+| **Category agents**    | `.opencode/agent/{category}/`           |
+| **Subagents**          | `.opencode/agent/subagents/`            |
+| **Commands**           | `.opencode/command/`                    |
+| **Context files**      | `.opencode/context/`                    |
+| **Prompt variants**    | `.opencode/prompts/{category}/{agent}/` |
+| **Tools**              | `.opencode/tool/`                       |
+| **Plugins**            | `.opencode/plugin/`                     |
+| **Agent tests**        | `evals/agents/{category}/{agent}/`      |
+| **Eval framework**     | `evals/framework/src/`                  |
+| **Registry scripts**   | `scripts/registry/`                     |
+| **Validation scripts** | `scripts/validation/`                   |
+| **Documentation**      | `docs/`                                 |
+| **Registry**           | `registry.json`                         |
+| **Installer**          | `install.sh`                            |
+| **Version**            | `VERSION`                               |
 
 ---
 
 ## Where Do I Add...?
 
-| What | Where |
-|------|-------|
-| **New core agent** | `.opencode/agent/core/{name}.md` |
-| **New category agent** | `.opencode/agent/{category}/{name}.md` |
-| **New subagent** | `.opencode/agent/subagents/{category}/{name}.md` |
-| **New command** | `.opencode/command/{name}.md` |
-| **New context** | `.opencode/context/{category}/{name}.md` |
-| **Agent tests** | `evals/agents/{category}/{agent}/tests/` |
-| **Test config** | `evals/agents/{category}/{agent}/config/config.yaml` |
-| **Documentation** | `docs/{section}/{topic}.md` |
-| **Script** | `scripts/{purpose}/{name}.sh` |
+| What                   | Where                                                |
+| ---------------------- | ---------------------------------------------------- |
+| **New core agent**     | `.opencode/agent/core/{name}.md`                     |
+| **New category agent** | `.opencode/agent/{category}/{name}.md`               |
+| **New subagent**       | `.opencode/agent/subagents/{category}/{name}.md`     |
+| **New command**        | `.opencode/command/{name}.md`                        |
+| **New context**        | `.opencode/context/{category}/{name}.md`             |
+| **Agent tests**        | `evals/agents/{category}/{agent}/tests/`             |
+| **Test config**        | `evals/agents/{category}/{agent}/config/config.yaml` |
+| **Documentation**      | `docs/{section}/{topic}.md`                          |
+| **Script**             | `scripts/{purpose}/{name}.sh`                        |
 
 ---
 
@@ -202,6 +202,7 @@ evals/framework/src/types/            # TypeScript types
 ```
 
 **Examples**:
+
 - `.opencode/agent/core/openagent.md`
 - `.opencode/agent/development/frontend-specialist.md`
 - `.opencode/agent/subagents/code/tester.md`
@@ -213,6 +214,7 @@ evals/framework/src/types/            # TypeScript types
 ```
 
 **Examples**:
+
 - `.opencode/context/core/standards/code.md`
 - `.opencode/context/development/react-patterns.md`
 - `.opencode/context/content/copywriting-frameworks.md`
@@ -226,6 +228,7 @@ evals/agents/{category}/{agent-name}/
 ```
 
 **Examples**:
+
 - `evals/agents/core/openagent/tests/smoke-test.yaml`
 - `evals/agents/development/frontend-specialist/tests/approval-gate.yaml`
 
@@ -236,6 +239,7 @@ scripts/{purpose}/{action}-{target}.sh
 ```
 
 **Examples**:
+
 - `scripts/registry/validate-registry.sh`
 - `scripts/validation/validate-test-suites.sh`
 - `scripts/versioning/bump-version.sh`

@@ -5,24 +5,24 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
 <target_file> $ARGUMENTS </target_file>
 
 <critical_rules priority="absolute" enforcement="strict">
-  <rule id="position_sensitivity">
-    Critical instructions MUST appear in first 15% of prompt (research: early positioning improves adherence)
-  </rule>
-  <rule id="nesting_limit">
-    Maximum nesting depth: 4 levels (research: excessive nesting reduces clarity)
-  </rule>
-  <rule id="instruction_ratio">
-    Instructions should be 40-50% of total prompt (not 60%+)
-  </rule>
-  <rule id="single_source">
-    Define critical rules once, reference with @rule_id (eliminates ambiguity)
-  </rule>
-  <rule id="token_efficiency">
-    Achieve 30-50% token reduction while preserving 100% semantic meaning
-  </rule>
-  <rule id="readability_preservation">
-    Token reduction must NOT sacrifice clarity or domain precision
-  </rule>
+<rule id="position_sensitivity">
+Critical instructions MUST appear in first 15% of prompt (research: early positioning improves adherence)
+</rule>
+<rule id="nesting_limit">
+Maximum nesting depth: 4 levels (research: excessive nesting reduces clarity)
+</rule>
+<rule id="instruction_ratio">
+Instructions should be 40-50% of total prompt (not 60%+)
+</rule>
+<rule id="single_source">
+Define critical rules once, reference with @rule_id (eliminates ambiguity)
+</rule>
+<rule id="token_efficiency">
+Achieve 30-50% token reduction while preserving 100% semantic meaning
+</rule>
+<rule id="readability_preservation">
+Token reduction must NOT sacrifice clarity or domain precision
+</rule>
 </critical_rules>
 
 <context>
@@ -37,27 +37,13 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
 <task>Optimize prompts: critical rules early, reduced nesting, modular design, explicit prioritization, token efficiency, 100% meaning preserved</task>
 
 <execution_priority>
-  <tier level="1" desc="Research-Backed Patterns">
-    - Position sensitivity (critical rules <15%)
-    - Nesting depth reduction (≤4 levels)
-    - Instruction ratio optimization (40-50%)
-    - Single source of truth (@references)
-    - Token efficiency (30-50% reduction)
-    - Semantic preservation (100%)
-  </tier>
-  <tier level="2" desc="Structural Improvements">
-    - Component ordering (context→role→task→instructions)
-    - Explicit prioritization systems
-    - Modular design w/ external refs
-    - Consistent attribute usage
-  </tier>
-  <tier level="3" desc="Enhancement Features">
-    - Workflow optimization
-    - Routing intelligence
-    - Context management
-    - Validation gates
-  </tier>
-  <conflict_resolution>Tier 1 always overrides Tier 2/3 - research patterns + token efficiency are non-negotiable</conflict_resolution>
+<tier level="1" desc="Research-Backed Patterns"> - Position sensitivity (critical rules <15%) - Nesting depth reduction (≤4 levels) - Instruction ratio optimization (40-50%) - Single source of truth (@references) - Token efficiency (30-50% reduction) - Semantic preservation (100%)
+</tier>
+<tier level="2" desc="Structural Improvements"> - Component ordering (context→role→task→instructions) - Explicit prioritization systems - Modular design w/ external refs - Consistent attribute usage
+</tier>
+<tier level="3" desc="Enhancement Features"> - Workflow optimization - Routing intelligence - Context management - Validation gates
+</tier>
+<conflict_resolution>Tier 1 always overrides Tier 2/3 - research patterns + token efficiency are non-negotiable</conflict_resolution>
 </execution_priority>
 
 <instructions>
@@ -178,7 +164,7 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
             Savings: ~50% | Use for simple classifications
           </operator>
         </visual_operators>
-        
+
         <abbreviations>
           <tier1 desc="Universal (Always Safe)">
             req→request/require/required | ctx→context | exec→execute/execution | ops→operations | cfg→config | env→environment | fn→function | w/→with | info→information
@@ -198,7 +184,7 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
             - Document if ambiguous
           </rules>
         </abbreviations>
-        
+
         <inline_mappings>
           <pattern>key→value | key2→value2 | key3→value3</pattern>
           <before>
@@ -214,7 +200,7 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
           <savings>~70%</savings>
           <limits>Max 3-4 mappings per line for readability</limits>
         </inline_mappings>
-        
+
         <compact_examples>
           <pattern>"Description" (context) | "Description2" (context2)</pattern>
           <before>
@@ -228,7 +214,7 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
           </after>
           <savings>~50%</savings>
         </compact_examples>
-        
+
         <remove_redundancy>
           - "MANDATORY" when required="true" present
           - "ALWAYS" when enforcement="strict" present
@@ -306,19 +292,19 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
         <usage_patterns>
           <!-- Single rule ref -->
           <stage enforce="@approval_gate">
-          
+
           <!-- Nested rule ref -->
           <stage enforce="@critical_rules.approval_gate">
-          
+
           <!-- All rules ref -->
           <safe enforce="@critical_rules">
-          
+
           <!-- Section ref -->
           <step enforce="@delegation_rules.evaluate_before_execution">
-          
+
           <!-- Condition ref -->
           <route when="@delegation_rules.scale">
-          
+
           <!-- Shorthand in text -->
           See @approval_gate for details
           Per @context_loading requirements
@@ -360,7 +346,7 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
           </tier>
           <conflict_resolution>
             Tier 1 always overrides Tier 2/3
-            
+
             Edge cases:
             - [Specific case]: [Resolution]
           </conflict_resolution>
@@ -440,14 +426,14 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
       <prerequisites>Validation passed w/ 12+/15 score</prerequisites>
       <output_format>
         ## Optimization Analysis
-        
+
         ### Token Efficiency
         | Metric | Before | After | Reduction |
         |--------|--------|-------|-----------|
         | Lines | X | Y | Z% |
         | Words | X | Y | Z% |
         | Est. tokens | X | Y | Z% |
-        
+
         ### Research Pattern Compliance
         | Pattern | Before | After | Status |
         |---------|--------|-------|--------|
@@ -459,12 +445,12 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
         | Consistent formatting | Mixed/Standard | Standard | ✅/❌ |
         | Token efficiency | Baseline | Z% reduction | ✅/❌ |
         | Semantic preservation | N/A | 100% | ✅/❌ |
-        
+
         ### Scores
         **Original Score**: X/15
         **Optimized Score**: Y/15
         **Improvement**: +Z points
-        
+
         ### Optimization Techniques Applied
         1. **Visual Operators**: → for flow, | for alternatives (Z% reduction)
         2. **Abbreviations**: req, ctx, exec, ops (Z% reduction)
@@ -474,7 +460,7 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
         6. **Critical Rules Elevated**: Moved from X% to Y% position
         7. **Nesting Flattened**: Reduced from X to Y levels
         8. **Instruction Ratio Optimized**: Reduced from X% to Y%
-        
+
         ### Pattern Compliance Summary
         - Position sensitivity: Critical rules positioned early ✓
         - Nesting reduction: Flattened structure (≤4 levels) ✓
@@ -484,112 +470,107 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
         - Token optimization: Visual operators + abbreviations ✓
         - Semantic preservation: 100% meaning preserved ✓
         - **Note**: Effectiveness improvements are model/task-specific
-        
+
         ### Files Created (if applicable)
         - `.opencode/context/core/[name].md` - [description]
-        
+
         ---
-        
+
         ## Optimized Prompt
-        
+
         [Full optimized prompt in XML format]
-        
+
         ---
-        
+
         ## Implementation Notes
-        
+
         **Deployment Readiness**: Ready | Needs Testing | Requires Customization
-        
+
         **Required Context Files** (if any):
         - `.opencode/context/core/[file].md`
-        
+
         **Breaking Changes**: None | [List if any]
-        
+
         **Testing Recommendations**:
         1. Verify @references work correctly
         2. Test edge cases in conflict_resolution
         3. Validate external context files load properly
         4. Validate semantic preservation (compare behavior)
         5. A/B test old vs new prompt effectiveness
-        
+
         **Next Steps**:
         1. Deploy w/ monitoring
         2. Track effectiveness metrics
         3. Iterate based on real-world performance
       </output_format>
     </stage>
-  </workflow_execution>
+
+</workflow_execution>
 </instructions>
 
 <proven_patterns>
-  <position_sensitivity>
-    <research>Stanford/Anthropic: Early instruction placement improves adherence (effect varies by task/model)</research>
-    <application>Move critical rules immediately after role definition</application>
-    <measurement>Calculate position %, target <15%</measurement>
-  </position_sensitivity>
-  
-  <nesting_depth>
-    <research>Excessive nesting reduces clarity (magnitude is task-dependent)</research>
-    <application>Flatten using attributes, extract to refs</application>
-    <measurement>Count max depth, target ≤4 levels</measurement>
-  </nesting_depth>
-  
-  <instruction_ratio>
-    <research>Optimal balance: 40-50% instructions, rest distributed</research>
-    <application>Extract verbose sections to external refs</application>
-    <measurement>Calculate instruction %, target 40-50%</measurement>
-  </instruction_ratio>
-  
-  <single_source_truth>
-    <research>Repetition causes ambiguity, reduces consistency</research>
-    <application>Define once, reference w/ @rule_id</application>
-    <measurement>Count repetitions, target 1x + refs</measurement>
-  </single_source_truth>
-  
-  <explicit_prioritization>
-    <research>Conflict resolution improves decision clarity (effect varies by task/model)</research>
-    <application>3-tier priority system w/ edge cases</application>
-    <measurement>Verify conflicts resolved, edge cases documented</measurement>
-  </explicit_prioritization>
-  
-  <token_optimization>
-    <research>Real-world learnings: Visual operators + abbreviations + inline mappings achieve 30-50% reduction w/ 100% semantic preservation</research>
-    <application>→ for flow, | for alternatives, @ for refs, systematic abbreviations, inline mappings</application>
-    <measurement>Count tokens before/after, validate semantic preservation, target 30-50% reduction</measurement>
-  </token_optimization>
-  
-  <component_ratios>
-    <context>15-25% hierarchical information</context>
-    <role>5-10% clear identity</role>
-    <task>5-10% primary objective</task>
-    <instructions>40-50% detailed procedures</instructions>
-    <examples>10-20% when needed</examples>
-    <principles>5-10% core values</principles>
-  </component_ratios>
-  
-  <xml_advantages>
-    - Improved response quality w/ descriptive tags (magnitude varies by model/task)
-    - Reduced token overhead for complex prompts (effect is task-dependent)
-    - Universal compatibility across models
-    - Explicit boundaries prevent context bleeding
-  </xml_advantages>
+<position_sensitivity>
+<research>Stanford/Anthropic: Early instruction placement improves adherence (effect varies by task/model)</research>
+<application>Move critical rules immediately after role definition</application>
+<measurement>Calculate position %, target <15%</measurement>
+</position_sensitivity>
+
+<nesting_depth>
+<research>Excessive nesting reduces clarity (magnitude is task-dependent)</research>
+<application>Flatten using attributes, extract to refs</application>
+<measurement>Count max depth, target ≤4 levels</measurement>
+</nesting_depth>
+
+<instruction_ratio>
+<research>Optimal balance: 40-50% instructions, rest distributed</research>
+<application>Extract verbose sections to external refs</application>
+<measurement>Calculate instruction %, target 40-50%</measurement>
+</instruction_ratio>
+
+<single_source_truth>
+<research>Repetition causes ambiguity, reduces consistency</research>
+<application>Define once, reference w/ @rule_id</application>
+<measurement>Count repetitions, target 1x + refs</measurement>
+</single_source_truth>
+
+<explicit_prioritization>
+<research>Conflict resolution improves decision clarity (effect varies by task/model)</research>
+<application>3-tier priority system w/ edge cases</application>
+<measurement>Verify conflicts resolved, edge cases documented</measurement>
+</explicit_prioritization>
+
+<token_optimization>
+<research>Real-world learnings: Visual operators + abbreviations + inline mappings achieve 30-50% reduction w/ 100% semantic preservation</research>
+<application>→ for flow, | for alternatives, @ for refs, systematic abbreviations, inline mappings</application>
+<measurement>Count tokens before/after, validate semantic preservation, target 30-50% reduction</measurement>
+</token_optimization>
+
+<component_ratios>
+<context>15-25% hierarchical information</context>
+<role>5-10% clear identity</role>
+<task>5-10% primary objective</task>
+<instructions>40-50% detailed procedures</instructions>
+<examples>10-20% when needed</examples>
+<principles>5-10% core values</principles>
+</component_ratios>
+
+<xml_advantages> - Improved response quality w/ descriptive tags (magnitude varies by model/task) - Reduced token overhead for complex prompts (effect is task-dependent) - Universal compatibility across models - Explicit boundaries prevent context bleeding
+</xml_advantages>
 </proven_patterns>
 
 <proven_transformations>
-  <example id="1" category="visual_operators">
-    <before>
-      Execution Pattern:
-      - IF delegating: Include context file path in session context for subagent
-      - IF direct execution: Load context file BEFORE starting work
-    </before>
-    <after>
-      Exec Pattern:
-      IF delegate: Pass ctx path in session
-      IF direct: Load ctx BEFORE work
-    </after>
-    <token_reduction>65%</token_reduction>
-  </example>
-  
+<example id="1" category="visual_operators">
+<before>
+Execution Pattern: - IF delegating: Include context file path in session context for subagent - IF direct execution: Load context file BEFORE starting work
+</before>
+<after>
+Exec Pattern:
+IF delegate: Pass ctx path in session
+IF direct: Load ctx BEFORE work
+</after>
+<token_reduction>65%</token_reduction>
+</example>
+
   <example id="2" category="inline_mapping">
     <before>
       Task-to-Context Mapping:
@@ -641,13 +622,13 @@ description: "Advanced prompt optimizer: Research patterns + token efficiency + 
 </proven_transformations>
 
 <quality_standards>
-  <research_based>Stanford multi-instruction study + Anthropic XML research + validated optimization patterns + real-world token efficiency learnings</research_based>
-  <effectiveness_approach>Model/task-specific improvements; recommend empirical testing & A/B validation</effectiveness_approach>
-  <pattern_compliance>All research patterns must pass validation</pattern_compliance>
-  <token_efficiency>30-50% reduction w/ 100% semantic preservation</token_efficiency>
-  <readability_maintained>Clarity preserved despite reduction</readability_maintained>
-  <immediate_usability>Ready for deployment w/ monitoring plan</immediate_usability>
-  <backward_compatible>No breaking changes unless explicitly noted</backward_compatible>
+<research_based>Stanford multi-instruction study + Anthropic XML research + validated optimization patterns + real-world token efficiency learnings</research_based>
+<effectiveness_approach>Model/task-specific improvements; recommend empirical testing & A/B validation</effectiveness_approach>
+<pattern_compliance>All research patterns must pass validation</pattern_compliance>
+<token_efficiency>30-50% reduction w/ 100% semantic preservation</token_efficiency>
+<readability_maintained>Clarity preserved despite reduction</readability_maintained>
+<immediate_usability>Ready for deployment w/ monitoring plan</immediate_usability>
+<backward_compatible>No breaking changes unless explicitly noted</backward_compatible>
 </quality_standards>
 
 <validation>

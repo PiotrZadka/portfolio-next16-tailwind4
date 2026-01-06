@@ -15,6 +15,7 @@ This guide covers best practices for designing robust, scalable, and maintainabl
 ### 1. Resource-Based URLs
 
 **Use nouns, not verbs**:
+
 ```
 # Bad
 GET  /getUsers
@@ -32,6 +33,7 @@ DELETE /users/123
 ### 2. HTTP Methods
 
 **Use appropriate HTTP methods**:
+
 - `GET` - Retrieve resources (idempotent, safe)
 - `POST` - Create new resources
 - `PUT` - Replace entire resource (idempotent)
@@ -41,6 +43,7 @@ DELETE /users/123
 ### 3. Status Codes
 
 **Use standard HTTP status codes**:
+
 ```
 2xx Success
   200 OK - Successful GET, PUT, PATCH
@@ -63,6 +66,7 @@ DELETE /users/123
 ### 4. Consistent Response Format
 
 **Standardize response structure**:
+
 ```json
 // Success response
 {
@@ -116,6 +120,7 @@ DELETE /users/123
 ### 5. Filtering, Sorting, Pagination
 
 **Support common query operations**:
+
 ```
 # Filtering
 GET /users?status=active&role=admin
@@ -136,6 +141,7 @@ GET /users?q=john
 ### 6. Nested Resources
 
 **Handle relationships appropriately**:
+
 ```
 # Good - Shallow nesting
 GET /users/123/posts
@@ -152,6 +158,7 @@ GET /comments/789
 ### 1. Schema Design
 
 **Design clear, intuitive schemas**:
+
 ```graphql
 type User {
   id: ID!
@@ -197,6 +204,7 @@ input UserFilter {
 ### 2. Resolver Patterns
 
 **Implement efficient resolvers**:
+
 ```javascript
 const resolvers = {
   Query: {
@@ -205,44 +213,45 @@ const resolvers = {
     },
     users: async (_, { filter, page, pageSize }, { dataSources }) => {
       return dataSources.userAPI.getUsers({ filter, page, pageSize });
-    }
+    },
   },
-  
+
   User: {
     posts: async (user, _, { dataSources }) => {
       // Use DataLoader to batch requests
       return dataSources.postAPI.getPostsByUserId(user.id);
-    }
+    },
   },
-  
+
   Mutation: {
     createUser: async (_, { input }, { dataSources, user }) => {
       // Check authorization
-      if (!user) throw new AuthenticationError('Not authenticated');
-      
+      if (!user) throw new AuthenticationError("Not authenticated");
+
       // Validate input
       const validatedInput = validateUserInput(input);
-      
+
       // Create user
       return dataSources.userAPI.createUser(validatedInput);
-    }
-  }
+    },
+  },
 };
 ```
 
 ### 3. DataLoader for N+1 Prevention
 
 **Batch and cache database queries**:
+
 ```javascript
-import DataLoader from 'dataloader';
+import DataLoader from "dataloader";
 
 const userLoader = new DataLoader(async (userIds) => {
   const users = await db.users.findMany({
-    where: { id: { in: userIds } }
+    where: { id: { in: userIds } },
   });
-  
+
   // Return in same order as input
-  return userIds.map(id => users.find(u => u.id === id));
+  return userIds.map((id) => users.find((u) => u.id === id));
 });
 
 // Usage in resolver
@@ -254,6 +263,7 @@ const user = await userLoader.load(userId);
 ### 1. URL Versioning
 
 **Version in the URL path**:
+
 ```
 GET /v1/users
 GET /v2/users
@@ -265,6 +275,7 @@ GET /v2/users
 ### 2. Header Versioning
 
 **Version in Accept header**:
+
 ```
 GET /users
 Accept: application/vnd.myapi.v2+json
@@ -276,6 +287,7 @@ Accept: application/vnd.myapi.v2+json
 ### 3. Deprecation Strategy
 
 **Communicate deprecation clearly**:
+
 ```javascript
 // Response headers
 Deprecation: true
@@ -298,6 +310,7 @@ Link: <https://api.example.com/v2/users>; rel="successor-version"
 ### 1. JWT Tokens
 
 **Use JWT for stateless auth**:
+
 ```javascript
 // Token structure
 {
@@ -311,11 +324,11 @@ Link: <https://api.example.com/v2/users>; rel="successor-version"
 // Middleware
 function authenticateToken(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];
-  
+
   if (!token) {
     return res.status(401).json({ error: 'No token provided' });
   }
-  
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
@@ -329,27 +342,24 @@ function authenticateToken(req, res, next) {
 ### 2. Role-Based Access Control
 
 **Implement RBAC**:
+
 ```javascript
 function authorize(...roles) {
   return (req, res, next) => {
     if (!req.user) {
-      return res.status(401).json({ error: 'Not authenticated' });
+      return res.status(401).json({ error: "Not authenticated" });
     }
-    
+
     if (!roles.includes(req.user.role)) {
-      return res.status(403).json({ error: 'Insufficient permissions' });
+      return res.status(403).json({ error: "Insufficient permissions" });
     }
-    
+
     next();
   };
 }
 
 // Usage
-app.delete('/users/:id', 
-  authenticateToken, 
-  authorize('admin'), 
-  deleteUser
-);
+app.delete("/users/:id", authenticateToken, authorize("admin"), deleteUser);
 ```
 
 ## Best Practices

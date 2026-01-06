@@ -58,6 +58,7 @@ open ../results/index.html
 ```
 
 **Architecture:**
+
 - **Agent files** (`.opencode/agent/*.md`) = Canonical defaults (source of truth)
 - **Prompt variants** (`.opencode/prompts/<agent>/<model>.md`) = Model-specific optimizations
 - **Results** always saved to `.opencode/prompts/<agent>/results/` (including default)
@@ -69,6 +70,7 @@ open ../results/index.html
 ### Running Tests with Variants
 
 The eval framework automatically:
+
 - ✅ Switches to the specified variant
 - ✅ Runs your test suite
 - ✅ Tracks results per variant
@@ -103,6 +105,7 @@ If you don't specify `--model`, the framework uses the first recommended model.
 ### Results Tracking
 
 Results are saved in two locations:
+
 1. **Main results:** `evals/results/latest.json` (includes `prompt_variant` field)
 2. **Per-variant:** `.opencode/prompts/{agent}/results/{variant}-results.json`
 
@@ -156,6 +159,7 @@ open ../results/index.html
 ### Step 6: Document Results
 
 Update `.opencode/prompts/openagent/README.md` with:
+
 - Test results (pass rate, timing)
 - Known issues or limitations
 - Recommended use cases
@@ -166,13 +170,13 @@ Update `.opencode/prompts/openagent/README.md` with:
 
 ### OpenAgent
 
-| Variant | Model Family | Status | Best For |
-|---------|--------------|--------|----------|
-| `default` | Claude | ✅ Stable | Production use, Claude models |
-| `gpt` | GPT | ✅ Stable | GPT-4, GPT-4o |
-| `gemini` | Gemini | ✅ Stable | Gemini 2.0, Gemini Pro |
-| `grok` | Grok | ✅ Stable | Grok models (free tier) |
-| `llama` | Llama/OSS | ✅ Stable | Llama, Qwen, DeepSeek, other OSS |
+| Variant   | Model Family | Status    | Best For                         |
+| --------- | ------------ | --------- | -------------------------------- |
+| `default` | Claude       | ✅ Stable | Production use, Claude models    |
+| `gpt`     | GPT          | ✅ Stable | GPT-4, GPT-4o                    |
+| `gemini`  | Gemini       | ✅ Stable | Gemini 2.0, Gemini Pro           |
+| `grok`    | Grok         | ✅ Stable | Grok models (free tier)          |
+| `llama`   | Llama/OSS    | ✅ Stable | Llama, Qwen, DeepSeek, other OSS |
 
 See [openagent/README.md](openagent/README.md) for detailed test results.
 
@@ -225,6 +229,7 @@ open evals/results/index.html
 ### Dashboard Features
 
 The results dashboard (`evals/results/index.html`) shows:
+
 - ✅ Filter by prompt variant
 - ✅ Filter by model
 - ✅ Pass/fail rates per variant
@@ -234,6 +239,7 @@ The results dashboard (`evals/results/index.html`) shows:
 ### Result Files
 
 **Main results** (`evals/results/latest.json`):
+
 ```json
 {
   "meta": {
@@ -252,6 +258,7 @@ The results dashboard (`evals/results/index.html`) shows:
 ```
 
 **Per-variant results** (`.opencode/prompts/openagent/results/llama-results.json`):
+
 - Tracks all test runs for this variant
 - Shows trends over time
 - Helps identify regressions
@@ -292,28 +299,33 @@ npm run eval:sdk -- --agent=openagent --prompt-variant=your-variant --suite=core
 ## 🎓 Design Principles
 
 ### 1. Agent Files are Canonical Defaults
+
 - Agent files (`.opencode/agent/*.md`) are the source of truth
 - Tested and production-ready
 - Optimized for Claude (primary model)
 - Modified through normal PR process
 
 ### 2. Variants are Model-Specific Optimizations
+
 - Stored in `.opencode/prompts/<agent>/<model>.md`
 - Optimized for specific models/use cases
 - May have different trade-offs
 - Results documented transparently
 
 ### 3. Results are Tracked
+
 - Every test run tracked per variant
 - Dashboard shows variant performance
 - Easy to compare variants
 
 ### 4. Easy to Test
+
 - One command to test any variant
 - Automatic model detection
 - Results saved automatically
 
 ### 5. Safe to Experiment
+
 - Variants don't affect default
 - Easy to switch and restore
 - Test before committing

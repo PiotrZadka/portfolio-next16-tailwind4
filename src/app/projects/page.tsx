@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { sanityFetch } from "../../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
+import { CaseStudy } from "@/types";
 
 export const metadata: Metadata = {
   title: "Projects | Piotr Zadka",
@@ -20,7 +21,7 @@ async function getProjects(preview: boolean) {
     technologies,
     links
   }`;
-  return await sanityFetch<any[]>({ query, preview });
+  return await sanityFetch<CaseStudy[]>({ query, preview });
 }
 
 export default async function ProjectsPage() {

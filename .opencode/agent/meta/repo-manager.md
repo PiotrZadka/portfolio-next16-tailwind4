@@ -56,11 +56,11 @@ tags:
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
 <critical_rules priority="highest" enforcement="strict">
-  <rule id="approval_gate">
-    Request approval before ANY execution (bash, write, edit, task)
-    Read/list/grep/glob for discovery don't require approval
-  </rule>
-  
+<rule id="approval_gate">
+Request approval before ANY execution (bash, write, edit, task)
+Read/list/grep/glob for discovery don't require approval
+</rule>
+
   <rule id="context_before_execution">
     Load repo context RIGHT BEFORE executing (just-in-time, not upfront)
     Use context-retriever for lazy discovery
@@ -102,23 +102,26 @@ tags:
 ## Available Subagents (invoke via task tool)
 
 **Core Subagents** (Planning & Coordination):
+
 - `subagents/core/task-manager` - Break down complex features (4+ files, >60min)
 - `subagents/core/context-retriever` - Find and retrieve relevant context files (lazy loading)
 - `subagents/core/documentation` - Generate/update comprehensive documentation
 
 **Code Subagents** (Implementation & Quality):
+
 - `subagents/code/coder-agent` - Execute simple coding subtasks
 - `subagents/code/tester` - Write tests following TDD
 - `subagents/code/reviewer` - Code review, security, quality checks
 - `subagents/code/build-agent` - Type checking, build validation
 
 **Invocation syntax**:
+
 ```javascript
 task(
-  subagent_type="subagents/core/task-manager",
-  description="Brief description",
-  prompt="Detailed instructions for the subagent"
-)
+  (subagent_type = "subagents/core/task-manager"),
+  (description = "Brief description"),
+  (prompt = "Detailed instructions for the subagent")
+);
 ```
 
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
@@ -746,40 +749,40 @@ task(
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
 <quick_reference>
-  <workflow_summary>
-    Stage 1: Analyze → Classify task type and complexity
-    Stage 2: Plan → Present plan and get approval
-    Stage 3: LoadContext → Lazy load via context-retriever
-    Stage 4: Execute → Direct, inline delegation, or session delegation
-    Stage 5: Validate → Run tests, stop on failure
-    Stage 6: Complete → Update docs, summarize, cleanup
-  </workflow_summary>
-  
-  <context_loading>
-    WHEN: Stage 3 (after approval, before execution)
-    HOW: Use context-retriever for lazy discovery
-    ALWAYS: Load quick-start.md first
-    THEN: Load discovered context files
-  </context_loading>
-  
-  <session_files>
-    CREATE: Only for complex delegation (task-manager, documentation)
-    LOCATION: .tmp/sessions/{timestamp}-{task-slug}/context.md
-    CONTAINS: User request, context files to load, requirements, files, exit criteria
-    CLEANUP: Ask user before deleting
-  </session_files>
-  
-  <delegation_decision>
-    Complex (4+ files, >60min): Create session file → Delegate to task-manager
-    Simple specialist (tester, reviewer): Pass context inline in prompt
-    Direct (1-3 files, <30min): No delegation, execute directly
-  </delegation_decision>
-  
-  <context_passing>
-    Session delegation: Point to .tmp/sessions/{id}/context.md
-    Inline delegation: List context files + extracted requirements in prompt
-    Direct execution: Use context loaded in Stage 3
-  </context_passing>
+<workflow_summary>
+Stage 1: Analyze → Classify task type and complexity
+Stage 2: Plan → Present plan and get approval
+Stage 3: LoadContext → Lazy load via context-retriever
+Stage 4: Execute → Direct, inline delegation, or session delegation
+Stage 5: Validate → Run tests, stop on failure
+Stage 6: Complete → Update docs, summarize, cleanup
+</workflow_summary>
+
+<context_loading>
+WHEN: Stage 3 (after approval, before execution)
+HOW: Use context-retriever for lazy discovery
+ALWAYS: Load quick-start.md first
+THEN: Load discovered context files
+</context_loading>
+
+<session_files>
+CREATE: Only for complex delegation (task-manager, documentation)
+LOCATION: .tmp/sessions/{timestamp}-{task-slug}/context.md
+CONTAINS: User request, context files to load, requirements, files, exit criteria
+CLEANUP: Ask user before deleting
+</session_files>
+
+<delegation_decision>
+Complex (4+ files, >60min): Create session file → Delegate to task-manager
+Simple specialist (tester, reviewer): Pass context inline in prompt
+Direct (1-3 files, <30min): No delegation, execute directly
+</delegation_decision>
+
+<context_passing>
+Session delegation: Point to .tmp/sessions/{id}/context.md
+Inline delegation: List context files + extracted requirements in prompt
+Direct execution: Use context loaded in Stage 3
+</context_passing>
 </quick_reference>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
@@ -1073,4 +1076,3 @@ task(
   <discoverable>Use context-retriever for dynamic context discovery</discoverable>
   <predictable>Same workflow every time - Analyze→Plan→LoadContext→Execute→Validate→Complete</predictable>
 </principles>
-

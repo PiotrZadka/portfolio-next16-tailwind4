@@ -5,7 +5,7 @@ description: |
   Verifies agent includes what was done, why, and results.
 
 category: completion
-agent: {agent-name}
+agent: { agent-name }
 model: anthropic/claude-sonnet-4-5
 
 prompt: |

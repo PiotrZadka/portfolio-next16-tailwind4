@@ -23,6 +23,7 @@
 ## When to Update Registry
 
 Update the registry when you:
+
 - ✅ Add a new agent
 - ✅ Add a new command
 - ✅ Add a new tool
@@ -42,6 +43,7 @@ Update the registry when you:
 ```
 
 **Output**:
+
 ```
 Scanning .opencode/ for components...
 
@@ -105,7 +107,7 @@ Only edit `registry.json` manually if auto-detect doesn't work.
 ✅ **Paths** - All paths exist  
 ✅ **IDs** - Unique IDs  
 ✅ **Categories** - Valid categories  
-✅ **Dependencies** - Dependencies exist  
+✅ **Dependencies** - Dependencies exist
 
 ### Validation Errors
 
@@ -192,6 +194,7 @@ cat registry.json | jq '.components.agents[] | select(.id == "your-agent")'
 ### Automatic Validation
 
 Registry is validated on:
+
 - Pull requests (`.github/workflows/validate-registry.yml`)
 - Merges to main
 - Release tags
@@ -199,6 +202,7 @@ Registry is validated on:
 ### Auto-Update on Merge
 
 Registry can be auto-updated after merge:
+
 ```yaml
 # .github/workflows/update-registry.yml
 - name: Update Registry
@@ -213,7 +217,7 @@ Registry can be auto-updated after merge:
 ✅ **Validate often** - Catch issues early  
 ✅ **Test locally** - Use local registry for testing  
 ✅ **Dry run first** - See changes before applying  
-✅ **Version consistency** - Keep versions in sync  
+✅ **Version consistency** - Keep versions in sync
 
 ---
 

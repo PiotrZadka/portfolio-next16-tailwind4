@@ -8,6 +8,7 @@
 ## What Is the Registry?
 
 The registry is a centralized catalog (`registry.json`) that tracks all components in OpenAgents:
+
 - **Agents** - AI agent prompts
 - **Subagents** - Delegated specialists
 - **Commands** - Slash commands
@@ -58,6 +59,7 @@ The registry is a centralized catalog (`registry.json`) that tracks all componen
 ```
 
 **Fields**:
+
 - `id`: Unique identifier (kebab-case)
 - `name`: Display name
 - `type`: Component type (agent, subagent, command, tool, context)
@@ -104,7 +106,7 @@ The auto-detect system scans `.opencode/` and automatically updates the registry
 ✅ **Subagents** - `.opencode/agent/subagents/**/*.md`  
 ✅ **Commands** - `.opencode/command/**/*.md`  
 ✅ **Tools** - `.opencode/tool/**/index.ts`  
-✅ **Contexts** - `.opencode/context/**/*.md`  
+✅ **Contexts** - `.opencode/context/**/*.md`
 
 ### Frontmatter Requirements
 
@@ -113,9 +115,9 @@ For auto-detect to work, files must have frontmatter:
 ```yaml
 ---
 description: "Brief description"
-category: "category-name"  # For agents
-type: "agent"              # Or subagent, command, tool, context
-tags: ["tag1", "tag2"]     # Optional
+category: "category-name" # For agents
+type: "agent" # Or subagent, command, tool, context
+tags: ["tag1", "tag2"] # Optional
 ---
 ```
 
@@ -140,7 +142,7 @@ tags: ["tag1", "tag2"]     # Optional
 ✅ **IDs** - Unique IDs  
 ✅ **Categories** - Valid categories  
 ✅ **Dependencies** - Dependencies exist  
-✅ **Versions** - Version consistency  
+✅ **Versions** - Version consistency
 
 ### Validation Errors
 
@@ -161,9 +163,11 @@ Profiles are pre-configured component bundles for quick installation.
 ### Available Profiles
 
 #### Essential Profile
+
 **Purpose**: Minimal setup for basic usage
 
 **Includes**:
+
 - Core agents (openagent, opencoder)
 - Essential commands (commit, test)
 - Core context files
@@ -183,9 +187,11 @@ Profiles are pre-configured component bundles for quick installation.
 ---
 
 #### Developer Profile
+
 **Purpose**: Full development setup
 
 **Includes**:
+
 - All core agents
 - Development specialists
 - All subagents
@@ -208,9 +214,11 @@ Profiles are pre-configured component bundles for quick installation.
 ---
 
 #### Business Profile
+
 **Purpose**: Content and product focus
 
 **Includes**:
+
 - Core agents
 - Content specialists
 - Product specialists
@@ -322,7 +330,7 @@ When installing components that already exist:
 
 ```bash
 File exists: .opencode/agent/core/openagent.md
-[S]kip, [O]verwrite, [B]ackup, [A]ll skip, [F]orce all? 
+[S]kip, [O]verwrite, [B]ackup, [A]ll skip, [F]orce all?
 ```
 
 ### Non-Interactive Mode
@@ -407,20 +415,20 @@ jq '.version = "0.X.Y"' registry.json > tmp && mv tmp registry.json
 ✅ **Add frontmatter** - Required for auto-detect  
 ✅ **Run auto-detect** - Don't manually edit registry  
 ✅ **Validate** - Always validate after changes  
-✅ **Test locally** - Use local registry for testing  
+✅ **Test locally** - Use local registry for testing
 
 ### Maintaining Registry
 
 ✅ **Auto-detect first** - Let scripts handle updates  
 ✅ **Validate often** - Catch issues early  
 ✅ **Version consistency** - Keep versions in sync  
-✅ **CI validation** - Automate validation in CI  
+✅ **CI validation** - Automate validation in CI
 
 ### Dependencies
 
 ✅ **Explicit dependencies** - List all dependencies  
 ✅ **Test resolution** - Verify dependencies resolve  
-✅ **Avoid cycles** - No circular dependencies  
+✅ **Avoid cycles** - No circular dependencies
 
 ---
 
