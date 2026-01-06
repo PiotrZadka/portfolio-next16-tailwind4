@@ -2,6 +2,14 @@
 
 A modern portfolio website built with the latest web technologies.
 
+## 🤖 Built with OpenAgents
+
+This project was developed using an agentic workflow powered by [OpenCode CLI](https://opencode.ai). The `.opencode` directory contains the custom agent prompts, context systems, and commands used to orchestrate the development process.
+
+I leverage these tools to accelerate the transition from concept to production-ready code while maintaining high standards for type safety and performance.
+
+Special thanks to [Darren Hinde](https://github.com/darrenhinde) for his work on [OpenAgents](https://github.com/darrenhinde/OpenAgents), which served as the foundation for the agentic systems used in this project.
+
 ## Tech Stack
 
 - **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
