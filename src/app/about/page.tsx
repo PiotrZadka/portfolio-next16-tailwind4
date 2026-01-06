@@ -3,7 +3,8 @@ import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { profile } from "@/data/profile";
-import { client } from "../../../sanity/lib/client";
+import { sanityFetch } from "../../../sanity/lib/client";
+import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     "Learn more about my background, skills, and professional journey.",
 };
 
-async function getProfileData() {
+async function getProfileData(preview: boolean) {
   const query = `*[_type == "profile"][0] {
     name,
     title,
@@ -23,11 +24,12 @@ async function getProfileData() {
     resume,
     "resumeFile": resumeFile.asset->url
   }`;
-  return await client.fetch(query);
+  return await sanityFetch<any>({ query, preview });
 }
 
 export default async function AboutPage() {
-  const profileData = await getProfileData();
+  const { isEnabled: preview } = await draftMode();
+  const profileData = await getProfileData(preview);
   const resumeUrl = profileData?.resumeFile || profileData?.resume;
 
   const mergedProfile = {

@@ -1,7 +1,8 @@
 import { CaseStudyCard } from "@/components/layout/CaseStudyCard";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { client } from "../../../sanity/lib/client";
+import { sanityFetch } from "../../../sanity/lib/client";
+import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description: "A showcase of my technical projects and case studies.",
 };
 
-async function getProjects() {
+async function getProjects(preview: boolean) {
   const query = `*[_type == "project"] {
     "id": _id,
     title,
@@ -19,11 +20,12 @@ async function getProjects() {
     technologies,
     links
   }`;
-  return await client.fetch(query);
+  return await sanityFetch<any[]>({ query, preview });
 }
 
 export default async function ProjectsPage() {
-  const projects = await getProjects();
+  const { isEnabled: preview } = await draftMode();
+  const projects = await getProjects(preview);
 
   return (
     <div className="flex flex-col">

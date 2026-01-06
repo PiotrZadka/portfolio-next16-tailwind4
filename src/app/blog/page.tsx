@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -23,7 +24,8 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
+  const { isEnabled: preview } = await draftMode();
+  const posts = await getBlogPosts(preview);
 
   return (
     <div className="flex flex-col">

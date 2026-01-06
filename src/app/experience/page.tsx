@@ -1,7 +1,8 @@
 import { ExperienceTimeline } from "@/components/layout/ExperienceTimeline";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { client } from "../../../sanity/lib/client";
+import { sanityFetch } from "../../../sanity/lib/client";
+import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description: "My professional journey and career timeline.",
 };
 
-async function getExperience() {
+async function getExperience(preview: boolean) {
   const query = `*[_type == "experience"] | order(order asc) {
     "id": _id,
     company,
@@ -20,11 +21,12 @@ async function getExperience() {
     impact,
     technologies
   }`;
-  return await client.fetch(query);
+  return await sanityFetch<any[]>({ query, preview });
 }
 
 export default async function ExperiencePage() {
-  const experience = await getExperience();
+  const { isEnabled: preview } = await draftMode();
+  const experience = await getExperience(preview);
 
   return (
     <div className="flex flex-col">

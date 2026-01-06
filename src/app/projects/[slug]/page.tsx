@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { client } from "../../../../sanity/lib/client";
+import { client, sanityFetch } from "../../../../sanity/lib/client";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -17,7 +18,7 @@ interface ProjectPageProps {
   }>;
 }
 
-async function getProject(slug: string) {
+async function getProject(slug: string, preview: boolean) {
   const query = `*[_type == "project" && slug.current == $slug][0] {
     "id": _id,
     title,
@@ -28,14 +29,14 @@ async function getProject(slug: string) {
     links,
     content
   }`;
-  return await client.fetch(query, { slug });
+  return await sanityFetch<any>({ query, params: { slug }, preview });
 }
 
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const project = await getProject(slug, false);
 
   if (!project) {
     return {
@@ -58,8 +59,9 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { isEnabled: preview } = await draftMode();
   const { slug } = await params;
-  const project = await getProject(slug);
+  const project = await getProject(slug, preview);
 
   if (!project) {
     notFound();

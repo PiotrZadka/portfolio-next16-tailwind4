@@ -6,11 +6,12 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { profile } from "@/data/profile";
-import { client } from "../../sanity/lib/client";
+import { sanityFetch } from "../../sanity/lib/client";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-async function getData() {
+async function getData(preview: boolean) {
   const profileQuery = `*[_type == "profile"][0] {
     name,
     title,
@@ -43,16 +44,17 @@ async function getData() {
   }`;
 
   const [profileData, experience, projects] = await Promise.all([
-    client.fetch(profileQuery),
-    client.fetch(experienceQuery),
-    client.fetch(projectsQuery),
+    sanityFetch<any>({ query: profileQuery, preview }),
+    sanityFetch<any[]>({ query: experienceQuery, preview }),
+    sanityFetch<any[]>({ query: projectsQuery, preview }),
   ]);
 
   return { profileData, experience, projects };
 }
 
 export default async function Home() {
-  const { profileData, experience, projects } = await getData();
+  const { isEnabled: preview } = await draftMode();
+  const { profileData, experience, projects } = await getData(preview);
   const resumeUrl = profileData?.resumeFile || profileData?.resume;
 
   return (

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { PortableText } from "@portabletext/react";
 import { cn } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
@@ -20,7 +21,7 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, false);
 
   if (!post) {
     return {
@@ -35,15 +36,16 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
+  const posts = await getBlogPosts(false);
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { isEnabled: preview } = await draftMode();
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, preview);
 
   if (!post) {
     notFound();

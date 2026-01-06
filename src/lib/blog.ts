@@ -1,7 +1,7 @@
-import { client } from "../../sanity/lib/client";
+import { sanityFetch } from "../../sanity/lib/client";
 import { BlogPost } from "@/types";
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(preview = false): Promise<BlogPost[]> {
   const query = `*[_type == "post"] | order(date desc) {
     "id": _id,
     "slug": slug.current,
@@ -14,10 +14,13 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     content
   }`;
 
-  return await client.fetch(query);
+  return await sanityFetch<BlogPost[]>({ query, preview });
 }
 
-export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+export async function getBlogPost(
+  slug: string,
+  preview = false
+): Promise<BlogPost | null> {
   const query = `*[_type == "post" && slug.current == $slug][0] {
     "id": _id,
     "slug": slug.current,
@@ -30,5 +33,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     content
   }`;
 
-  return await client.fetch(query, { slug });
+  return await sanityFetch<BlogPost | null>({
+    query,
+    params: { slug },
+    preview,
+  });
 }
