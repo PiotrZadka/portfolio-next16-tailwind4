@@ -152,20 +152,36 @@ export function ConsoleNav() {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center md:hidden"
           >
+            {/* Background Decorative Elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+              <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px]" />
+              <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px]" />
+            </div>
+
             <button
-              className="absolute top-6 right-6 p-3 rounded-full bg-surface border border-border/40"
+              className="absolute top-6 right-6 p-3 rounded-full bg-surface border border-border/40 hover:border-primary/50 transition-colors z-10"
               onClick={() => setIsOpen(false)}
             >
               <X className="w-6 h-6" />
             </button>
 
-            <nav className="flex flex-col items-center gap-8">
+            <nav className="relative flex flex-col items-center w-full px-6 gap-4">
+              <Link
+                href="/"
+                className={cn(
+                  "w-full py-4 text-center text-4xl font-bold tracking-tighter uppercase border-b border-border/10 transition-colors hover:text-primary",
+                  pathname === "/" ? "text-primary" : "text-foreground"
+                )}
+                onClick={() => setIsOpen(false)}
+              >
+                home
+              </Link>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "text-5xl font-bold tracking-tighter uppercase",
+                    "w-full py-4 text-center text-4xl font-bold tracking-tighter uppercase border-b border-border/10 transition-colors hover:text-primary",
                     pathname === item.href ? "text-primary" : "text-foreground"
                   )}
                   onClick={() => setIsOpen(false)}
@@ -173,6 +189,10 @@ export function ConsoleNav() {
                   {item.label}
                 </Link>
               ))}
+
+              <div className="mt-8 text-[10px] font-mono text-muted-foreground tracking-[0.3em] uppercase">
+                piotrzadka.dev — 2026
+              </div>
             </nav>
           </motion.div>
         )}
