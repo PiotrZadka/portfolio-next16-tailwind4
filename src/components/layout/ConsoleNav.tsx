@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,11 +18,32 @@ const navItems = [
 
 export function ConsoleNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const pathname = usePathname();
+  const navRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   // Close menu when route changes
   useEffect(() => {
     setIsOpen(false);
+  }, [pathname]);
+
+  // Update indicator position based on active link
+  useEffect(() => {
+    const activeIndex = navItems.findIndex((item) => item.href === pathname);
+    const activeLink = linkRefs.current[activeIndex];
+    const nav = navRef.current;
+
+    if (activeLink && nav) {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      setIndicatorStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+      });
+    } else {
+      setIndicatorStyle({ left: 0, width: 0 });
+    }
   }, [pathname]);
 
   // Prevent scrolling when menu is open
@@ -34,9 +55,11 @@ export function ConsoleNav() {
     }
   }, [isOpen]);
 
+  const isActiveNav = navItems.some((item) => item.href === pathname);
+
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-background/40 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-background/40 backdrop-blur-xl">
         <Container>
           <div className="flex h-14 items-center justify-between">
             {/* Logo Module */}
@@ -50,10 +73,16 @@ export function ConsoleNav() {
             </Link>
 
             {/* Desktop: Console Links */}
-            <nav className="hidden md:flex flex-1 h-full items-center">
-              {navItems.map((item) => (
+            <nav
+              ref={navRef}
+              className="hidden md:flex flex-1 h-full items-center relative"
+            >
+              {navItems.map((item, index) => (
                 <Link
                   key={item.href}
+                  ref={(el) => {
+                    linkRefs.current[index] = el;
+                  }}
                   href={item.href}
                   className={cn(
                     "relative flex items-center justify-center px-8 h-full border-r border-border/40 text-[11px] font-medium font-mono uppercase tracking-[0.15em] transition-all duration-300 hover:bg-primary/5",
@@ -63,19 +92,20 @@ export function ConsoleNav() {
                   )}
                 >
                   <span className="relative z-10">{item.label}</span>
-                  {pathname === item.href && (
-                    <motion.div
-                      layoutId="console-active"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                    />
-                  )}
                 </Link>
               ))}
+
+              {/* CSS-based sliding indicator */}
+              <div
+                className={cn(
+                  "absolute bottom-0 h-0.5 bg-primary transition-all duration-300 ease-out",
+                  !isActiveNav && "opacity-0"
+                )}
+                style={{
+                  left: indicatorStyle.left,
+                  width: indicatorStyle.width,
+                }}
+              />
             </nav>
 
             {/* Actions Module */}
