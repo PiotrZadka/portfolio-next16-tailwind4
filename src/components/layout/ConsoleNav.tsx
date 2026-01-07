@@ -38,14 +38,14 @@ export function ConsoleNav() {
     <>
       <header className="sticky top-0 z-50 w-full bg-background/40 backdrop-blur-xl">
         <Container>
-          <div className="flex h-20 items-center justify-between">
+          <div className="flex h-14 items-center justify-between">
             {/* Logo Module */}
             <Link
               href="/"
               className="flex items-center justify-center px-6 h-full border-x border-border/40 hover:bg-primary/5 transition-colors group"
             >
               <span className="text-sm font-bold tracking-tighter group-hover:text-primary transition-colors">
-                PZ_SYSTEM
+                PIOTR ZADKA
               </span>
             </Link>
 
