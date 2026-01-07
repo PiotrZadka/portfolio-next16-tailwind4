@@ -11,6 +11,8 @@ export async function getBlogPosts(preview = false): Promise<BlogPost[]> {
     readTime,
     tags,
     externalUrl,
+    linkedinHook,
+    "socialImage": socialImage.asset->url,
     content
   }`;
 
@@ -30,6 +32,8 @@ export async function getBlogPost(
     readTime,
     tags,
     externalUrl,
+    linkedinHook,
+    "socialImage": socialImage.asset->url,
     content
   }`;
 
