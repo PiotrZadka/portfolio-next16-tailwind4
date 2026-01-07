@@ -115,7 +115,7 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 ### Phase 1: Architecture & Layout
 
 - [x] Create `src/types/index.ts` with rich interfaces (Profile, Experience, CaseStudy, BlogPost)
-- [x] Create shared layout (`HUDNav`, `Footer`) with navigation
+- [x] Create shared layout (`PathNav`, `Footer`) with navigation
 - [x] Implement dark/light mode toggle component
 - [x] Set up smooth scroll and page transition foundations
 

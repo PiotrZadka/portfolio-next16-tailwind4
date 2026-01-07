@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { HUDNav } from "@/components/layout/HUDNav";
+import { PathNav } from "@/components/layout/PathNav";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
@@ -85,7 +85,7 @@ export default function RootLayout({
     >
       <body className="antialiased font-sans bg-background text-foreground flex flex-col min-h-screen">
         <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
-        <HUDNav />
+        <PathNav />
         <main className="flex-1 relative z-10">{children}</main>
         <Footer />
       </body>
