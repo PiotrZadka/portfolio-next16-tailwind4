@@ -65,7 +65,7 @@ export function ConsoleNav() {
             {/* Logo Module */}
             <Link
               href="/"
-              className="flex items-center justify-center px-6 h-full border-x border-border/40 hover:bg-primary/5 transition-colors group"
+              className="flex items-center justify-center px-4 md:px-6 h-full md:border-x border-border/40 hover:bg-primary/5 transition-colors group"
             >
               <span className="text-sm font-semibold tracking-tight font-mono group-hover:text-primary transition-colors">
                 PIOTR ZADKA
@@ -109,7 +109,7 @@ export function ConsoleNav() {
             </nav>
 
             {/* Actions Module */}
-            <div className="flex items-center h-full border-x border-border/40 px-4 gap-4">
+            <div className="flex items-center h-full md:border-x border-border/40 px-4 gap-4">
               <ThemeToggle />
 
               {/* Mobile Menu Trigger */}
@@ -165,11 +165,11 @@ export function ConsoleNav() {
               <X className="w-6 h-6" />
             </button>
 
-            <nav className="relative flex flex-col items-center w-full px-6 gap-4">
+            <nav className="relative flex flex-col items-center w-full gap-2">
               <Link
                 href="/"
                 className={cn(
-                  "w-full py-4 text-center text-4xl font-bold tracking-tighter uppercase border-b border-border/10 transition-colors hover:text-primary",
+                  "w-full py-6 text-center text-4xl font-bold tracking-tighter uppercase border-b border-border/10 transition-colors hover:text-primary",
                   pathname === "/" ? "text-primary" : "text-foreground"
                 )}
                 onClick={() => setIsOpen(false)}
@@ -181,7 +181,7 @@ export function ConsoleNav() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "w-full py-4 text-center text-4xl font-bold tracking-tighter uppercase border-b border-border/10 transition-colors hover:text-primary",
+                    "w-full py-6 text-center text-4xl font-bold tracking-tighter uppercase border-b border-border/10 transition-colors hover:text-primary",
                     pathname === item.href ? "text-primary" : "text-foreground"
                   )}
                   onClick={() => setIsOpen(false)}
