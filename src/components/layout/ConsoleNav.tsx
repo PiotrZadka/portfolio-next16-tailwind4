@@ -65,8 +65,9 @@ export function ConsoleNav() {
                   <span className="relative z-10">{item.label}</span>
                   {pathname === item.href && (
                     <motion.div
-                      layoutId="console-active"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={{ opacity: 1, scaleX: 1 }}
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary origin-center"
                     />
                   )}
                 </Link>
