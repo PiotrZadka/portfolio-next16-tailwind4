@@ -90,6 +90,20 @@ export function ConsoleNav() {
 
         {/* Horizontal Laser Line */}
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border/60 to-transparent dark:via-primary/20" />
+
+        {/* Scanning Pulse Effect */}
+        <motion.div
+          initial={{ left: "-20%" }}
+          animate={{ left: "120%" }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear",
+            repeatDelay: 3,
+          }}
+          className="absolute bottom-0 w-[20%] h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent z-10 opacity-0 dark:opacity-100"
+        />
+
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-primary/30 blur-[1px] opacity-0 dark:opacity-100" />
       </header>
 
