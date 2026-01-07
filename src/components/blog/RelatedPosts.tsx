@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { cn } from "@/lib/utils";
+import { cn, calculateReadingTime } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
 import { BlogPost } from "@/types";
 
@@ -30,10 +30,10 @@ export function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
               <div className="flex flex-col h-full">
                 <div className="flex gap-2 items-center text-xs text-muted-foreground mb-3">
                   <time dateTime={post.date}>{post.date}</time>
-                  {post.readTime && (
+                  {post.content && (
                     <>
                       <span>•</span>
-                      <span>{post.readTime}</span>
+                      <span>{calculateReadingTime(post.content)} min read</span>
                     </>
                   )}
                 </div>

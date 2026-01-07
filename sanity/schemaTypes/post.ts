@@ -35,12 +35,6 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "readTime",
-      title: "Read Time",
-      type: "string",
-      description: "e.g. 5 min read",
-    }),
-    defineField({
       name: "tags",
       title: "Tags",
       type: "array",

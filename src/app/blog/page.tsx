@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, calculateReadingTime } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
@@ -47,6 +47,7 @@ export default async function BlogPage() {
             {posts.map((post) => {
               const href = post.externalUrl || `/blog/${post.slug}`;
               const isExternal = !!post.externalUrl;
+              const readTime = calculateReadingTime(post.content);
 
               return (
                 <Link
@@ -67,7 +68,7 @@ export default async function BlogPage() {
                             <ExternalLink className="h-4 w-4 text-muted-foreground" />
                           )}
                           <span className="text-sm text-muted-foreground">
-                            {post.readTime}
+                            {readTime} min read
                           </span>
                         </div>
                       </div>
