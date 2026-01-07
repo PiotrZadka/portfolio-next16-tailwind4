@@ -56,6 +56,25 @@ export const post = defineType({
       description: "If this post is hosted elsewhere (e.g. Medium)",
     }),
     defineField({
+      name: "linkedinHook",
+      title: "LinkedIn Hook",
+      type: "text",
+      rows: 2,
+      description:
+        "2-line hook for LinkedIn post (150 chars max). Stops the scroll!",
+      validation: (Rule) => Rule.max(150),
+    }),
+    defineField({
+      name: "socialImage",
+      title: "Social Preview Image",
+      type: "image",
+      description:
+        "Custom image for social sharing (1200x630). If not set, auto-generated OG image will be used.",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "array",

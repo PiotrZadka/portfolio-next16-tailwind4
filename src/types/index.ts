@@ -53,4 +53,6 @@ export interface BlogPost {
   tags: string[];
   content: string; // MDX content
   externalUrl?: string; // Optional external link (e.g., Medium article)
+  linkedinHook?: string; // 2-line hook for LinkedIn sharing
+  socialImage?: string; // Custom social preview image URL
 }
