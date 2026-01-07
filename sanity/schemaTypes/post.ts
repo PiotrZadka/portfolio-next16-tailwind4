@@ -36,9 +36,10 @@ export const post = defineType({
     }),
     defineField({
       name: "readTime",
-      title: "Read Time",
+      title: "Read Time (Override)",
       type: "string",
-      description: "e.g. 5 min read",
+      description:
+        "Optional: Manually set reading time (e.g. '5 min read'). If empty, it will be calculated automatically.",
     }),
     defineField({
       name: "tags",

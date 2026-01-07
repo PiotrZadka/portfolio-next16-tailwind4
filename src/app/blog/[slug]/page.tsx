@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PortableText } from "@portabletext/react";
-import { cn } from "@/lib/utils";
+import { cn, calculateReadingTime } from "@/lib/utils";
 import { getSkillBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
@@ -89,7 +89,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="flex gap-4 items-center text-sm text-muted-foreground mb-6">
               <time dateTime={post.date}>{post.date}</time>
               <span>•</span>
-              <span>{post.readTime}</span>
+              <span>
+                {post.readTime ||
+                  `${calculateReadingTime(post.content)} min read`}
+              </span>
             </div>
 
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">

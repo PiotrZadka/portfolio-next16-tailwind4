@@ -49,7 +49,7 @@ export interface BlogPost {
   slug: string;
   excerpt: string;
   date: string;
-  readTime: string;
+  readTime?: string;
   tags: string[];
   content: string; // MDX content
   externalUrl?: string; // Optional external link (e.g., Medium article)

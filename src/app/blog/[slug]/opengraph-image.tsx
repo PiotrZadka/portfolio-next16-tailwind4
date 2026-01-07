@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getBlogPost } from "@/lib/blog";
+import { calculateReadingTime } from "@/lib/utils";
 
 // Route segment config
 export const runtime = "edge";
@@ -193,7 +194,7 @@ export default async function Image({
           </div>
 
           {/* Read time badge */}
-          {post?.readTime && (
+          {(post?.readTime || post?.content) && (
             <div
               style={{
                 fontSize: 16,
@@ -203,7 +204,8 @@ export default async function Image({
                 borderRadius: "8px",
               }}
             >
-              {post.readTime}
+              {post?.readTime ||
+                `${calculateReadingTime(post?.content)} min read`}
             </div>
           )}
         </div>
