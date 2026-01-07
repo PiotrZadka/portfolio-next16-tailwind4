@@ -36,7 +36,7 @@ export function PathNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/10">
+      <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
         <Container>
           <div className="flex h-16 items-center justify-between">
             {/* Desktop: Breadcrumb Path */}
@@ -91,6 +91,10 @@ export function PathNav() {
             </div>
           </div>
         </Container>
+
+        {/* Horizon Line Distinction */}
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border/60 to-transparent dark:via-primary/20" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-primary/30 blur-[1px] opacity-0 dark:opacity-100" />
       </header>
 
       {/* Fullscreen Overlay (Mobile & Desktop Trigger) */}
