@@ -232,7 +232,7 @@ Initial posts to establish authority and voice:
 - [ ] Unit tests with Vitest (component and utility testing)
 - [ ] Contact form with Server Actions (email integration)
 - [ ] RSS feed for blog
-- [ ] Reading time estimates on blog posts
+- [x] Reading time estimates on blog posts
 - [ ] "Copy link" button on blog posts
 - [ ] Analytics (privacy-respecting, e.g., Plausible or Umami)
 - [x] Sanity Studio preview mode (live preview while editing)
