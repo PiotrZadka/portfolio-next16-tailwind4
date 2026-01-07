@@ -194,7 +194,7 @@ export default async function Image({
           </div>
 
           {/* Read time badge */}
-          {post?.content && (
+          {(post?.readTime || post?.content) && (
             <div
               style={{
                 fontSize: 16,
@@ -204,7 +204,8 @@ export default async function Image({
                 borderRadius: "8px",
               }}
             >
-              {calculateReadingTime(post.content)} min read
+              {post?.readTime ||
+                `${calculateReadingTime(post?.content)} min read`}
             </div>
           )}
         </div>

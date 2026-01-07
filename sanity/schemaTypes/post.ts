@@ -35,6 +35,13 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "readTime",
+      title: "Read Time (Override)",
+      type: "string",
+      description:
+        "Optional: Manually set reading time (e.g. '5 min read'). If empty, it will be calculated automatically.",
+    }),
+    defineField({
       name: "tags",
       title: "Tags",
       type: "array",

@@ -30,10 +30,13 @@ export function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
               <div className="flex flex-col h-full">
                 <div className="flex gap-2 items-center text-xs text-muted-foreground mb-3">
                   <time dateTime={post.date}>{post.date}</time>
-                  {post.content && (
+                  {(post.readTime || post.content) && (
                     <>
                       <span>•</span>
-                      <span>{calculateReadingTime(post.content)} min read</span>
+                      <span>
+                        {post.readTime ||
+                          `${calculateReadingTime(post.content)} min read`}
+                      </span>
                     </>
                   )}
                 </div>

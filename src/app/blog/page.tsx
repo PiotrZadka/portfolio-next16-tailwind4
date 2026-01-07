@@ -47,7 +47,9 @@ export default async function BlogPage() {
             {posts.map((post) => {
               const href = post.externalUrl || `/blog/${post.slug}`;
               const isExternal = !!post.externalUrl;
-              const readTime = calculateReadingTime(post.content);
+              const readTime =
+                post.readTime ||
+                `${calculateReadingTime(post.content)} min read`;
 
               return (
                 <Link
@@ -68,7 +70,7 @@ export default async function BlogPage() {
                             <ExternalLink className="h-4 w-4 text-muted-foreground" />
                           )}
                           <span className="text-sm text-muted-foreground">
-                            {readTime} min read
+                            {readTime}
                           </span>
                         </div>
                       </div>

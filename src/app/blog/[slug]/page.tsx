@@ -89,7 +89,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="flex gap-4 items-center text-sm text-muted-foreground mb-6">
               <time dateTime={post.date}>{post.date}</time>
               <span>•</span>
-              <span>{calculateReadingTime(post.content)} min read</span>
+              <span>
+                {post.readTime ||
+                  `${calculateReadingTime(post.content)} min read`}
+              </span>
             </div>
 
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
