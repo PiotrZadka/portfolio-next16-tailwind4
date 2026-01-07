@@ -44,7 +44,7 @@ export function ConsoleNav() {
               href="/"
               className="flex items-center justify-center px-6 h-full border-x border-border/40 hover:bg-primary/5 transition-colors group"
             >
-              <span className="text-sm font-bold tracking-tighter group-hover:text-primary transition-colors">
+              <span className="text-sm font-semibold tracking-tight font-mono group-hover:text-primary transition-colors">
                 PIOTR ZADKA
               </span>
             </Link>
@@ -56,7 +56,7 @@ export function ConsoleNav() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative flex items-center justify-center px-8 h-full border-r border-border/40 text-[10px] uppercase tracking-[0.2em] transition-all duration-300 hover:bg-primary/5",
+                    "relative flex items-center justify-center px-8 h-full border-r border-border/40 text-[11px] font-medium font-mono uppercase tracking-[0.15em] transition-all duration-300 hover:bg-primary/5",
                     pathname === item.href
                       ? "text-primary"
                       : "text-muted-foreground"
