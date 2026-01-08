@@ -33,19 +33,32 @@ export async function generateMetadata({
   }
 
   const metadata: Metadata = {
-    title: `${post.title} | Piotr Zadka`,
+    title: post.title,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.date,
+      authors: ["Piotr Zadka"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 
   // Use custom social image if available
   if (post.socialImage) {
-    metadata.openGraph = {
-      images: [{ url: post.socialImage, width: 1200, height: 630 }],
-    };
-    metadata.twitter = {
-      card: "summary_large_image",
-      images: [post.socialImage],
-    };
+    if (metadata.openGraph) {
+      metadata.openGraph.images = [
+        { url: post.socialImage, width: 1200, height: 630 },
+      ];
+    }
+    if (metadata.twitter) {
+      metadata.twitter.images = [post.socialImage];
+    }
   }
 
   return metadata;

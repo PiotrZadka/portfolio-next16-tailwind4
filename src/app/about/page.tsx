@@ -8,9 +8,19 @@ import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Piotr Zadka",
+  title: "About",
   description:
     "Learn more about my background, skills, and professional journey.",
+  openGraph: {
+    title: "About",
+    description:
+      "Learn more about my background, skills, and professional journey.",
+  },
+  twitter: {
+    title: "About",
+    description:
+      "Learn more about my background, skills, and professional journey.",
+  },
 };
 
 async function getProfileData(preview: boolean) {

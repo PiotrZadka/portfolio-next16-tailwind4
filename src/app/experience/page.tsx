@@ -6,8 +6,16 @@ import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Experience | Piotr Zadka",
+  title: "Experience",
   description: "My professional journey and career timeline.",
+  openGraph: {
+    title: "Experience",
+    description: "My professional journey and career timeline.",
+  },
+  twitter: {
+    title: "Experience",
+    description: "My professional journey and career timeline.",
+  },
 };
 
 async function getExperience(preview: boolean) {

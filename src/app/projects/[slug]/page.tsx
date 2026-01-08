@@ -46,8 +46,22 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${project.title} | Piotr Zadka`,
+    title: project.title,
     description: project.summary,
+    openGraph: {
+      title: project.title,
+      description: project.summary,
+      type: "website",
+      images: project.coverImage
+        ? [{ url: project.coverImage, width: 1200, height: 630 }]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.summary,
+      images: project.coverImage ? [project.coverImage] : undefined,
+    },
   };
 }
 

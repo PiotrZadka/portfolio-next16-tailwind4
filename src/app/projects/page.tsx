@@ -7,8 +7,16 @@ import { Metadata } from "next";
 import { CaseStudy } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Projects | Piotr Zadka",
+  title: "Projects",
   description: "A showcase of my technical projects and case studies.",
+  openGraph: {
+    title: "Projects",
+    description: "A showcase of my technical projects and case studies.",
+  },
+  twitter: {
+    title: "Projects",
+    description: "A showcase of my technical projects and case studies.",
+  },
 };
 
 async function getProjects(preview: boolean) {

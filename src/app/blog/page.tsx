@@ -18,9 +18,19 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Piotr Zadka",
+  title: "Blog",
   description:
     "Technical guides, thoughts, and insights on software development.",
+  openGraph: {
+    title: "Blog",
+    description:
+      "Technical guides, thoughts, and insights on software development.",
+  },
+  twitter: {
+    title: "Blog",
+    description:
+      "Technical guides, thoughts, and insights on software development.",
+  },
 };
 
 export default async function BlogPage() {
