@@ -54,7 +54,8 @@ async function getAboutData(preview: boolean) {
 async function getContactData(preview: boolean) {
   const contactQuery = `*[_type == "contact"][0] {
     email,
-    social
+    social,
+    text
   }`;
 
   try {
@@ -99,6 +100,7 @@ export default async function AboutPage() {
   const contact = {
     email: contactData?.email,
     social: contactData?.social,
+    text: contactData?.text,
   };
 
   return (
@@ -116,7 +118,11 @@ export default async function AboutPage() {
 
       <AboutSection profile={about} />
 
-      <ContactSection email={contact.email} social={contact.social} />
+      <ContactSection
+        email={contact.email}
+        social={contact.social}
+        text={contact.text}
+      />
     </div>
   );
 }

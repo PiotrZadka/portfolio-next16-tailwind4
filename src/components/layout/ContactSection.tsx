@@ -7,9 +7,10 @@ import Link from "next/link";
 interface ContactSectionProps {
   email: string;
   social: SocialLinks;
+  text?: string;
 }
 
-export function ContactSection({ email, social }: ContactSectionProps) {
+export function ContactSection({ email, social, text }: ContactSectionProps) {
   return (
     <section id="contact" className="py-20 bg-muted/50">
       <Container className="text-center max-w-2xl">
@@ -17,9 +18,8 @@ export function ContactSection({ email, social }: ContactSectionProps) {
           Get In Touch
         </h2>
         <p className="text-lg text-muted-foreground mb-10">
-          I'm currently open to new opportunities and collaborations. Whether
-          you have a question or just want to say hi, I'll try my best to get
-          back to you!
+          {text ||
+            "I'm always open to new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!"}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
