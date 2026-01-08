@@ -17,7 +17,7 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -41,20 +41,17 @@ export default async function BlogPage() {
 
   return (
     <div className="flex flex-col">
-      <Section className="pb-0 md:pb-0 lg:pb-0 pt-24">
+      <Section className="pt-24 pb-16">
         <Container>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-            Blog
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Technical guides, thoughts, and insights on software development,
-            React, Next.js, and more.
-          </p>
-        </Container>
-      </Section>
-
-      <Section className="pt-8">
-        <Container>
+          <div className="mb-12">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
+              Blog
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              Technical guides, thoughts, and insights on software development,
+              React, Next.js, and more.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {posts.map((post) => {
               const href = post.externalUrl || `/blog/${post.slug}`;
