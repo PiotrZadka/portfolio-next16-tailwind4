@@ -13,16 +13,13 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { ChevronDown, ChevronUp, Calendar, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getBadgeClassName } from "@/lib/skills";
 
 interface ExperienceTimelineProps {
   items: Experience[];
-  skillBadgeClasses?: Record<string, string>;
 }
 
-export function ExperienceTimeline({
-  items,
-  skillBadgeClasses,
-}: ExperienceTimelineProps) {
+export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const [expandedId, setExpandedId] = useState<string | null>(
     items[0]?.id || null
   );
@@ -138,11 +135,7 @@ export function ExperienceTimeline({
                                 <Badge
                                   key={tech}
                                   variant="none"
-                                  className={cn(
-                                    "text-xs",
-                                    skillBadgeClasses?.[tech] ||
-                                      "bg-[var(--pill-bg)] text-[var(--pill-text)] border border-[var(--pill-border)] shadow-sm"
-                                  )}
+                                  className={cn("text-xs", getBadgeClassName())}
                                 >
                                   {tech}
                                 </Badge>

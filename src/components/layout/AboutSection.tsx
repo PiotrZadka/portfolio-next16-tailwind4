@@ -3,11 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { CodeTerminal } from "@/components/ui/CodeTerminal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import {
-  getBadgeClassName,
-  getSkillCategories,
-  resolveSkillCategory,
-} from "@/lib/skills";
+import { getBadgeClassName } from "@/lib/skills";
 import { FileText } from "lucide-react";
 import Link from "next/link";
 
@@ -16,20 +12,12 @@ interface AboutSectionProps {
     about: string;
     location: string;
     skills?: string[];
-    skillCategories?: Array<{
-      category: "frontend" | "backend" | "devops" | "testing" | "tools";
-      skills: string[];
-    }>;
     resume?: string;
   };
 }
 
 export async function AboutSection({ profile }: AboutSectionProps) {
-  const categories = profile.skillCategories || (await getSkillCategories());
-  const displaySkills =
-    profile.skills && profile.skills.length > 0
-      ? profile.skills
-      : categories.flatMap((c) => c.skills);
+  const displaySkills = profile.skills || [];
 
   return (
     <section className="pb-20 pt-8">
@@ -59,7 +47,6 @@ export async function AboutSection({ profile }: AboutSectionProps) {
               <h3 className="text-lg font-semibold mb-4">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
                 {displaySkills.map((skill) => {
-                  resolveSkillCategory(skill, categories);
                   return (
                     <Badge
                       key={skill}

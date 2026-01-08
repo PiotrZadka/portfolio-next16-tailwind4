@@ -26,26 +26,6 @@ export const about = defineType({
       of: [{ type: "string" }],
     }),
     defineField({
-      name: "skillCategories",
-      title: "Skill Categories",
-      type: "array",
-      description: "Categorized skills for detailed view",
-      of: [
-        {
-          type: "object",
-          fields: [
-            { name: "category", type: "string", title: "Category Name" },
-            {
-              name: "skills",
-              type: "array",
-              title: "Skills",
-              of: [{ type: "string" }],
-            },
-          ],
-        },
-      ],
-    }),
-    defineField({
       name: "resume",
       title: "Resume URL",
       type: "url",
