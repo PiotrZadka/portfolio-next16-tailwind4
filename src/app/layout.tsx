@@ -84,7 +84,6 @@ async function getContact() {
     social?: {
       github?: string;
       linkedin?: string;
-      twitter?: string;
     };
   }>({ query });
 }

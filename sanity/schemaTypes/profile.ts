@@ -11,5 +11,11 @@ export const profile = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "tagline",
+      title: "Tagline",
+      type: "string",
+      description: "A short, catchy phrase for the hero section.",
+    }),
   ],
 });

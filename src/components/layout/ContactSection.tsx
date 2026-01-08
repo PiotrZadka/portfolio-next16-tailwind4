@@ -1,7 +1,7 @@
 import { SocialLinks } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 interface ContactSectionProps {
@@ -52,17 +52,6 @@ export function ContactSection({ email, social }: ContactSectionProps) {
             >
               <Linkedin className="h-6 w-6" />
               <span className="sr-only">LinkedIn</span>
-            </Link>
-          )}
-          {social.twitter && (
-            <Link
-              href={social.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Twitter className="h-6 w-6" />
-              <span className="sr-only">Twitter</span>
             </Link>
           )}
         </div>

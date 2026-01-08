@@ -17,8 +17,8 @@ import { getSkillCategories, getSkillBadgeClasses } from "@/lib/skills";
 
 export const dynamic = "force-dynamic";
 async function getData(preview: boolean) {
-  const heroQuery = `*[_type == "hero"][0] {
-    title,
+  const profileQuery = `*[_type == "profile"][0] {
+    name,
     tagline
   }`;
 
@@ -53,10 +53,10 @@ async function getData(preview: boolean) {
     links
   }`;
 
-  // Fetch hero data
-  let heroData = await sanityFetch<any>({ query: heroQuery, preview });
-  if (!heroData) {
-    heroData = await publishedClient.fetch<any>(heroQuery);
+  // Fetch profile data (hero)
+  let profileData = await sanityFetch<any>({ query: profileQuery, preview });
+  if (!profileData) {
+    profileData = await publishedClient.fetch<any>(profileQuery);
   }
 
   // Fetch contact data
@@ -76,12 +76,12 @@ async function getData(preview: boolean) {
     sanityFetch<CaseStudy[]>({ query: projectsQuery, preview }),
   ]);
 
-  return { heroData, contactData, aboutData, experience, projects };
+  return { profileData, contactData, aboutData, experience, projects };
 }
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
-  const { heroData, contactData, aboutData, experience, projects } =
+  const { profileData, contactData, aboutData, experience, projects } =
     await getData(preview);
 
   const allTech = Array.from(
@@ -93,8 +93,8 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
-        name="Piotr Zadka"
-        tagline={heroData?.tagline || ""}
+        name={profileData?.name || "Piotr Zadka"}
+        tagline={profileData?.tagline || ""}
         resume={aboutData?.resumeFile || aboutData?.resume}
       />
 

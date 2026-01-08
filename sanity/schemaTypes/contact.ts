@@ -18,7 +18,6 @@ export const contact = defineType({
       fields: [
         { name: "github", title: "GitHub URL", type: "url" },
         { name: "linkedin", title: "LinkedIn URL", type: "url" },
-        { name: "twitter", title: "Twitter/X URL", type: "url" },
       ],
     }),
   ],

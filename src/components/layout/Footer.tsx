@@ -7,7 +7,6 @@ interface FooterProps {
     social?: {
       github?: string;
       linkedin?: string;
-      twitter?: string;
     };
   };
 }
