@@ -31,6 +31,7 @@ async function getProfileData(preview: boolean) {
     email,
     social,
     skills,
+    skillCategories,
     resume,
     "resumeFile": resumeFile.asset->url
   }`;

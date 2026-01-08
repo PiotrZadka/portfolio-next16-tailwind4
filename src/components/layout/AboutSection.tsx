@@ -17,7 +17,11 @@ interface AboutSectionProps {
 }
 
 export async function AboutSection({ profile }: AboutSectionProps) {
-  const categories = await getSkillCategories();
+  const categories = profile.skillCategories || (await getSkillCategories());
+  const displaySkills =
+    profile.skills && profile.skills.length > 0
+      ? profile.skills
+      : categories.flatMap((c) => c.skills);
 
   return (
     <section className="pb-20 pt-8">
@@ -54,7 +58,7 @@ export async function AboutSection({ profile }: AboutSectionProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
-                {(profile.skills || []).map((skill) => {
+                {displaySkills.map((skill) => {
                   resolveSkillCategory(skill, categories);
                   return (
                     <Badge

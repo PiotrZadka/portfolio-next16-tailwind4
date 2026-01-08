@@ -51,6 +51,13 @@ export const profile = defineType({
       ],
     }),
     defineField({
+      name: "skills",
+      title: "Skills",
+      type: "array",
+      description: "List of featured skills to display on the about page",
+      of: [{ type: "string" }],
+    }),
+    defineField({
       name: "resume",
       title: "Resume URL",
       type: "url",
