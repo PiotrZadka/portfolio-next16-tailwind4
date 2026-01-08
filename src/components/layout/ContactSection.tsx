@@ -32,24 +32,28 @@ export function ContactSection({ email, social }: ContactSectionProps) {
         </div>
 
         <div className="flex items-center justify-center gap-6">
-          <Link
-            href={social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Github className="h-6 w-6" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <Link
-            href={social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Linkedin className="h-6 w-6" />
-            <span className="sr-only">LinkedIn</span>
-          </Link>
+          {social.github && (
+            <Link
+              href={social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Github className="h-6 w-6" />
+              <span className="sr-only">GitHub</span>
+            </Link>
+          )}
+          {social.linkedin && (
+            <Link
+              href={social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Linkedin className="h-6 w-6" />
+              <span className="sr-only">LinkedIn</span>
+            </Link>
+          )}
           {social.twitter && (
             <Link
               href={social.twitter}
