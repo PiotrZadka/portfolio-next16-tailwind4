@@ -1,15 +1,25 @@
-import { sanityFetch } from "../../sanity/lib/client";
+import {
+  sanityFetch,
+  client as publishedClient,
+} from "../../sanity/lib/client";
 
 export async function getSkillCategories() {
-  const query = `*[_type == "profile"][0] {
+  const query = `*[_type == "about"][0] {
     skillCategories
   }`;
 
-  const result = await sanityFetch<{
+  let result = await sanityFetch<{
     skillCategories: Array<{ category: string; skills: string[] }>;
   }>({
     query,
   });
+
+  // Fallback to published if no data in draft
+  if (!result?.skillCategories) {
+    result = await publishedClient.fetch<{
+      skillCategories: Array<{ category: string; skills: string[] }>;
+    }>(query);
+  }
 
   return result?.skillCategories || [];
 }

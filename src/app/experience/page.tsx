@@ -6,6 +6,8 @@ import { getSkillBadgeClasses } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Experience",
   description: "My professional journey and career timeline.",

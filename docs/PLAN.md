@@ -224,6 +224,16 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 - [x] Verify skills render on About page with CSS styling
 - [x] Keep `skillCategories` and `skills` fields in Sanity as source of truth
 
+### Phase 12: Sanity Section Refactoring (Complete)
+
+- [x] Refactor monolithic Profile document into separate section documents (hero, about, contact)
+- [x] Create new Sanity schemas: `hero.ts`, `about.ts`, `contact.ts`
+- [x] Create migration script `scripts/migrate-sections-to-sanity.js`
+- [x] Update frontend pages to fetch from specific section documents
+- [x] Fix TypeScript errors in `AboutSection` component
+- [x] Fix production build issues by forcing dynamic rendering for Sanity-dependent pages
+- [x] Verify all pages load correctly with new data structure
+
 ---
 
 ## 7. Content Strategy (Blog)

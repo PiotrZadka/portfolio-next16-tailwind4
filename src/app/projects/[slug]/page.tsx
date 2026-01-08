@@ -17,6 +17,8 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { CaseStudy } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 interface ProjectPageProps {
   params: Promise<{
     slug: string;
@@ -69,6 +71,7 @@ export async function generateMetadata({
   };
 }
 
+/*
 export async function generateStaticParams() {
   const query = `*[_type == "project"] { "slug": slug.current }`;
   const projects = await client.fetch(query);
@@ -76,6 +79,7 @@ export async function generateStaticParams() {
     slug: project.slug,
   }));
 }
+*/
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { isEnabled: preview } = await draftMode();

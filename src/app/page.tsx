@@ -5,24 +5,24 @@ import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { sanityFetch } from "../../sanity/lib/client";
+import {
+  sanityFetch,
+  client as publishedClient,
+} from "../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Profile, Experience, CaseStudy } from "@/types";
+import { Experience, CaseStudy } from "@/types";
 import { getSkillCategories, getSkillBadgeClasses } from "@/lib/skills";
 
-interface ProfileData extends Partial<Profile> {
-  resumeFile?: string;
-}
-
+export const dynamic = "force-dynamic";
 async function getData(preview: boolean) {
-  const profileQuery = `*[_type == "profile"][0] {
-    name,
+  const heroQuery = `*[_type == "hero"][0] {
     title,
-    tagline,
-    resume,
-    "resumeFile": resumeFile.asset->url,
+    tagline
+  }`;
+
+  const contactQuery = `*[_type == "contact"][0] {
     email,
     social
   }`;
@@ -48,19 +48,30 @@ async function getData(preview: boolean) {
     links
   }`;
 
-  const [profileData, experience, projects] = await Promise.all([
-    sanityFetch<ProfileData>({ query: profileQuery, preview }),
+  // Fetch hero data
+  let heroData = await sanityFetch<any>({ query: heroQuery, preview });
+  if (!heroData) {
+    heroData = await publishedClient.fetch<any>(heroQuery);
+  }
+
+  // Fetch contact data
+  let contactData = await sanityFetch<any>({ query: contactQuery, preview });
+  if (!contactData) {
+    contactData = await publishedClient.fetch<any>(contactQuery);
+  }
+
+  const [experience, projects] = await Promise.all([
     sanityFetch<Experience[]>({ query: experienceQuery, preview }),
     sanityFetch<CaseStudy[]>({ query: projectsQuery, preview }),
   ]);
 
-  return { profileData, experience, projects };
+  return { heroData, contactData, experience, projects };
 }
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
-  const { profileData, experience, projects } = await getData(preview);
-  const resumeUrl = profileData?.resumeFile || profileData?.resume;
+  const { heroData, contactData, experience, projects } =
+    await getData(preview);
 
   const allTech = Array.from(
     new Set(experience.flatMap((exp) => exp.technologies))
@@ -71,9 +82,9 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
-        name={profileData?.name || ""}
-        tagline={profileData?.tagline || ""}
-        resume={resumeUrl}
+        name="Piotr Zadka"
+        tagline={heroData?.tagline || ""}
+        resume={undefined}
       />
 
       <Section className="bg-muted/50">
@@ -148,8 +159,8 @@ export default async function Home() {
       </Section>
 
       <ContactSection
-        email={profileData?.email || ""}
-        social={profileData?.social || { github: "", linkedin: "" }}
+        email={contactData?.email || ""}
+        social={contactData?.social || { github: "", linkedin: "" }}
       />
     </div>
   );

@@ -7,6 +7,8 @@ import { draftMode } from "next/headers";
 import { Metadata } from "next";
 import { CaseStudy } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Projects",
   description: "A showcase of my technical projects and case studies.",

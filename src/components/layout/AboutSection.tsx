@@ -1,4 +1,3 @@
-import { Profile } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { CodeTerminal } from "@/components/ui/CodeTerminal";
@@ -13,7 +12,16 @@ import { FileText } from "lucide-react";
 import Link from "next/link";
 
 interface AboutSectionProps {
-  profile: Profile;
+  profile: {
+    about: string;
+    location: string;
+    skills?: string[];
+    skillCategories?: Array<{
+      category: "frontend" | "backend" | "devops" | "testing" | "tools";
+      skills: string[];
+    }>;
+    resume?: string;
+  };
 }
 
 export async function AboutSection({ profile }: AboutSectionProps) {
