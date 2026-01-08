@@ -32,7 +32,6 @@ async function getAboutData(preview: boolean) {
     about,
     location,
     skills,
-    skillCategories,
     resume,
     "resumeFile": resumeFile.asset->url
   }`;
@@ -92,8 +91,7 @@ export default async function AboutPage() {
   const about = {
     about: aboutData.about,
     location: aboutData.location,
-    skills: aboutData.skills,
-    skillCategories: aboutData.skillCategories,
+    skills: aboutData.skills || [],
     resume: aboutData.resumeFile || aboutData.resume,
   };
 

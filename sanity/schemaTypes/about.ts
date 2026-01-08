@@ -19,6 +19,13 @@ export const about = defineType({
       type: "string",
     }),
     defineField({
+      name: "skills",
+      title: "Featured Skills",
+      type: "array",
+      description: "List of top skills to display in the Tech Stack section",
+      of: [{ type: "string" }],
+    }),
+    defineField({
       name: "resume",
       title: "Resume URL",
       type: "url",

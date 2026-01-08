@@ -13,23 +13,13 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  getBadgeClassName,
-  getSkillCategories,
-  resolveSkillCategory,
-} from "@/lib/skills";
+import { getBadgeClassName } from "@/lib/skills";
 
 interface CaseStudyCardProps {
   project: CaseStudy;
-  categories?: Array<{ category: string; skills: string[] }>;
 }
 
-export async function CaseStudyCard({
-  project,
-  categories: providedCategories,
-}: CaseStudyCardProps) {
-  const categories = providedCategories || (await getSkillCategories());
-
+export async function CaseStudyCard({ project }: CaseStudyCardProps) {
   return (
     <Card className="overflow-hidden flex flex-col h-full group">
       <div className="relative h-48 w-full overflow-hidden bg-muted">
@@ -68,7 +58,6 @@ export async function CaseStudyCard({
       <CardContent className="flex-1">
         <div className="flex flex-wrap gap-2">
           {(project.technologies?.slice(0, 4) || []).map((tech) => {
-            resolveSkillCategory(tech, categories);
             return (
               <Badge
                 key={tech}

@@ -13,7 +13,6 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Experience, CaseStudy } from "@/types";
-import { getSkillCategories, getSkillBadgeClasses } from "@/lib/skills";
 
 export const dynamic = "force-dynamic";
 async function getData(preview: boolean) {
@@ -85,12 +84,6 @@ export default async function Home() {
   const { profileData, contactData, aboutData, experience, projects } =
     await getData(preview);
 
-  const allTech = Array.from(
-    new Set(experience.flatMap((exp) => exp.technologies))
-  );
-  const skillBadgeClasses = await getSkillBadgeClasses(allTech);
-  const categories = await getSkillCategories();
-
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
@@ -117,10 +110,7 @@ export default async function Home() {
             </Link>
           </div>
 
-          <ExperienceTimeline
-            items={experience}
-            skillBadgeClasses={skillBadgeClasses}
-          />
+          <ExperienceTimeline items={experience} />
 
           <div className="mt-8 md:hidden text-center">
             <Link href="/experience">
@@ -152,11 +142,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project: any) => (
-              <CaseStudyCard
-                key={project.id}
-                project={project}
-                categories={categories}
-              />
+              <CaseStudyCard key={project.id} project={project} />
             ))}
           </div>
 
