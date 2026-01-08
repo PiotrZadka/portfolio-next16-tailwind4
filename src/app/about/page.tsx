@@ -30,6 +30,7 @@ async function getProfileData(preview: boolean) {
     location,
     email,
     social,
+    skills,
     resume,
     "resumeFile": resumeFile.asset->url
   }`;
