@@ -12,6 +12,10 @@ export interface Profile {
   };
   resume?: string;
   skills: string[];
+  skillCategories?: Array<{
+    category: "frontend" | "backend" | "devops" | "testing" | "tools";
+    skills: string[];
+  }>;
 }
 
 export interface Experience {

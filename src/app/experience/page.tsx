@@ -2,6 +2,7 @@ import { ExperienceTimeline } from "@/components/layout/ExperienceTimeline";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { sanityFetch } from "../../../sanity/lib/client";
+import { getSkillBadgeClasses } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
@@ -36,6 +37,11 @@ export default async function ExperiencePage() {
   const { isEnabled: preview } = await draftMode();
   const experience = await getExperience(preview);
 
+  const allTech = Array.from(
+    new Set(experience.flatMap((exp) => exp.technologies))
+  );
+  const skillBadgeClasses = await getSkillBadgeClasses(allTech);
+
   return (
     <div className="flex flex-col">
       <Section className="pb-8 pt-24">
@@ -52,7 +58,10 @@ export default async function ExperiencePage() {
 
       <Section className="pt-8">
         <Container>
-          <ExperienceTimeline items={experience} />
+          <ExperienceTimeline
+            items={experience}
+            skillBadgeClasses={skillBadgeClasses}
+          />
         </Container>
       </Section>
     </div>

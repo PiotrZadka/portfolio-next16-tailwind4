@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ConsoleNav } from "@/components/layout/ConsoleNav";
 import { Footer } from "@/components/layout/Footer";
+import { sanityFetch } from "../../sanity/lib/client";
+import { Profile } from "@/types";
 import "./globals.css";
 
 const inter = Inter({
@@ -73,11 +75,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+async function getProfile() {
+  const query = `*[_type == "profile"][0] {
+    email,
+    social
+  }`;
+  return await sanityFetch<Partial<Profile>>({ query });
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const profile = await getProfile();
+
   return (
     <html
       lang="en"
@@ -87,7 +99,7 @@ export default function RootLayout({
         <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
         <ConsoleNav />
         <main className="flex-1 relative z-10 pt-14">{children}</main>
-        <Footer />
+        <Footer profile={profile} />
       </body>
     </html>
   );

@@ -63,5 +63,52 @@ export const profile = defineType({
       type: "file",
       description: "Upload your CV/Resume directly to Sanity",
     }),
+    defineField({
+      name: "skillCategories",
+      title: "Skill Categories",
+      type: "array",
+      description: "Categories of skills with their associated technologies",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "category",
+              title: "Category Name",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Frontend", value: "frontend" },
+                  { title: "Backend", value: "backend" },
+                  { title: "DevOps", value: "devops" },
+                  { title: "Testing", value: "testing" },
+                  { title: "Tools & AI", value: "tools" },
+                ],
+              },
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "skills",
+              title: "Skills",
+              type: "array",
+              of: [{ type: "string" }],
+              validation: (Rule) => Rule.required().min(1),
+            },
+          ],
+          preview: {
+            select: {
+              title: "category",
+              subtitle: "skills",
+            },
+            prepare(selection: any) {
+              return {
+                title: selection.title,
+                subtitle: selection.subtitle?.join(", ") || "No skills",
+              };
+            },
+          },
+        },
+      ],
+    }),
   ],
 });

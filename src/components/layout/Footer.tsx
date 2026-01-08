@@ -1,8 +1,18 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
-export function Footer() {
+import { Profile } from "@/types";
+
+interface FooterProps {
+  profile?: Partial<Profile>;
+}
+
+export function Footer({ profile }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const email = profile?.email || "piotr.zadka@gmail.com";
+  const github = profile?.social?.github || "https://github.com/piotrzadka";
+  const linkedin =
+    profile?.social?.linkedin || "https://www.linkedin.com/in/piotr-zadka/";
 
   return (
     <footer className="border-t border-border/40 bg-background py-8 transition-colors duration-300">
@@ -14,7 +24,7 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <Link
-              href="https://github.com/piotrzadka"
+              href={github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -22,7 +32,7 @@ export function Footer() {
               GitHub
             </Link>
             <Link
-              href="https://www.linkedin.com/in/piotr-zadka/"
+              href={linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -30,7 +40,7 @@ export function Footer() {
               LinkedIn
             </Link>
             <Link
-              href="mailto:piotr.zadka@gmail.com"
+              href={`mailto:${email}`}
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               Email

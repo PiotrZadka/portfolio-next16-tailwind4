@@ -5,12 +5,12 @@ import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { profile } from "@/data/profile";
 import { sanityFetch } from "../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Profile, Experience, CaseStudy } from "@/types";
+import { getSkillCategories, getSkillBadgeClasses } from "@/lib/skills";
 
 interface ProfileData extends Partial<Profile> {
   resumeFile?: string;
@@ -62,11 +62,17 @@ export default async function Home() {
   const { profileData, experience, projects } = await getData(preview);
   const resumeUrl = profileData?.resumeFile || profileData?.resume;
 
+  const allTech = Array.from(
+    new Set(experience.flatMap((exp) => exp.technologies))
+  );
+  const skillBadgeClasses = await getSkillBadgeClasses(allTech);
+  const categories = await getSkillCategories();
+
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
-        name={profileData?.name || profile.name}
-        tagline={profileData?.tagline || profile.tagline}
+        name={profileData?.name || ""}
+        tagline={profileData?.tagline || ""}
         resume={resumeUrl}
       />
 
@@ -88,7 +94,10 @@ export default async function Home() {
             </Link>
           </div>
 
-          <ExperienceTimeline items={experience} />
+          <ExperienceTimeline
+            items={experience}
+            skillBadgeClasses={skillBadgeClasses}
+          />
 
           <div className="mt-8 md:hidden text-center">
             <Link href="/experience">
@@ -120,7 +129,11 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project: any) => (
-              <CaseStudyCard key={project.id} project={project} />
+              <CaseStudyCard
+                key={project.id}
+                project={project}
+                categories={categories}
+              />
             ))}
           </div>
 
@@ -135,8 +148,8 @@ export default async function Home() {
       </Section>
 
       <ContactSection
-        email={profileData?.email || profile.email}
-        social={profileData?.social || profile.social}
+        email={profileData?.email || ""}
+        social={profileData?.social || { github: "", linkedin: "" }}
       />
     </div>
   );

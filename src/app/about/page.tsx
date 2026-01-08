@@ -2,7 +2,6 @@ import { AboutSection } from "@/components/layout/AboutSection";
 import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { profile } from "@/data/profile";
 import { sanityFetch } from "../../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
@@ -42,8 +41,11 @@ export default async function AboutPage() {
   const profileData = await getProfileData(preview);
   const resumeUrl = profileData?.resumeFile || profileData?.resume;
 
-  const mergedProfile = {
-    ...profile,
+  if (!profileData) {
+    return null; // Or some error state
+  }
+
+  const profile = {
     ...profileData,
     resume: resumeUrl,
   };
@@ -61,7 +63,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <AboutSection profile={mergedProfile} />
+      <AboutSection profile={profile} />
 
       <ContactSection email={profile.email} social={profile.social} />
     </div>

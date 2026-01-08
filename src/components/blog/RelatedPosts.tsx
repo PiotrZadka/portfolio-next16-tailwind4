@@ -2,7 +2,11 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { cn, calculateReadingTime } from "@/lib/utils";
-import { getSkillBadgeClassName } from "@/lib/skills";
+import {
+  getBadgeClassName,
+  getSkillCategories,
+  resolveSkillCategory,
+} from "@/lib/skills";
 import { BlogPost } from "@/types";
 
 interface RelatedPostsProps {
@@ -10,7 +14,7 @@ interface RelatedPostsProps {
   currentSlug: string;
 }
 
-export function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
+export async function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
   // Filter out current post and limit to 3
   const relatedPosts = posts
     .filter((post) => post.slug !== currentSlug)
@@ -19,6 +23,8 @@ export function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
   if (relatedPosts.length === 0) {
     return null;
   }
+
+  const categories = await getSkillCategories();
 
   return (
     <section className="py-12 border-t border-border">
@@ -51,18 +57,21 @@ export function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
 
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {post.tags.slice(0, 2).map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="none"
-                        className={cn(
-                          "text-xs py-0.5 px-2",
-                          getSkillBadgeClassName(tag)
-                        )}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
+                    {post.tags.slice(0, 2).map((tag) => {
+                      resolveSkillCategory(tag, categories);
+                      return (
+                        <Badge
+                          key={tag}
+                          variant="none"
+                          className={cn(
+                            "text-xs py-0.5 px-2",
+                            getBadgeClassName()
+                          )}
+                        >
+                          {tag}
+                        </Badge>
+                      );
+                    })}
                   </div>
                 )}
               </div>
