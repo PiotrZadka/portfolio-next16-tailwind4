@@ -26,21 +26,18 @@ export default async function ProjectsPage() {
 
   return (
     <div className="flex flex-col">
-      <Section className="pb-8 pt-24">
+      <Section className="pt-24 pb-16">
         <Container>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-            Projects
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            A collection of projects that showcase my technical skills,
-            problem-solving abilities, and passion for building high-quality
-            software.
-          </p>
-        </Container>
-      </Section>
-
-      <Section className="pt-8">
-        <Container>
+          <div className="mb-12">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
+              Projects
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              A collection of projects that showcase my technical skills,
+              problem-solving abilities, and passion for building high-quality
+              software.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project: any) => (
               <CaseStudyCard key={project.id} project={project} />
