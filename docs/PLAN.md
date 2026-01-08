@@ -248,4 +248,4 @@ Initial posts to establish authority and voice:
 
 ---
 
-_Last Updated: 2026-01-05_
+_Last Updated: 2026-01-08_
