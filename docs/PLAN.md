@@ -234,6 +234,15 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 - [x] Fix production build issues by forcing dynamic rendering for Sanity-dependent pages
 - [x] Verify all pages load correctly with new data structure
 
+### Phase 13: Content & Schema Refinement (Complete)
+
+- [x] Consolidate contact info into `contact` document (remove from `profile`)
+- [x] Merge Hero section back into `profile` document (simplify schema)
+- [x] Update Tech Stack skills in Sanity (add CI/CD, Observability, remove AWS/Azure)
+- [x] Move contact text to Sanity for editability
+- [x] Cleanup unused scripts and legacy data files (`src/data`, `scripts/`)
+- [x] Fix stale data issues in dev mode by clearing drafts
+
 ---
 
 ## 7. Content Strategy (Blog)
