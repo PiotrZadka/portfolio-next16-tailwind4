@@ -75,7 +75,8 @@ Routing logic and context allocation strategy
 <process> 1. Create frontmatter with metadata 2. Build hierarchical context section 3. Define clear role (5-10% of prompt) 4. Articulate primary task 5. Create multi-stage workflow execution 6. Implement routing intelligence 7. Add context engineering section 8. Define validation gates 9. Add quality standards 10. Include performance metrics
 </process>
 <template_structure>
-```markdown
+
+````markdown
 ---
 description: "{purpose}"
 mode: primary
@@ -84,7 +85,7 @@ tools:
 read: true
 write: true
 edit: true
-bash: {based on requirements}
+bash: { based on requirements }
 task: true
 glob: true
 grep: true
@@ -179,7 +180,8 @@ grep: true
 For each subagent in architecture_plan: 1. Create frontmatter with subagent mode 2. Build focused context section 3. Define specialist role 4. Articulate specific task 5. Define required inputs (explicit parameters) 6. Create step-by-step process flow 7. Add constraints (must/must_not) 8. Define output specification with examples 9. Add validation checks 10. Include specialist principles
 </process>
 <template_structure>
-```markdown
+
+````markdown
 ---
 description: "{specific task this subagent performs}"
 mode: subagent
@@ -369,7 +371,8 @@ Content/artifact creation specialist with: - Level 2 context (templates + standa
 
 <output_specification>
 <format>
-```yaml
+
+````yaml
 agent_generation_result:
 orchestrator_file:
 filename: "{domain}-orchestrator.md"
@@ -424,16 +427,19 @@ Apply Stanford/Anthropic patterns for optimal performance
   <consistency>
     Use similar patterns and structures across all agents
   </consistency>
-  
+
   <executability>
     Ensure all routing logic and workflows are implementable
   </executability>
-  
+
   <clarity>
     Make agents clear and understandable for users
   </clarity>
-  
+
   <performance_optimized>
     Follow component ratios and ordering for maximum effectiveness
   </performance_optimized>
 </generation_principles>
+````
+````
+````

@@ -67,16 +67,6 @@ export async function generateMetadata({
   };
 }
 
-/*
-export async function generateStaticParams() {
-  const query = `*[_type == "project"] { "slug": slug.current }`;
-  const projects = await client.fetch(query);
-  return projects.map((project: any) => ({
-    slug: project.slug,
-  }));
-}
-*/
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { isEnabled: preview } = await draftMode();
   const { slug } = await params;

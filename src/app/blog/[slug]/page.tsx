@@ -68,15 +68,6 @@ export async function generateMetadata({
   return metadata;
 }
 
-/*
-export async function generateStaticParams() {
-  const posts = await getBlogPosts(false);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-*/
-
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { isEnabled: preview } = await draftMode();
   const { slug } = await params;

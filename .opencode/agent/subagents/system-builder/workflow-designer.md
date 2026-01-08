@@ -93,8 +93,8 @@ Available context files for dependency mapping
 <process> 1. Create markdown file for each workflow 2. Include all stages with details 3. Document context dependencies 4. Add examples and guidance 5. Include success metrics
 </process>
 <template>
-```markdown # {Workflow Name}
 
+````markdown # {Workflow Name}
       ## Overview
       {What this workflow accomplishes and when to use it}
 
@@ -201,7 +201,8 @@ Multi-agent coordination: 1. Analyze and plan 2. Coordinate parallel tasks 3. In
 
 <output_specification>
 <format>
-```yaml
+
+````yaml
 workflow_design_result:
 workflow_files: - filename: "{workflow-1}.md"
 content: |
@@ -231,3 +232,5 @@ complexity: "moderate"
 <post_execution> - All workflows have clear stages - Context dependencies documented - Success criteria defined - Selection logic provided
 </post_execution>
 </validation_checks>
+````
+````
