@@ -1,8 +1,22 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
-export function Footer() {
+interface FooterProps {
+  contact?: {
+    email?: string;
+    social?: {
+      github?: string;
+      linkedin?: string;
+    };
+  };
+}
+
+export function Footer({ contact }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const email = contact?.email || "piotr.zadka@gmail.com";
+  const github = contact?.social?.github || "https://github.com/piotrzadka";
+  const linkedin =
+    contact?.social?.linkedin || "https://www.linkedin.com/in/piotr-zadka/";
 
   return (
     <footer className="border-t border-border/40 bg-background py-8 transition-colors duration-300">
@@ -13,28 +27,34 @@ export function Footer() {
           </p>
 
           <div className="flex items-center gap-6">
-            <Link
-              href="https://github.com/piotrzadka"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              GitHub
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/piotr-zadka/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              LinkedIn
-            </Link>
-            <Link
-              href="mailto:piotr.zadka@gmail.com"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Email
-            </Link>
+            {github && (
+              <Link
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                GitHub
+              </Link>
+            )}
+            {linkedin && (
+              <Link
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                LinkedIn
+              </Link>
+            )}
+            {email && (
+              <Link
+                href={`mailto:${email}`}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Email
+              </Link>
+            )}
           </div>
         </div>
       </Container>

@@ -1,3 +1,8 @@
+export interface SocialLinks {
+  github: string;
+  linkedin: string;
+}
+
 export interface Profile {
   name: string;
   title: string;
@@ -5,13 +10,13 @@ export interface Profile {
   about: string;
   location: string;
   email: string;
-  social: {
-    github: string;
-    linkedin: string;
-    twitter?: string;
-  };
+  social: SocialLinks;
   resume?: string;
   skills: string[];
+  skillCategories?: Array<{
+    category: "frontend" | "backend" | "devops" | "testing" | "tools";
+    skills: string[];
+  }>;
 }
 
 export interface Experience {

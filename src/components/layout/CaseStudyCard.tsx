@@ -13,13 +13,23 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getSkillBadgeClassName } from "@/lib/skills";
+import {
+  getBadgeClassName,
+  getSkillCategories,
+  resolveSkillCategory,
+} from "@/lib/skills";
 
 interface CaseStudyCardProps {
   project: CaseStudy;
+  categories?: Array<{ category: string; skills: string[] }>;
 }
 
-export function CaseStudyCard({ project }: CaseStudyCardProps) {
+export async function CaseStudyCard({
+  project,
+  categories: providedCategories,
+}: CaseStudyCardProps) {
+  const categories = providedCategories || (await getSkillCategories());
+
   return (
     <Card className="overflow-hidden flex flex-col h-full group">
       <div className="relative h-48 w-full overflow-hidden bg-muted">
@@ -57,15 +67,18 @@ export function CaseStudyCard({ project }: CaseStudyCardProps) {
 
       <CardContent className="flex-1">
         <div className="flex flex-wrap gap-2">
-          {project.technologies?.slice(0, 4).map((tech) => (
-            <Badge
-              key={tech}
-              variant="none"
-              className={cn("text-xs", getSkillBadgeClassName(tech))}
-            >
-              {tech}
-            </Badge>
-          ))}
+          {(project.technologies?.slice(0, 4) || []).map((tech) => {
+            resolveSkillCategory(tech, categories);
+            return (
+              <Badge
+                key={tech}
+                variant="none"
+                className={cn("text-xs", getBadgeClassName())}
+              >
+                {tech}
+              </Badge>
+            );
+          })}
           {project.technologies?.length > 4 && (
             <Badge variant="outline" className="text-xs">
               +{project.technologies.length - 4}

@@ -6,12 +6,18 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getSkillBadgeClassName } from "@/lib/skills";
+import {
+  getBadgeClassName,
+  getSkillCategories,
+  resolveSkillCategory,
+} from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { CaseStudy } from "@/types";
+
+export const dynamic = "force-dynamic";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -65,6 +71,7 @@ export async function generateMetadata({
   };
 }
 
+/*
 export async function generateStaticParams() {
   const query = `*[_type == "project"] { "slug": slug.current }`;
   const projects = await client.fetch(query);
@@ -72,6 +79,7 @@ export async function generateStaticParams() {
     slug: project.slug,
   }));
 }
+*/
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { isEnabled: preview } = await draftMode();
@@ -81,6 +89,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) {
     notFound();
   }
+
+  const categories = await getSkillCategories();
 
   return (
     <div className="flex flex-col">
@@ -129,18 +139,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {project.technologies?.map((tech: string) => (
-              <Badge
-                key={tech}
-                variant="none"
-                className={cn(
-                  "text-sm py-1 px-3",
-                  getSkillBadgeClassName(tech)
-                )}
-              >
-                {tech}
-              </Badge>
-            ))}
+            {(project.technologies || []).map((tech: string) => {
+              resolveSkillCategory(tech, categories);
+              return (
+                <Badge
+                  key={tech}
+                  variant="none"
+                  className={cn("text-sm py-1 px-3", getBadgeClassName())}
+                >
+                  {tech}
+                </Badge>
+              );
+            })}
           </div>
         </Container>
       </Section>

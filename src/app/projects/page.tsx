@@ -1,10 +1,13 @@
 import { CaseStudyCard } from "@/components/layout/CaseStudyCard";
+import { getSkillCategories } from "@/lib/skills";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { sanityFetch } from "../../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
 import { CaseStudy } from "@/types";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -35,6 +38,7 @@ async function getProjects(preview: boolean) {
 export default async function ProjectsPage() {
   const { isEnabled: preview } = await draftMode();
   const projects = await getProjects(preview);
+  const categories = await getSkillCategories();
 
   return (
     <div className="flex flex-col">
@@ -55,7 +59,11 @@ export default async function ProjectsPage() {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project: any) => (
-              <CaseStudyCard key={project.id} project={project} />
+              <CaseStudyCard
+                key={project.id}
+                project={project}
+                categories={categories}
+              />
             ))}
           </div>
         </Container>

@@ -1,33 +1,43 @@
-import { Profile } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { CodeTerminal } from "@/components/ui/CodeTerminal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { getSkillBadgeClassName } from "@/lib/skills";
+import {
+  getBadgeClassName,
+  getSkillCategories,
+  resolveSkillCategory,
+} from "@/lib/skills";
 import { FileText } from "lucide-react";
 import Link from "next/link";
 
 interface AboutSectionProps {
-  profile: Profile;
+  profile: {
+    about: string;
+    location: string;
+    skills?: string[];
+    skillCategories?: Array<{
+      category: "frontend" | "backend" | "devops" | "testing" | "tools";
+      skills: string[];
+    }>;
+    resume?: string;
+  };
 }
 
-export function AboutSection({ profile }: AboutSectionProps) {
+export async function AboutSection({ profile }: AboutSectionProps) {
+  const categories = profile.skillCategories || (await getSkillCategories());
+  const displaySkills =
+    profile.skills && profile.skills.length > 0
+      ? profile.skills
+      : categories.flatMap((c) => c.skills);
+
   return (
     <section className="pb-20 pt-8">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="prose prose-lg dark:prose-invert">
-              <p>{profile.about}</p>
-              <p>
-                Based in{" "}
-                <span className="text-foreground font-medium">
-                  {profile.location}
-                </span>
-                , I specialize in building accessible, high-performance web
-                applications.
-              </p>
+              <p className="whitespace-pre-wrap">{profile.about}</p>
 
               {profile.resume && (
                 <div className="pt-2">
@@ -48,18 +58,18 @@ export function AboutSection({ profile }: AboutSectionProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
-                {profile.skills.map((skill) => (
-                  <Badge
-                    key={skill}
-                    variant="none"
-                    className={cn(
-                      "text-sm py-1 px-3",
-                      getSkillBadgeClassName(skill)
-                    )}
-                  >
-                    {skill}
-                  </Badge>
-                ))}
+                {displaySkills.map((skill) => {
+                  resolveSkillCategory(skill, categories);
+                  return (
+                    <Badge
+                      key={skill}
+                      variant="none"
+                      className={cn("text-sm py-1 px-3", getBadgeClassName())}
+                    >
+                      {skill}
+                    </Badge>
+                  );
+                })}
               </div>
             </div>
           </div>

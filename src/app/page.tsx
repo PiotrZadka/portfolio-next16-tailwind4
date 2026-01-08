@@ -5,26 +5,32 @@ import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { profile } from "@/data/profile";
-import { sanityFetch } from "../../sanity/lib/client";
+import {
+  sanityFetch,
+  client as publishedClient,
+} from "../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Profile, Experience, CaseStudy } from "@/types";
+import { Experience, CaseStudy } from "@/types";
+import { getSkillCategories, getSkillBadgeClasses } from "@/lib/skills";
 
-interface ProfileData extends Partial<Profile> {
-  resumeFile?: string;
-}
-
+export const dynamic = "force-dynamic";
 async function getData(preview: boolean) {
   const profileQuery = `*[_type == "profile"][0] {
     name,
-    title,
-    tagline,
-    resume,
-    "resumeFile": resumeFile.asset->url,
+    tagline
+  }`;
+
+  const contactQuery = `*[_type == "contact"][0] {
     email,
-    social
+    social,
+    text
+  }`;
+
+  const aboutQuery = `*[_type == "about"][0] {
+    resume,
+    "resumeFile": resumeFile.asset->url
   }`;
 
   const experienceQuery = `*[_type == "experience"] | order(order asc) [0...2] {
@@ -48,26 +54,49 @@ async function getData(preview: boolean) {
     links
   }`;
 
-  const [profileData, experience, projects] = await Promise.all([
-    sanityFetch<ProfileData>({ query: profileQuery, preview }),
+  // Fetch profile data (hero)
+  let profileData = await sanityFetch<any>({ query: profileQuery, preview });
+  if (!profileData) {
+    profileData = await publishedClient.fetch<any>(profileQuery);
+  }
+
+  // Fetch contact data
+  let contactData = await sanityFetch<any>({ query: contactQuery, preview });
+  if (!contactData) {
+    contactData = await publishedClient.fetch<any>(contactQuery);
+  }
+
+  // Fetch about data for resume
+  let aboutData = await sanityFetch<any>({ query: aboutQuery, preview });
+  if (!aboutData) {
+    aboutData = await publishedClient.fetch<any>(aboutQuery);
+  }
+
+  const [experience, projects] = await Promise.all([
     sanityFetch<Experience[]>({ query: experienceQuery, preview }),
     sanityFetch<CaseStudy[]>({ query: projectsQuery, preview }),
   ]);
 
-  return { profileData, experience, projects };
+  return { profileData, contactData, aboutData, experience, projects };
 }
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
-  const { profileData, experience, projects } = await getData(preview);
-  const resumeUrl = profileData?.resumeFile || profileData?.resume;
+  const { profileData, contactData, aboutData, experience, projects } =
+    await getData(preview);
+
+  const allTech = Array.from(
+    new Set(experience.flatMap((exp) => exp.technologies))
+  );
+  const skillBadgeClasses = await getSkillBadgeClasses(allTech);
+  const categories = await getSkillCategories();
 
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
-        name={profileData?.name || profile.name}
-        tagline={profileData?.tagline || profile.tagline}
-        resume={resumeUrl}
+        name={profileData?.name || "Piotr Zadka"}
+        tagline={profileData?.tagline || ""}
+        resume={aboutData?.resumeFile || aboutData?.resume}
       />
 
       <Section className="bg-muted/50">
@@ -88,7 +117,10 @@ export default async function Home() {
             </Link>
           </div>
 
-          <ExperienceTimeline items={experience} />
+          <ExperienceTimeline
+            items={experience}
+            skillBadgeClasses={skillBadgeClasses}
+          />
 
           <div className="mt-8 md:hidden text-center">
             <Link href="/experience">
@@ -120,7 +152,11 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project: any) => (
-              <CaseStudyCard key={project.id} project={project} />
+              <CaseStudyCard
+                key={project.id}
+                project={project}
+                categories={categories}
+              />
             ))}
           </div>
 
@@ -135,8 +171,9 @@ export default async function Home() {
       </Section>
 
       <ContactSection
-        email={profileData?.email || profile.email}
-        social={profileData?.social || profile.social}
+        email={contactData?.email || ""}
+        social={contactData?.social || { github: "", linkedin: "" }}
+        text={contactData?.text}
       />
     </div>
   );

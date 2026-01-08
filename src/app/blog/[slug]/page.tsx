@@ -5,7 +5,11 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PortableText } from "@portabletext/react";
 import { cn, calculateReadingTime } from "@/lib/utils";
-import { getSkillBadgeClassName } from "@/lib/skills";
+import {
+  getBadgeClassName,
+  getSkillCategories,
+  resolveSkillCategory,
+} from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -13,6 +17,8 @@ import { Metadata } from "next";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
 import { ShareButtons } from "@/components/blog/ShareButtons";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
+
+export const dynamic = "force-dynamic";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -66,12 +72,14 @@ export async function generateMetadata({
   return metadata;
 }
 
+/*
 export async function generateStaticParams() {
   const posts = await getBlogPosts(false);
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
+*/
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { isEnabled: preview } = await draftMode();
@@ -85,6 +93,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const categories = await getSkillCategories();
   const postUrl = `https://piotrzadka.dev/blog/${post.slug}`;
 
   return (
@@ -116,18 +125,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <p className="text-xl text-muted-foreground mb-8">{post.excerpt}</p>
 
             <div className="flex flex-wrap gap-2">
-              {post.tags?.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="none"
-                  className={cn(
-                    "text-sm py-1 px-3",
-                    getSkillBadgeClassName(tag)
-                  )}
-                >
-                  {tag}
-                </Badge>
-              ))}
+              {(post.tags || []).map((tag) => {
+                resolveSkillCategory(tag, categories);
+                return (
+                  <Badge
+                    key={tag}
+                    variant="none"
+                    className={cn("text-sm py-1 px-3", getBadgeClassName())}
+                  >
+                    {tag}
+                  </Badge>
+                );
+              })}
             </div>
           </Container>
         </Section>
@@ -140,7 +149,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Share buttons */}
             <div className="mt-12">
-              <ShareButtons title={post.title} url={postUrl} />
+              <ShareButtons url={postUrl} />
             </div>
 
             {/* Related posts */}

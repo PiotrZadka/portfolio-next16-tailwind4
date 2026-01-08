@@ -35,6 +35,7 @@ export default [
       "out/**",
       "build/**",
       ".opencode/**",
+      "scripts/**",
     ],
   },
 ];

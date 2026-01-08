@@ -2,10 +2,14 @@ import { AboutSection } from "@/components/layout/AboutSection";
 import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { profile } from "@/data/profile";
-import { sanityFetch } from "../../../sanity/lib/client";
+import {
+  sanityFetch,
+  client as publishedClient,
+} from "../../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "About",
@@ -23,29 +27,80 @@ export const metadata: Metadata = {
   },
 };
 
-async function getProfileData(preview: boolean) {
-  const query = `*[_type == "profile"][0] {
-    name,
-    title,
+async function getAboutData(preview: boolean) {
+  const aboutQuery = `*[_type == "about"][0] {
     about,
     location,
-    email,
-    social,
+    skills,
+    skillCategories,
     resume,
     "resumeFile": resumeFile.asset->url
   }`;
-  return await sanityFetch<any>({ query, preview });
+
+  try {
+    let aboutData = await sanityFetch<any>({ query: aboutQuery, preview });
+
+    if (!aboutData) {
+      aboutData = await publishedClient.fetch<any>(aboutQuery);
+    }
+
+    return aboutData;
+  } catch (error) {
+    console.error("Error fetching about data:", error);
+    return null;
+  }
+}
+
+async function getContactData(preview: boolean) {
+  const contactQuery = `*[_type == "contact"][0] {
+    email,
+    social,
+    text
+  }`;
+
+  try {
+    let contactData = await sanityFetch<any>({ query: contactQuery, preview });
+
+    if (!contactData) {
+      contactData = await publishedClient.fetch<any>(contactQuery);
+    }
+
+    return contactData;
+  } catch (error) {
+    console.error("Error fetching contact data:", error);
+    return null;
+  }
 }
 
 export default async function AboutPage() {
-  const { isEnabled: preview } = await draftMode();
-  const profileData = await getProfileData(preview);
-  const resumeUrl = profileData?.resumeFile || profileData?.resume;
+  let preview = false;
+  try {
+    const draftModeResult = await draftMode();
+    preview = draftModeResult.isEnabled;
+  } catch {
+    // draftMode() can fail during static generation
+    preview = false;
+  }
 
-  const mergedProfile = {
-    ...profile,
-    ...profileData,
-    resume: resumeUrl,
+  const aboutData = await getAboutData(preview);
+  const contactData = await getContactData(preview);
+
+  if (!aboutData) {
+    return null;
+  }
+
+  const about = {
+    about: aboutData.about,
+    location: aboutData.location,
+    skills: aboutData.skills,
+    skillCategories: aboutData.skillCategories,
+    resume: aboutData.resumeFile || aboutData.resume,
+  };
+
+  const contact = {
+    email: contactData?.email,
+    social: contactData?.social,
+    text: contactData?.text,
   };
 
   return (
@@ -61,9 +116,13 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <AboutSection profile={mergedProfile} />
+      <AboutSection profile={about} />
 
-      <ContactSection email={profile.email} social={profile.social} />
+      <ContactSection
+        email={contact.email}
+        social={contact.social}
+        text={contact.text}
+      />
     </div>
   );
 }

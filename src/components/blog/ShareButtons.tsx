@@ -5,11 +5,10 @@ import { Linkedin, Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 interface ShareButtonsProps {
-  title: string;
   url: string;
 }
 
-export function ShareButtons({ title, url }: ShareButtonsProps) {
+export function ShareButtons({ url }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
   const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;

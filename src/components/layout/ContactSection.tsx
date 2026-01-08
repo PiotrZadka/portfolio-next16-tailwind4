@@ -1,15 +1,16 @@
-import { Profile } from "@/types";
+import { SocialLinks } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 interface ContactSectionProps {
   email: string;
-  social: Profile["social"];
+  social: SocialLinks;
+  text?: string;
 }
 
-export function ContactSection({ email, social }: ContactSectionProps) {
+export function ContactSection({ email, social, text }: ContactSectionProps) {
   return (
     <section id="contact" className="py-20 bg-muted/50">
       <Container className="text-center max-w-2xl">
@@ -17,9 +18,8 @@ export function ContactSection({ email, social }: ContactSectionProps) {
           Get In Touch
         </h2>
         <p className="text-lg text-muted-foreground mb-10">
-          I'm currently open to new opportunities and collaborations. Whether
-          you have a question or just want to say hi, I'll try my best to get
-          back to you!
+          {text ||
+            "I'm always open to new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!"}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -32,33 +32,26 @@ export function ContactSection({ email, social }: ContactSectionProps) {
         </div>
 
         <div className="flex items-center justify-center gap-6">
-          <Link
-            href={social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Github className="h-6 w-6" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <Link
-            href={social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Linkedin className="h-6 w-6" />
-            <span className="sr-only">LinkedIn</span>
-          </Link>
-          {social.twitter && (
+          {social.github && (
             <Link
-              href={social.twitter}
+              href={social.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              <Twitter className="h-6 w-6" />
-              <span className="sr-only">Twitter</span>
+              <Github className="h-6 w-6" />
+              <span className="sr-only">GitHub</span>
+            </Link>
+          )}
+          {social.linkedin && (
+            <Link
+              href={social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Linkedin className="h-6 w-6" />
+              <span className="sr-only">LinkedIn</span>
             </Link>
           )}
         </div>

@@ -12,28 +12,31 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false, // Disable CDN in development for consistency
   perspective: "published",
 });
 
 // Preview client for drafts (no CDN, includes draft content)
-export const previewClient = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: false,
-  perspective: "previewDrafts",
-  token: process.env.SANITY_API_READ_TOKEN,
-});
+// Only create with token if one is provided to avoid auth errors during build
+export const previewClient = process.env.SANITY_API_READ_TOKEN
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion,
+      useCdn: false,
+      perspective: "drafts",
+      token: process.env.SANITY_API_READ_TOKEN,
+    })
+  : null;
 
 /**
  * Helper to get the appropriate client based on preview mode
- * In development, always show drafts for convenience
- * In production, only show drafts when preview mode is enabled
+ * In development, always show drafts for convenience (if token available)
+ * In production, only show drafts when preview mode is enabled (if token available)
  */
 export function getClient(preview?: boolean) {
   const isDev = process.env.NODE_ENV === "development";
-  if (preview || isDev) {
+  if ((preview || isDev) && previewClient) {
     return previewClient;
   }
   return client;
