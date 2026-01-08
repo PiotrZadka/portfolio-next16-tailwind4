@@ -27,6 +27,11 @@ async function getData(preview: boolean) {
     social
   }`;
 
+  const aboutQuery = `*[_type == "about"][0] {
+    resume,
+    "resumeFile": resumeFile.asset->url
+  }`;
+
   const experienceQuery = `*[_type == "experience"] | order(order asc) [0...2] {
     "id": _id,
     company,
@@ -60,17 +65,23 @@ async function getData(preview: boolean) {
     contactData = await publishedClient.fetch<any>(contactQuery);
   }
 
+  // Fetch about data for resume
+  let aboutData = await sanityFetch<any>({ query: aboutQuery, preview });
+  if (!aboutData) {
+    aboutData = await publishedClient.fetch<any>(aboutQuery);
+  }
+
   const [experience, projects] = await Promise.all([
     sanityFetch<Experience[]>({ query: experienceQuery, preview }),
     sanityFetch<CaseStudy[]>({ query: projectsQuery, preview }),
   ]);
 
-  return { heroData, contactData, experience, projects };
+  return { heroData, contactData, aboutData, experience, projects };
 }
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
-  const { heroData, contactData, experience, projects } =
+  const { heroData, contactData, aboutData, experience, projects } =
     await getData(preview);
 
   const allTech = Array.from(
@@ -84,7 +95,7 @@ export default async function Home() {
       <HeroSection
         name="Piotr Zadka"
         tagline={heroData?.tagline || ""}
-        resume={undefined}
+        resume={aboutData?.resumeFile || aboutData?.resume}
       />
 
       <Section className="bg-muted/50">
