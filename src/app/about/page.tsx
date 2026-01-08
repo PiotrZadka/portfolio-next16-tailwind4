@@ -9,6 +9,8 @@ import {
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
+import { DEFAULT_SKILLS, DEFAULT_SKILL_CATEGORIES } from "@/data/skills";
+
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -92,8 +94,14 @@ export default async function AboutPage() {
   const about = {
     about: aboutData.about,
     location: aboutData.location,
-    skills: aboutData.skills,
-    skillCategories: aboutData.skillCategories,
+    skills:
+      aboutData.skills && aboutData.skills.length > 0
+        ? aboutData.skills
+        : DEFAULT_SKILLS,
+    skillCategories:
+      aboutData.skillCategories && aboutData.skillCategories.length > 0
+        ? aboutData.skillCategories
+        : DEFAULT_SKILL_CATEGORIES,
     resume: aboutData.resumeFile || aboutData.resume,
   };
 

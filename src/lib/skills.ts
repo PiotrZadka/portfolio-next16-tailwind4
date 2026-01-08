@@ -2,6 +2,7 @@ import {
   sanityFetch,
   client as publishedClient,
 } from "../../sanity/lib/client";
+import { DEFAULT_SKILL_CATEGORIES } from "@/data/skills";
 
 export async function getSkillCategories() {
   const query = `*[_type == "about"][0] {
@@ -19,6 +20,11 @@ export async function getSkillCategories() {
     result = await publishedClient.fetch<{
       skillCategories: Array<{ category: string; skills: string[] }>;
     }>(query);
+  }
+
+  // Fallback to local data if Sanity has no data
+  if (!result?.skillCategories || result.skillCategories.length === 0) {
+    return DEFAULT_SKILL_CATEGORIES;
   }
 
   return result?.skillCategories || [];
