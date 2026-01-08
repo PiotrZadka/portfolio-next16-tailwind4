@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ConsoleNav } from "@/components/layout/ConsoleNav";
 import { Footer } from "@/components/layout/Footer";
-import { sanityFetch } from "../../sanity/lib/client";
+import { getContact } from "@/lib/sanity";
 import "./globals.css";
 
 const inter = Inter({
@@ -73,20 +73,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
-async function getContact() {
-  const query = `*[_type == "contact"][0] {
-    email,
-    social
-  }`;
-  return await sanityFetch<{
-    email?: string;
-    social?: {
-      github?: string;
-      linkedin?: string;
-    };
-  }>({ query });
-}
 
 export default async function RootLayout({
   children,

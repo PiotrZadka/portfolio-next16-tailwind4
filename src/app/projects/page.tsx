@@ -1,12 +1,11 @@
 import { CaseStudyCard } from "@/components/layout/CaseStudyCard";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { sanityFetch } from "../../../sanity/lib/client";
+import { getProjects } from "@/lib/sanity";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
-import { CaseStudy } from "@/types";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -20,19 +19,6 @@ export const metadata: Metadata = {
     description: "A showcase of my technical projects and case studies.",
   },
 };
-
-async function getProjects(preview: boolean) {
-  const query = `*[_type == "project"] {
-    "id": _id,
-    title,
-    "slug": slug.current,
-    summary,
-    "coverImage": coverImage.asset->url,
-    technologies,
-    links
-  }`;
-  return await sanityFetch<CaseStudy[]>({ query, preview });
-}
 
 export default async function ProjectsPage() {
   const { isEnabled: preview } = await draftMode();

@@ -6,75 +6,27 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import {
-  sanityFetch,
-  client as publishedClient,
-} from "../../sanity/lib/client";
+  getProfile,
+  getContact,
+  getAbout,
+  getExperiences,
+  getProjects,
+} from "@/lib/sanity";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Experience, CaseStudy } from "@/types";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // Revalidate every hour
+
 async function getData(preview: boolean) {
-  const profileQuery = `*[_type == "profile"][0] {
-    name,
-    tagline
-  }`;
-
-  const contactQuery = `*[_type == "contact"][0] {
-    email,
-    social,
-    text
-  }`;
-
-  const aboutQuery = `*[_type == "about"][0] {
-    resume,
-    "resumeFile": resumeFile.asset->url
-  }`;
-
-  const experienceQuery = `*[_type == "experience"] | order(order asc) [0...2] {
-    "id": _id,
-    company,
-    role,
-    startDate,
-    endDate,
-    description,
-    impact,
-    technologies
-  }`;
-
-  const projectsQuery = `*[_type == "project"] [0...3] {
-    "id": _id,
-    title,
-    "slug": slug.current,
-    summary,
-    "coverImage": coverImage.asset->url,
-    technologies,
-    links
-  }`;
-
-  // Fetch profile data (hero)
-  let profileData = await sanityFetch<any>({ query: profileQuery, preview });
-  if (!profileData) {
-    profileData = await publishedClient.fetch<any>(profileQuery);
-  }
-
-  // Fetch contact data
-  let contactData = await sanityFetch<any>({ query: contactQuery, preview });
-  if (!contactData) {
-    contactData = await publishedClient.fetch<any>(contactQuery);
-  }
-
-  // Fetch about data for resume
-  let aboutData = await sanityFetch<any>({ query: aboutQuery, preview });
-  if (!aboutData) {
-    aboutData = await publishedClient.fetch<any>(aboutQuery);
-  }
-
-  const [experience, projects] = await Promise.all([
-    sanityFetch<Experience[]>({ query: experienceQuery, preview }),
-    sanityFetch<CaseStudy[]>({ query: projectsQuery, preview }),
-  ]);
+  const [profileData, contactData, aboutData, experience, projects] =
+    await Promise.all([
+      getProfile(preview),
+      getContact(preview),
+      getAbout(preview),
+      getExperiences(preview, 2),
+      getProjects(preview, 3),
+    ]);
 
   return { profileData, contactData, aboutData, experience, projects };
 }

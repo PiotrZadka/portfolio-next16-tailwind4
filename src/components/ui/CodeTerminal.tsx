@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ReactNode } from "react";
 
 const codeLines = [
@@ -184,7 +184,7 @@ function tokenize(text: string): Token[] {
 }
 
 function SyntaxHighlight({ text }: { text: string }): ReactNode {
-  const tokens = tokenize(text);
+  const tokens = useMemo(() => tokenize(text), [text]);
 
   return (
     <>

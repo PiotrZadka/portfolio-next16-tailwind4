@@ -1,12 +1,6 @@
 import { createClient, type QueryParams } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../env";
 
-if (process.env.NODE_ENV === "development") {
-  // This is a workaround for local SSL certificate issues
-  // It should NOT be used in production
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-}
-
 // Base client for production (published content only, uses CDN)
 export const client = createClient({
   projectId,
