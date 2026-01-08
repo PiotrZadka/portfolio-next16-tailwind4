@@ -68,15 +68,6 @@ export async function generateMetadata({
   return metadata;
 }
 
-/*
-export async function generateStaticParams() {
-  const posts = await getBlogPosts(false);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-*/
-
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { isEnabled: preview } = await draftMode();
   const { slug } = await params;
@@ -95,7 +86,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <ReadingProgress />
       <article className="flex flex-col">
-        <Section className="pb-8 pt-24 bg-muted/50 border-b border-border/40">
+        <Section className="pb-0 md:pb-0 lg:pb-0 pt-24 bg-muted/50 border-b border-border/40">
           <Container className="max-w-3xl">
             <Link
               href="/blog"

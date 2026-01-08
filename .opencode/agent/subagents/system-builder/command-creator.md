@@ -80,9 +80,10 @@ Example use cases for command examples
 <process> 1. Create markdown file for each command 2. Add frontmatter with agent routing 3. Document syntax and parameters 4. Include examples 5. Specify expected output
 </process>
 <template>
-```markdown
+
+````markdown
 ---
-agent: {target-agent}
+agent: { target-agent }
 description: "{What this command does}"
 ---
 
@@ -173,7 +174,8 @@ Triggers complete workflow:
 
 <output_specification>
 <format>
-```yaml
+
+````yaml
 command_creation_result:
 command_files: - filename: "{command-1}.md"
 content: |
@@ -211,8 +213,10 @@ Every command should have clear documentation and examples
   <consistent>
     Similar commands should follow similar patterns
   </consistent>
-  
+
   <discoverable>
     Command names should indicate their purpose
   </discoverable>
 </design_principles>
+````
+````

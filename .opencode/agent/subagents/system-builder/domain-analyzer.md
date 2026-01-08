@@ -271,7 +271,8 @@ concepts: string[]
 
 <output_specification>
 <format>
-```yaml
+
+````yaml
 domain_analysis:
 domain_name: string
 industry: string
@@ -324,14 +325,14 @@ complexity_score: 1-10
     ```
 
   </format>
-  
+
   <example>
     ```yaml
     domain_analysis:
       domain_name: "E-commerce Order Management"
       industry: "Retail and Online Commerce"
       complexity_score: 7
-      
+
       core_concepts:
         - name: "Order"
           description: "Customer purchase request with items, pricing, and fulfillment details"
@@ -345,7 +346,7 @@ complexity_score: 1-10
           description: "Process of validating, processing, and completing orders"
           category: "process"
           relationships: ["Order", "Inventory", "Payment", "Shipping"]
-      
+
       recommended_agents:
         - name: "order-processor"
           purpose: "Process and validate customer orders"
@@ -355,7 +356,7 @@ complexity_score: 1-10
           context_level: "Level 2"
           inputs: ["order_data", "customer_info"]
           outputs: "Validated order with status and next steps"
-        
+
         - name: "inventory-checker"
           purpose: "Check product availability and manage stock"
           specialization: "Inventory management"
@@ -364,7 +365,7 @@ complexity_score: 1-10
           context_level: "Level 1"
           inputs: ["product_ids", "quantities"]
           outputs: "Availability status with stock levels"
-      
+
       context_structure:
         domain:
           - filename: "product-catalog.md"
@@ -390,7 +391,7 @@ complexity_score: 1-10
             content_type: "Order confirmation message template"
             estimated_lines: 60
             dependencies: []
-      
+
       knowledge_graph:
         concepts: ["Order", "Customer", "Product", "Inventory", "Payment", "Shipping"]
         relationships:
@@ -408,7 +409,7 @@ complexity_score: 1-10
             concepts: ["Order", "Customer", "Payment"]
           - name: "Inventory Management"
             concepts: ["Product", "Inventory", "Shipping"]
-      
+
       recommendations:
         - priority: "high"
           recommendation: "Implement inventory-checker as Level 1 agent for efficiency"
@@ -416,7 +417,7 @@ complexity_score: 1-10
         - priority: "medium"
           recommendation: "Create separate payment-processor agent if payment logic is complex"
           rationale: "Payment processing may require specialized handling and compliance"
-      
+
       potential_challenges:
         - challenge: "High-volume order processing may require optimization"
           mitigation: "Use Level 1 context for standard orders, Level 2 only for complex cases"
@@ -455,3 +456,4 @@ Recommend Level 1 context for agents whenever possible
 Consider how the system will scale with more use cases
 </scalability_aware>
 </analysis_principles>
+````
