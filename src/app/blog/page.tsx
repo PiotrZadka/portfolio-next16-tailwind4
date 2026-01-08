@@ -12,11 +12,7 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { ExternalLink } from "lucide-react";
 import { cn, calculateReadingTime } from "@/lib/utils";
-import {
-  getBadgeClassName,
-  getSkillCategories,
-  resolveSkillCategory,
-} from "@/lib/skills";
+import { getBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { Metadata } from "next";
@@ -42,7 +38,6 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const { isEnabled: preview } = await draftMode();
   const posts = await getBlogPosts(preview);
-  const categories = await getSkillCategories();
 
   return (
     <div className="flex flex-col">
@@ -103,7 +98,6 @@ export default async function BlogPage() {
                     <CardFooter>
                       <div className="flex flex-wrap gap-2">
                         {(post.tags || []).map((tag) => {
-                          resolveSkillCategory(tag, categories);
                           return (
                             <Badge
                               key={tag}

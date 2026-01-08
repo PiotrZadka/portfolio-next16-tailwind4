@@ -1,16 +1,12 @@
 import { notFound } from "next/navigation";
-import { client, sanityFetch } from "../../../../sanity/lib/client";
+import { sanityFetch } from "../../../../sanity/lib/client";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  getBadgeClassName,
-  getSkillCategories,
-  resolveSkillCategory,
-} from "@/lib/skills";
+import { getBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
@@ -90,8 +86,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const categories = await getSkillCategories();
-
   return (
     <div className="flex flex-col">
       <Section className="pb-8 pt-24 bg-muted/50 border-b border-border/40">
@@ -140,7 +134,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
           <div className="flex flex-wrap gap-2">
             {(project.technologies || []).map((tech: string) => {
-              resolveSkillCategory(tech, categories);
               return (
                 <Badge
                   key={tech}

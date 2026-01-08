@@ -2,11 +2,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { cn, calculateReadingTime } from "@/lib/utils";
-import {
-  getBadgeClassName,
-  getSkillCategories,
-  resolveSkillCategory,
-} from "@/lib/skills";
+import { getBadgeClassName } from "@/lib/skills";
 import { BlogPost } from "@/types";
 
 interface RelatedPostsProps {
@@ -23,8 +19,6 @@ export async function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
   if (relatedPosts.length === 0) {
     return null;
   }
-
-  const categories = await getSkillCategories();
 
   return (
     <section className="py-12 border-t border-border">
@@ -58,7 +52,6 @@ export async function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) {
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-auto">
                     {post.tags.slice(0, 2).map((tag) => {
-                      resolveSkillCategory(tag, categories);
                       return (
                         <Badge
                           key={tag}

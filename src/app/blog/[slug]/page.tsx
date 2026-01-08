@@ -5,11 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { PortableText } from "@portabletext/react";
 import { cn, calculateReadingTime } from "@/lib/utils";
-import {
-  getBadgeClassName,
-  getSkillCategories,
-  resolveSkillCategory,
-} from "@/lib/skills";
+import { getBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -93,7 +89,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const categories = await getSkillCategories();
   const postUrl = `https://piotrzadka.dev/blog/${post.slug}`;
 
   return (
@@ -126,7 +121,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <div className="flex flex-wrap gap-2">
               {(post.tags || []).map((tag) => {
-                resolveSkillCategory(tag, categories);
                 return (
                   <Badge
                     key={tag}
