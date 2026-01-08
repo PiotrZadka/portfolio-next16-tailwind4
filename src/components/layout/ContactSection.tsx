@@ -1,4 +1,4 @@
-import { Profile } from "@/types";
+import { SocialLinks } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Mail, Github, Linkedin, Twitter } from "lucide-react";
@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface ContactSectionProps {
   email: string;
-  social: Profile["social"];
+  social: SocialLinks;
 }
 
 export function ContactSection({ email, social }: ContactSectionProps) {

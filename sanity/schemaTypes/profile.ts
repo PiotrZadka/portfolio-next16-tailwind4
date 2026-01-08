@@ -11,20 +11,5 @@ export const profile = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "email",
-      title: "Email",
-      type: "string",
-    }),
-    defineField({
-      name: "social",
-      title: "Social Links",
-      type: "object",
-      fields: [
-        { name: "github", title: "GitHub URL", type: "url" },
-        { name: "linkedin", title: "LinkedIn URL", type: "url" },
-        { name: "twitter", title: "Twitter/X URL", type: "url" },
-      ],
-    }),
   ],
 });

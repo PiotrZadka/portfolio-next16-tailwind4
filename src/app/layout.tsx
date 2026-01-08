@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { ConsoleNav } from "@/components/layout/ConsoleNav";
 import { Footer } from "@/components/layout/Footer";
 import { sanityFetch } from "../../sanity/lib/client";
-import { Profile } from "@/types";
 import "./globals.css";
 
 const inter = Inter({
@@ -75,12 +74,19 @@ export const metadata: Metadata = {
   },
 };
 
-async function getProfile() {
-  const query = `*[_type == "profile"][0] {
+async function getContact() {
+  const query = `*[_type == "contact"][0] {
     email,
     social
   }`;
-  return await sanityFetch<Partial<Profile>>({ query });
+  return await sanityFetch<{
+    email?: string;
+    social?: {
+      github?: string;
+      linkedin?: string;
+      twitter?: string;
+    };
+  }>({ query });
 }
 
 export default async function RootLayout({
@@ -88,7 +94,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const profile = await getProfile();
+  const contact = await getContact();
 
   return (
     <html
@@ -99,7 +105,7 @@ export default async function RootLayout({
         <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
         <ConsoleNav />
         <main className="flex-1 relative z-10 pt-14">{children}</main>
-        <Footer profile={profile} />
+        <Footer contact={contact} />
       </body>
     </html>
   );
