@@ -33,7 +33,9 @@ export async function generateMetadata({
   }
 
   const metadata: Metadata = {
-    title: post.title,
+    title: {
+      absolute: post.title,
+    },
     description: post.excerpt,
     openGraph: {
       title: post.title,
