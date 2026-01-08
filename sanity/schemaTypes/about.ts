@@ -22,7 +22,7 @@ export const about = defineType({
       name: "skills",
       title: "Featured Skills",
       type: "array",
-      description: "List of top skills to display in the Tech Stack section",
+      description: "List of top skills to display in the Technologies section",
       of: [{ type: "string" }],
     }),
     defineField({

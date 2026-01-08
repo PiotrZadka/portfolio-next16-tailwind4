@@ -44,7 +44,7 @@ export async function AboutSection({ profile }: AboutSectionProps) {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Tech Stack</h3>
+              <h3 className="text-lg font-semibold mb-4">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {displaySkills.map((skill) => {
                   return (
