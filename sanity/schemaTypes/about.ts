@@ -17,61 +17,6 @@ export const about = defineType({
       name: "location",
       title: "Location",
       type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "skills",
-      title: "Featured Skills",
-      type: "array",
-      description: "List of featured skills to display on the about page",
-      of: [{ type: "string" }],
-    }),
-    defineField({
-      name: "skillCategories",
-      title: "Skill Categories",
-      type: "array",
-      description: "Categories of skills with their associated technologies",
-      of: [
-        {
-          type: "object",
-          fields: [
-            {
-              name: "category",
-              title: "Category Name",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Frontend", value: "frontend" },
-                  { title: "Backend", value: "backend" },
-                  { title: "DevOps", value: "devops" },
-                  { title: "Testing", value: "testing" },
-                  { title: "Tools & AI", value: "tools" },
-                ],
-              },
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: "skills",
-              title: "Skills",
-              type: "array",
-              of: [{ type: "string" }],
-              validation: (Rule) => Rule.required().min(1),
-            },
-          ],
-          preview: {
-            select: {
-              title: "category",
-              subtitle: "skills",
-            },
-            prepare(selection: any) {
-              return {
-                title: selection.title,
-                subtitle: selection.subtitle?.join(", ") || "No skills",
-              };
-            },
-          },
-        },
-      ],
     }),
     defineField({
       name: "resume",

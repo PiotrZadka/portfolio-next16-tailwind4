@@ -37,15 +37,7 @@ export async function AboutSection({ profile }: AboutSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="prose prose-lg dark:prose-invert">
-              <p>{profile.about}</p>
-              <p>
-                Based in{" "}
-                <span className="text-foreground font-medium">
-                  {profile.location}
-                </span>
-                , I specialize in building accessible, high-performance web
-                applications.
-              </p>
+              <p className="whitespace-pre-wrap">{profile.about}</p>
 
               {profile.resume && (
                 <div className="pt-2">
