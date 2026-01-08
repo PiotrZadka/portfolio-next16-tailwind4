@@ -18,7 +18,8 @@ export const dynamic = "force-dynamic";
 async function getData(preview: boolean) {
   const profileQuery = `*[_type == "profile"][0] {
     name,
-    tagline
+    tagline,
+    skills
   }`;
 
   const contactQuery = `*[_type == "contact"][0] {
