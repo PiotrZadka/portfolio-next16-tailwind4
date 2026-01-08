@@ -2,7 +2,10 @@ import { AboutSection } from "@/components/layout/AboutSection";
 import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { sanityFetch } from "../../../sanity/lib/client";
+import {
+  sanityFetch,
+  client as publishedClient,
+} from "../../../sanity/lib/client";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
@@ -35,7 +38,16 @@ async function getProfileData(preview: boolean) {
     resume,
     "resumeFile": resumeFile.asset->url
   }`;
-  return await sanityFetch<any>({ query, preview });
+
+  // Try preview/draft first, fall back to published if empty
+  let data = await sanityFetch<any>({ query, preview });
+
+  // If no skills found in draft, fetch from published
+  if (!data?.skills || data.skills.length === 0) {
+    data = await publishedClient.fetch<any>(query);
+  }
+
+  return data;
 }
 
 export default async function AboutPage() {

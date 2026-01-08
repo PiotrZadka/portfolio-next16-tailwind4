@@ -12,7 +12,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false, // Disable CDN in development for consistency
   perspective: "published",
 });
 
@@ -22,7 +22,7 @@ export const previewClient = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  perspective: "previewDrafts",
+  perspective: "drafts",
   token: process.env.SANITY_API_READ_TOKEN,
 });
 
