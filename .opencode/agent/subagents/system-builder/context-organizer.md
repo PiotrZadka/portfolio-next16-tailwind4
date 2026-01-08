@@ -54,8 +54,8 @@ Quality criteria, validation rules, error handling requirements
 <process> 1. Extract core concepts from domain_analysis 2. Group related concepts (target 50-200 lines per file) 3. Create files for: - Core concepts and definitions - Terminology and glossary - Business rules and policies - Data models and schemas 4. Document relationships and dependencies 5. Add clear examples for each concept
 </process>
 <file_structure>
-```markdown # {Concept Name}
 
+````markdown # {Concept Name}
       ## Overview
       {Brief description of this concept}
 
@@ -92,8 +92,8 @@ Quality criteria, validation rules, error handling requirements
 <process> 1. Extract workflows from use_cases 2. Document step-by-step procedures 3. Create files for: - Standard workflows - Integration patterns - Edge case handling - Escalation paths 4. Map context dependencies for each process 5. Define success criteria
 </process>
 <file_structure>
-```markdown # {Process Name}
 
+````markdown # {Process Name}
       ## Overview
       {What this process accomplishes}
 
@@ -141,8 +141,8 @@ Quality criteria, validation rules, error handling requirements
 <process> 1. Define quality criteria from standards_requirements 2. Create validation rules 3. Document error handling patterns 4. Specify compliance requirements (if applicable) 5. Add scoring systems and thresholds
 </process>
 <file_structure>
-```markdown # {Standards Type}
 
+````markdown # {Standards Type}
       ## Overview
       {What these standards ensure}
 
@@ -196,8 +196,8 @@ Quality criteria, validation rules, error handling requirements
 <process> 1. Create output format templates 2. Document common patterns 3. Provide reusable structures 4. Include concrete examples
 </process>
 <file_structure>
-```markdown # {Template Type}
 
+````markdown # {Template Type}
       ## Overview
       {What this template is for}
 
@@ -287,7 +287,8 @@ Every concept should have concrete examples
 
 <output_specification>
 <format>
-```yaml
+
+````yaml
 context_files_result:
 domain_files: - filename: "core-concepts.md"
 content: |
@@ -351,12 +352,17 @@ Domain knowledge, processes, standards, and templates are clearly separated
   <discoverability>
     File names and organization make it easy to find information
   </discoverability>
-  
+
   <maintainability>
     Small, focused files are easier to update and maintain
   </maintainability>
-  
+
   <reusability>
     Context files can be loaded selectively based on needs
   </reusability>
 </organization_principles>
+````
+````
+````
+````
+````

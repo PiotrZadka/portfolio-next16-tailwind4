@@ -40,7 +40,7 @@ export default async function ExperiencePage() {
 
   return (
     <div className="flex flex-col">
-      <Section className="pb-8 pt-24">
+      <Section className="pb-0 md:pb-0 lg:pb-0 pt-24">
         <Container>
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
             Experience

@@ -1,3 +1,4 @@
+import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { CodeTerminal } from "@/components/ui/CodeTerminal";
@@ -20,7 +21,7 @@ export async function AboutSection({ profile }: AboutSectionProps) {
   const displaySkills = profile.skills || [];
 
   return (
-    <section className="pb-20 pt-8">
+    <Section className="pt-8">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -66,6 +67,6 @@ export async function AboutSection({ profile }: AboutSectionProps) {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

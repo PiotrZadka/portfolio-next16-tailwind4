@@ -18,7 +18,8 @@ export const dynamic = "force-dynamic";
 async function getData(preview: boolean) {
   const profileQuery = `*[_type == "profile"][0] {
     name,
-    tagline
+    tagline,
+    skills
   }`;
 
   const contactQuery = `*[_type == "contact"][0] {
@@ -92,7 +93,7 @@ export default async function Home() {
         resume={aboutData?.resumeFile || aboutData?.resume}
       />
 
-      <Section className="bg-muted/50">
+      <Section className="bg-muted/50 pt-8 md:pt-12 lg:pt-16">
         <Container>
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>

@@ -67,16 +67,6 @@ export async function generateMetadata({
   };
 }
 
-/*
-export async function generateStaticParams() {
-  const query = `*[_type == "project"] { "slug": slug.current }`;
-  const projects = await client.fetch(query);
-  return projects.map((project: any) => ({
-    slug: project.slug,
-  }));
-}
-*/
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { isEnabled: preview } = await draftMode();
   const { slug } = await params;
@@ -88,7 +78,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="flex flex-col">
-      <Section className="pb-8 pt-24 bg-muted/50 border-b border-border/40">
+      <Section className="pb-0 md:pb-0 lg:pb-0 pt-24 bg-muted/50 border-b border-border/40">
         <Container>
           <Link
             href="/projects"

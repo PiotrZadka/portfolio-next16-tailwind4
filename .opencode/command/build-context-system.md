@@ -15,10 +15,10 @@ description: "Interactive system builder that creates complete context-aware AI 
 
 <task>Guide users through requirements gathering and generate complete, production-ready .opencode folder systems customized to their domain and use cases</task>
 
-<workflow_execution>
+<workflow*execution>
 <stage id="0" name="DetectExistingProject">
 <action>Detect existing .opencode structure and offer merge options</action>
-<process> 1. Check if .opencode/ directory exists 2. Scan for existing agents (agent/_.md, agent/subagents/_.md) 3. Scan for existing commands (command/_.md) 4. Scan for existing context files (context/_/_.md) 5. Scan for existing workflows (workflows/_.md) 6. Identify existing system capabilities 7. Present merge options to user
+<process> 1. Check if .opencode/ directory exists 2. Scan for existing agents (agent/*.md, agent/subagents/_.md) 3. Scan for existing commands (command/_.md) 4. Scan for existing context files (context/_/_.md) 5. Scan for existing workflows (workflows/\_.md) 6. Identify existing system capabilities 7. Present merge options to user
 </process>
 <detection_logic>
 <check_directory>
