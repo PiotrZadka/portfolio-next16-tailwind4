@@ -215,6 +215,15 @@ Sanity CMS will manage all frequently-updated content, enabling edits without co
 - [x] Verify live site functionality
 - [x] Set up Sanity production dataset (if using separate dev/prod)
 
+### Phase 11: Sanity Source of Truth - Skills Migration (Complete)
+
+- [x] Migrate skills data from hardcoded `src/lib/skills.ts` to Sanity CMS
+- [x] Create migration script (`scripts/migrate-skills-to-sanity.js`) to populate Sanity profile
+- [x] Populate 8 featured skills and 5 skill categories to Sanity
+- [x] Fix About page Tech Stack section (was showing empty due to missing Sanity data)
+- [x] Verify skills render on About page with CSS styling
+- [x] Keep `skillCategories` and `skills` fields in Sanity as source of truth
+
 ---
 
 ## 7. Content Strategy (Blog)
