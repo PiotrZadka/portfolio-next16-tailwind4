@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { ConsoleNav } from "@/components/layout/ConsoleNav";
 import { Footer } from "@/components/layout/Footer";
 import { getContact } from "@/lib/sanity";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({
@@ -91,6 +93,8 @@ export default async function RootLayout({
         <ConsoleNav />
         <main className="flex-1 relative z-10 pt-14">{children}</main>
         <Footer contact={contact} />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
