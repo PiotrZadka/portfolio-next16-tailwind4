@@ -17,7 +17,7 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { Metadata } from "next";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog",

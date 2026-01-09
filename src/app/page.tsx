@@ -16,7 +16,7 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export const revalidate = 3600; // Revalidate every hour
+export const dynamic = "force-dynamic";
 
 async function getData(preview: boolean) {
   const [profileData, contactData, aboutData, experience, projects] =
