@@ -78,8 +78,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="flex flex-col">
-      <Section className="pb-0 md:pb-0 lg:pb-0 pt-24 bg-muted/50 border-b border-border/40">
-        <Container>
+      <Section className="pb-0 md:pb-0 lg:pb-0 pt-12 md:pt-24 bg-muted/50 border-b border-border/40">
+        <Container className="pb-12">
           <Link
             href="/projects"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"

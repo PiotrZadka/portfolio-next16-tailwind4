@@ -41,7 +41,7 @@ export default async function BlogPage() {
 
   return (
     <div className="flex flex-col">
-      <Section className="pt-24 pb-16">
+      <Section className="pt-12 md:pt-24 pb-16">
         <Container>
           <div className="mb-12">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">

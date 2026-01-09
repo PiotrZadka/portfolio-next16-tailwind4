@@ -86,8 +86,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <ReadingProgress />
       <article className="flex flex-col">
-        <Section className="pb-0 md:pb-0 lg:pb-0 pt-24 bg-muted/50 border-b border-border/40">
-          <Container className="max-w-3xl">
+        <Section className="pb-0 md:pb-0 lg:pb-0 pt-12 md:pt-24 bg-muted/50 border-b border-border/40">
+          <Container className="max-w-3xl pb-12">
             <Link
               href="/blog"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"

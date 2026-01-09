@@ -66,7 +66,7 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="mt-6 h-20 sm:h-24 md:h-28 max-w-3xl"
+          className="mt-6 h-16 sm:h-24 md:h-28 max-w-3xl"
         >
           <p className="text-xl text-muted-foreground sm:text-2xl md:text-3xl font-mono">
             {displayedText}
@@ -78,7 +78,7 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.5 }}
-          className="mt-10 flex flex-col gap-4 sm:flex-row"
+          className="mt-16 flex flex-col gap-4 sm:flex-row"
         >
           <Link href="/projects">
             <Button size="lg" className="w-full sm:w-auto">
