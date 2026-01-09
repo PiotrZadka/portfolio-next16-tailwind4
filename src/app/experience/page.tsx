@@ -5,7 +5,7 @@ import { getExperiences } from "@/lib/sanity";
 import { draftMode } from "next/headers";
 import { Metadata } from "next";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Experience",
