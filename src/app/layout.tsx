@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 export const dynamic = "force-dynamic";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { ConsoleNav } from "@/components/layout/ConsoleNav";
+
 import { Footer } from "@/components/layout/Footer";
 import { getContact } from "@/lib/sanity";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -92,7 +92,6 @@ export default async function RootLayout({
     >
       <body className="antialiased font-sans bg-background text-foreground flex flex-col min-h-screen">
         <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
-        <ConsoleNav />
         <main className="flex-1 relative z-10 pt-14">{children}</main>
         <Footer contact={contact} />
         <SpeedInsights />
