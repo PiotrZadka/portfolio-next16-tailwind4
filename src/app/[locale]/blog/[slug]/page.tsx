@@ -29,7 +29,7 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
-  const post = await getBlogPost(slug, false);
+  const post = await getBlogPost(slug, locale, false);
 
   if (!post) {
     return {
@@ -62,8 +62,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { isEnabled: preview } = await draftMode();
   const t = await getTranslations({ locale, namespace: "blog" });
   const [post, allPosts] = await Promise.all([
-    getBlogPost(slug, preview),
-    getBlogPosts(preview),
+    getBlogPost(slug, locale, preview),
+    getBlogPosts(locale, preview),
   ]);
 
   if (!post) {

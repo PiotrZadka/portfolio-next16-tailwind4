@@ -17,8 +17,8 @@ export default async function Image({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const post = await getBlogPost(slug, false);
+  const { locale, slug } = await params;
+  const post = await getBlogPost(slug, locale, false);
 
   const title = post?.title || "Blog Post";
   const tags = post?.tags?.slice(0, 3) || [];

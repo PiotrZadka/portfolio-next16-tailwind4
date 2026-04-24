@@ -50,7 +50,7 @@ export default async function BlogPage({
   const { locale } = await params;
   const { isEnabled: preview } = await draftMode();
   const t = await getTranslations({ locale, namespace: "blog" });
-  const posts = await getBlogPosts(preview);
+  const posts = await getBlogPosts(locale, preview);
 
   return (
     <div className="flex flex-col">
