@@ -2,9 +2,6 @@ import type { Metadata, Viewport } from "next";
 
 export const dynamic = "force-dynamic";
 import { Inter, JetBrains_Mono } from "next/font/google";
-
-import { Footer } from "@/components/layout/Footer";
-import { getContact } from "@/lib/sanity";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
@@ -83,8 +80,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const contact = await getContact("en");
-
   return (
     <html
       lang="en"
@@ -93,7 +88,6 @@ export default async function RootLayout({
       <body className="antialiased font-sans bg-background text-foreground flex flex-col min-h-screen">
         <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
         <main className="flex-1 relative z-10 pt-14">{children}</main>
-        <Footer contact={contact} />
         <SpeedInsights />
         <Analytics />
       </body>
