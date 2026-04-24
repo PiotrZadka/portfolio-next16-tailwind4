@@ -2,10 +2,8 @@ import { ImageResponse } from "next/og";
 import { getBlogPost } from "@/lib/blog";
 import { calculateReadingTime } from "@/lib/utils";
 
-// Route segment config
 export const runtime = "edge";
 
-// Image metadata
 export const alt = "Blog Post | Piotr Zadka";
 export const size = {
   width: 1200,
@@ -14,11 +12,10 @@ export const size = {
 
 export const contentType = "image/png";
 
-// Image generation
 export default async function Image({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
   const post = await getBlogPost(slug, false);
@@ -57,7 +54,6 @@ export default async function Image({
           boxShadow: "0 20px 50px rgba(0,0,0,0.5)",
         }}
       >
-        {/* Blog badge */}
         <div
           style={{
             display: "flex",
@@ -85,7 +81,6 @@ export default async function Image({
           />
         </div>
 
-        {/* Title */}
         <div
           style={{
             display: "flex",
@@ -107,7 +102,6 @@ export default async function Image({
             {title}
           </div>
 
-          {/* Tags */}
           {tags.length > 0 && (
             <div
               style={{
@@ -135,7 +129,6 @@ export default async function Image({
           )}
         </div>
 
-        {/* Author info */}
         <div
           style={{
             display: "flex",
@@ -193,7 +186,6 @@ export default async function Image({
             </div>
           </div>
 
-          {/* Read time badge */}
           {(post?.readTime || post?.content) && (
             <div
               style={{

@@ -38,5 +38,18 @@ export const about = defineType({
       type: "file",
       description: "Upload your CV/Resume directly to Sanity",
     }),
+    defineField({
+      name: "language",
+      title: "Language",
+      type: "string",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Polish", value: "pl" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "en",
+    }),
   ],
 });

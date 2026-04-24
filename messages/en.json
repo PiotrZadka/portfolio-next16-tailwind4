@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "experience": "Experience",
+    "projects": "Projects",
+    "blog": "Blog",
+    "about": "About"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "viewProjects": "View My Projects",
+    "contactMe": "Contact Me",
+    "viewCV": "View CV",
+    "fallbackName": "Piotr Zadka"
+  },
+  "homepage": {
+    "experienceHeading": "Latest Experience",
+    "experienceDesc": "My professional journey in software engineering.",
+    "viewFullTimeline": "View Full Timeline",
+    "projectsHeading": "Featured Projects",
+    "projectsDesc": "A selection of projects that demonstrate my technical expertise.",
+    "viewAllProjects": "View All Projects"
+  },
+  "about": {
+    "metaTitle": "About",
+    "metaDescription": "Learn more about my background, skills, and professional journey.",
+    "ogTitle": "About",
+    "ogDescription": "Learn more about my background, skills, and professional journey.",
+    "twitterTitle": "About",
+    "twitterDescription": "Learn more about my background, skills, and professional journey.",
+    "heading": "About Me",
+    "subtitle": "Learn more about my background, skills, and professional journey.",
+    "viewCV": "View CV",
+    "technologies": "Technologies"
+  },
+  "experience": {
+    "metaTitle": "Experience",
+    "metaDescription": "My professional journey and career timeline.",
+    "ogTitle": "Experience",
+    "ogDescription": "My professional journey and career timeline.",
+    "twitterTitle": "Experience",
+    "twitterDescription": "My professional journey and career timeline.",
+    "heading": "Experience",
+    "subtitle": "A detailed timeline of my professional career, key roles, and the impact I've delivered across various organizations."
+  },
+  "blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Technical guides, thoughts, and insights on software development.",
+    "ogTitle": "Blog",
+    "ogDescription": "Technical guides, thoughts, and insights on software development.",
+    "twitterTitle": "Blog",
+    "twitterDescription": "Technical guides, thoughts, and insights on software development.",
+    "heading": "Blog",
+    "subtitle": "Technical guides, thoughts, and insights on software development, React, Next.js, and more.",
+    "minRead": "min read",
+    "backToBlog": "Back to Blog",
+    "postNotFound": "Post Not Found"
+  },
+  "projects": {
+    "metaTitle": "Projects",
+    "metaDescription": "A showcase of my technical projects and case studies.",
+    "ogTitle": "Projects",
+    "ogDescription": "A showcase of my technical projects and case studies.",
+    "twitterTitle": "Projects",
+    "twitterDescription": "A showcase of my technical projects and case studies.",
+    "heading": "Projects",
+    "subtitle": "A collection of projects that showcase my technical skills, problem-solving abilities, and passion for building high-quality software.",
+    "backToProjects": "Back to Projects",
+    "viewSource": "View Source",
+    "liveDemo": "Live Demo",
+    "theProblem": "The Problem",
+    "theApproach": "The Approach",
+    "theResults": "The Results",
+    "projectNotFound": "Project Not Found"
+  },
+  "contact": {
+    "heading": "Get In Touch",
+    "cta": "Say Hello",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved.",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email"
+  }
+}

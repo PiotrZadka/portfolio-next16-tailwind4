@@ -81,6 +81,19 @@ export const post = defineType({
       type: "array",
       of: [{ type: "block" }, { type: "image" }],
     }),
+    defineField({
+      name: "language",
+      title: "Language",
+      type: "string",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Polish", value: "pl" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "en",
+    }),
   ],
   preview: {
     select: {

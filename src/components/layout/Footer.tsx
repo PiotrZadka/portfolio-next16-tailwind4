@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 
 interface FooterProps {
@@ -23,7 +23,7 @@ export function Footer({ contact }: FooterProps) {
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Piotr Zadka. All rights reserved.
+            &copy; {currentYear} Piotr Zadka. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6">

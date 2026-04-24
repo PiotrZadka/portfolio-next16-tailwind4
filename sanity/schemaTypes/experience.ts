@@ -59,6 +59,19 @@ export const experience = defineType({
       type: "number",
       description: "Used to sort experience (higher numbers first)",
     }),
+    defineField({
+      name: "language",
+      title: "Language",
+      type: "string",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Polish", value: "pl" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "en",
+    }),
   ],
   preview: {
     select: {

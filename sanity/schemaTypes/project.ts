@@ -64,5 +64,18 @@ export const project = defineType({
         { name: "results", title: "The Results", type: "text", rows: 5 },
       ],
     }),
+    defineField({
+      name: "language",
+      title: "Language",
+      type: "string",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Polish", value: "pl" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "en",
+    }),
   ],
 });

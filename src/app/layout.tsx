@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+
+export const dynamic = "force-dynamic";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ConsoleNav } from "@/components/layout/ConsoleNav";
 import { Footer } from "@/components/layout/Footer";
@@ -81,7 +83,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const contact = await getContact();
+  const contact = await getContact("en");
 
   return (
     <html

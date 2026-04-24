@@ -1,28 +1,44 @@
+import { getTranslations } from "next-intl/server";
 import { CaseStudyCard } from "@/components/layout/CaseStudyCard";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { getProjects } from "@/lib/sanity";
 import { draftMode } from "next/headers";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: "A showcase of my technical projects and case studies.",
-  openGraph: {
-    title: "Projects",
-    description: "A showcase of my technical projects and case studies.",
-  },
-  twitter: {
-    title: "Projects",
-    description: "A showcase of my technical projects and case studies.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "projects" });
 
-export default async function ProjectsPage() {
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    openGraph: {
+      title: t("ogTitle"),
+      description: t("ogDescription"),
+    },
+    twitter: {
+      title: t("twitterTitle"),
+      description: t("twitterDescription"),
+    },
+  };
+}
+
+export default async function ProjectsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const { isEnabled: preview } = await draftMode();
-  const projects = await getProjects(preview);
+  const t = await getTranslations({ locale, namespace: "projects" });
+  const projects = await getProjects(locale, preview);
 
   return (
     <div className="flex flex-col">
@@ -30,12 +46,10 @@ export default async function ProjectsPage() {
         <Container>
           <div className="mb-12">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-              Projects
+              {t("heading")}
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl">
-              A collection of projects that showcase my technical skills,
-              problem-solving abilities, and passion for building high-quality
-              software.
+              {t("subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "experience": "Doświadczenie",
+    "projects": "Projekty",
+    "blog": "Blog",
+    "about": "O mnie"
+  },
+  "hero": {
+    "greeting": "Cześć, jestem",
+    "viewProjects": "Zobacz projekty",
+    "contactMe": "Kontakt",
+    "viewCV": "Zobacz CV",
+    "fallbackName": "Piotr Zadka"
+  },
+  "homepage": {
+    "experienceHeading": "Ostatnie doświadczenie",
+    "experienceDesc": "Moja profesjonalna ścieżka w inżynierii oprogramowania.",
+    "viewFullTimeline": "Pełna oś czasu",
+    "projectsHeading": "Wybrane projekty",
+    "projectsDesc": "Wybór projektów pokazujących moje umiejętności techniczne.",
+    "viewAllProjects": "Wszystkie projekty"
+  },
+  "about": {
+    "metaTitle": "O mnie",
+    "metaDescription": "Dowiedz się więcej o moim backgroundzie, umiejętnościach i ścieżce zawodowej.",
+    "ogTitle": "O mnie",
+    "ogDescription": "Dowiedz się więcej o moim backgroundzie, umiejętnościach i ścieżce zawodowej.",
+    "twitterTitle": "O mnie",
+    "twitterDescription": "Dowiedz się więcej o moim backgroundzie, umiejętnościach i ścieżce zawodowej.",
+    "heading": "O mnie",
+    "subtitle": "Dowiedz się więcej o moim backgroundzie, umiejętnościach i ścieżce zawodowej.",
+    "viewCV": "Zobacz CV",
+    "technologies": "Technologie"
+  },
+  "experience": {
+    "metaTitle": "Doświadczenie",
+    "metaDescription": "Moja ścieżka zawodowa i oś czasu kariery.",
+    "ogTitle": "Doświadczenie",
+    "ogDescription": "Moja ścieżka zawodowa i oś czasu kariery.",
+    "twitterTitle": "Doświadczenie",
+    "twitterDescription": "Moja ścieżka zawodowa i oś czasu kariery.",
+    "heading": "Doświadczenie",
+    "subtitle": "Szczegółowa oś czasu mojej kariery zawodowej, kluczowych ról i wpływu, jaki wywarłem w różnych organizacjach."
+  },
+  "blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Poradniki techniczne, przemyślenia i spostrzeżenia na temat tworzenia oprogramowania.",
+    "ogTitle": "Blog",
+    "ogDescription": "Poradniki techniczne, przemyślenia i spostrzeżenia na temat tworzenia oprogramowania.",
+    "twitterTitle": "Blog",
+    "twitterDescription": "Poradniki techniczne, przemyślenia i spostrzeżenia na temat tworzenia oprogramowania.",
+    "heading": "Blog",
+    "subtitle": "Poradniki techniczne, przemyślenia i spostrzeżenia na temat React, Next.js i nie tylko.",
+    "minRead": "min czytania",
+    "backToBlog": "Powrót do bloga",
+    "postNotFound": "Nie znaleziono posta"
+  },
+  "projects": {
+    "metaTitle": "Projekty",
+    "metaDescription": "Prezentacja moich projektów technicznych i studiów przypadków.",
+    "ogTitle": "Projekty",
+    "ogDescription": "Prezentacja moich projektów technicznych i studiów przypadków.",
+    "twitterTitle": "Projekty",
+    "twitterDescription": "Prezentacja moich projektów technicznych i studiów przypadków.",
+    "heading": "Projekty",
+    "subtitle": "Kolekcja projektów pokazujących moje umiejętności techniczne, zdolności rozwiązywania problemów i pasję do tworzenia wysokiej jakości oprogramowania.",
+    "backToProjects": "Powrót do projektów",
+    "viewSource": "Kod źródłowy",
+    "liveDemo": "Demo na żywo",
+    "theProblem": "Problem",
+    "theApproach": "Podejście",
+    "theResults": "Rezultaty",
+    "projectNotFound": "Nie znaleziono projektu"
+  },
+  "contact": {
+    "heading": "Skontaktuj się",
+    "cta": "Przywitaj się",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "allRightsReserved": "Wszelkie prawa zastrzeżone.",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email"
+  }
+}

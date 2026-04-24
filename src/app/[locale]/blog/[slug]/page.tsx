@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Section } from "@/components/ui/Section";
@@ -7,7 +8,7 @@ import { PortableText } from "@portabletext/react";
 import { cn, calculateReadingTime } from "@/lib/utils";
 import { getBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
@@ -18,6 +19,7 @@ export const dynamic = "force-dynamic";
 
 interface BlogPostPageProps {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 }
@@ -25,16 +27,17 @@ interface BlogPostPageProps {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
   const post = await getBlogPost(slug, false);
 
   if (!post) {
     return {
-      title: "Post Not Found",
+      title: t("postNotFound"),
     };
   }
 
-  const metadata: Metadata = {
+  return {
     title: {
       absolute: post.title,
     },
@@ -52,25 +55,12 @@ export async function generateMetadata({
       description: post.excerpt,
     },
   };
-
-  // Use custom social image if available
-  if (post.socialImage) {
-    if (metadata.openGraph) {
-      metadata.openGraph.images = [
-        { url: post.socialImage, width: 1200, height: 630 },
-      ];
-    }
-    if (metadata.twitter) {
-      metadata.twitter.images = [post.socialImage];
-    }
-  }
-
-  return metadata;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { locale, slug } = await params;
   const { isEnabled: preview } = await draftMode();
-  const { slug } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
   const [post, allPosts] = await Promise.all([
     getBlogPost(slug, preview),
     getBlogPosts(preview),
@@ -93,15 +83,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Blog
+              {t("backToBlog")}
             </Link>
 
             <div className="flex gap-4 items-center text-sm text-muted-foreground mb-6">
               <time dateTime={post.date}>{post.date}</time>
-              <span>•</span>
+              <span>&bull;</span>
               <span>
                 {post.readTime ||
-                  `${calculateReadingTime(post.content)} min read`}
+                  `${calculateReadingTime(post.content)} ${t("minRead")}`}
               </span>
             </div>
 
@@ -132,12 +122,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <PortableText value={post.content as any} />
             </div>
 
-            {/* Share buttons */}
             <div className="mt-12">
               <ShareButtons url={postUrl} />
             </div>
 
-            {/* Related posts */}
             <RelatedPosts posts={allPosts} currentSlug={post.slug} />
           </Container>
         </Section>

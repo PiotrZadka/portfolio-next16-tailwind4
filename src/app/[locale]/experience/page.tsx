@@ -1,0 +1,60 @@
+import { getTranslations } from "next-intl/server";
+import { ExperienceTimeline } from "@/components/layout/ExperienceTimeline";
+import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
+import { getExperiences } from "@/lib/sanity";
+import { draftMode } from "next/headers";
+import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "experience" });
+
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    openGraph: {
+      title: t("ogTitle"),
+      description: t("ogDescription"),
+    },
+    twitter: {
+      title: t("twitterTitle"),
+      description: t("twitterDescription"),
+    },
+  };
+}
+
+export default async function ExperiencePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const t = await getTranslations({ locale, namespace: "experience" });
+  const experience = await getExperiences(locale, preview);
+
+  return (
+    <div className="flex flex-col">
+      <Section className="pt-12 md:pt-24 pb-16">
+        <Container>
+          <div className="mb-12">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
+              {t("heading")}
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              {t("subtitle")}
+            </p>
+          </div>
+          <ExperienceTimeline items={experience} />
+        </Container>
+      </Section>
+    </div>
+  );
+}

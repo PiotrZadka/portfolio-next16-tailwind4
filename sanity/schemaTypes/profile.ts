@@ -31,5 +31,18 @@ export const profile = defineType({
         layout: "tags",
       },
     }),
+    defineField({
+      name: "language",
+      title: "Language",
+      type: "string",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Polish", value: "pl" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "en",
+    }),
   ],
 });

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { getBlogPosts } from "@/lib/blog";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -14,29 +15,41 @@ import { ExternalLink } from "lucide-react";
 import { cn, calculateReadingTime } from "@/lib/utils";
 import { getBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
-import Link from "next/link";
-import { Metadata } from "next";
+import { Link } from "@/i18n/navigation";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Technical guides, thoughts, and insights on software development.",
-  openGraph: {
-    title: "Blog",
-    description:
-      "Technical guides, thoughts, and insights on software development.",
-  },
-  twitter: {
-    title: "Blog",
-    description:
-      "Technical guides, thoughts, and insights on software development.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
 
-export default async function BlogPage() {
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    openGraph: {
+      title: t("ogTitle"),
+      description: t("ogDescription"),
+    },
+    twitter: {
+      title: t("twitterTitle"),
+      description: t("twitterDescription"),
+    },
+  };
+}
+
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const { isEnabled: preview } = await draftMode();
+  const t = await getTranslations({ locale, namespace: "blog" });
   const posts = await getBlogPosts(preview);
 
   return (
@@ -45,11 +58,10 @@ export default async function BlogPage() {
         <Container>
           <div className="mb-12">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-              Blog
+              {t("heading")}
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl">
-              Technical guides, thoughts, and insights on software development,
-              React, Next.js, and more.
+              {t("subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -58,7 +70,7 @@ export default async function BlogPage() {
               const isExternal = !!post.externalUrl;
               const readTime =
                 post.readTime ||
-                `${calculateReadingTime(post.content)} min read`;
+                `${calculateReadingTime(post.content)} ${t("minRead")}`;
 
               return (
                 <Link

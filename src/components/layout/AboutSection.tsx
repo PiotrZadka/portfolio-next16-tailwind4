@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { getBadgeClassName } from "@/lib/skills";
 import { FileText } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface AboutSectionProps {
   profile: {
@@ -15,9 +15,15 @@ interface AboutSectionProps {
     skills?: string[];
     resume?: string;
   };
+  viewCV: string;
+  technologies: string;
 }
 
-export async function AboutSection({ profile }: AboutSectionProps) {
+export async function AboutSection({
+  profile,
+  viewCV,
+  technologies,
+}: AboutSectionProps) {
   const displaySkills = profile.skills || [];
 
   return (
@@ -37,7 +43,7 @@ export async function AboutSection({ profile }: AboutSectionProps) {
                   >
                     <Button variant="outline" className="gap-2">
                       <FileText className="h-4 w-4" />
-                      View CV
+                      {viewCV}
                     </Button>
                   </Link>
                 </div>
@@ -45,7 +51,7 @@ export async function AboutSection({ profile }: AboutSectionProps) {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Technologies</h3>
+              <h3 className="text-lg font-semibold mb-4">{technologies}</h3>
               <div className="flex flex-wrap gap-2">
                 {displaySkills.map((skill) => {
                   return (
