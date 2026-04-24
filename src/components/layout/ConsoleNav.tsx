@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,12 +18,15 @@ export function ConsoleNav() {
   const navRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  const navItems = [
-    { label: t("experience"), href: "/experience" },
-    { label: t("projects"), href: "/projects" },
-    { label: t("blog"), href: "/blog" },
-    { label: t("about"), href: "/about" },
-  ];
+  const navItems = useMemo(
+    () => [
+      { label: t("experience"), href: "/experience" },
+      { label: t("projects"), href: "/projects" },
+      { label: t("blog"), href: "/blog" },
+      { label: t("about"), href: "/about" },
+    ],
+    [t]
+  );
 
   useEffect(() => {
     setIsOpen(false);

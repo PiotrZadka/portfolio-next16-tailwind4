@@ -6,6 +6,13 @@ export const profile = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "documentTitle",
+      title: "Document Title",
+      type: "string",
+      description: "Internal name for this document in the Studio",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "name",
       title: "Name",
       type: "string",
@@ -45,4 +52,10 @@ export const profile = defineType({
       initialValue: "en",
     }),
   ],
+  preview: {
+    select: {
+      title: "documentTitle",
+      subtitle: "name",
+    },
+  },
 });
