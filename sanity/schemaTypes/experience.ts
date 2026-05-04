@@ -19,13 +19,13 @@ export const experience = defineType({
     defineField({
       name: "startDate",
       title: "Start Date",
-      type: "localeString",
+      type: "string",
       description: "e.g. Oct 2021",
     }),
     defineField({
       name: "endDate",
       title: "End Date",
-      type: "localeString",
+      type: "string",
       description: "e.g. Present or Dec 2023",
     }),
     defineField({

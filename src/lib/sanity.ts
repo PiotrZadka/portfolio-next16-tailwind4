@@ -47,8 +47,8 @@ export async function getExperiences(
     "id": _id,
     company,
     "role": ${loc("role")},
-    "startDate": ${loc("startDate")},
-    "endDate": ${loc("endDate")},
+    startDate,
+    endDate,
     "description": ${loc("description")},
     "impact": coalesce(impact[$locale], impact.en),
     "technologies": ${refTitles("technologies")}
