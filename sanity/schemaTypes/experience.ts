@@ -63,7 +63,14 @@ export const experience = defineType({
       name: "order",
       title: "Order",
       type: "number",
-      description: "Used to sort experience (higher numbers first)",
+      description: "Sort order. Higher number = shown first. Increment for each new role.",
+    }),
+    defineField({
+      name: "parentId",
+      title: "Parent Experience",
+      type: "reference",
+      to: [{ type: "experience" }],
+      description: "If this role was a placement/contract under another employer, link it here. It will be nested inside the parent entry.",
     }),
   ],
   preview: {

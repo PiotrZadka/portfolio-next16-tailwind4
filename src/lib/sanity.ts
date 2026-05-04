@@ -51,7 +51,18 @@ export async function getExperiences(
     endDate,
     "description": ${loc("description")},
     "impact": coalesce(impact[$locale], impact.en),
-    "technologies": ${refTitles("technologies")}
+    "technologies": ${refTitles("technologies")},
+    "parentId": parentId._ref,
+    "children": *[_type == "experience" && parentId._ref == ^._id] | order(order desc) {
+      "id": _id,
+      "company": ${loc("company")},
+      "role": ${loc("role")},
+      startDate,
+      endDate,
+      "description": ${loc("description")},
+      "impact": coalesce(impact[$locale], impact.en),
+      "technologies": ${refTitles("technologies")}
+    }
   }`;
   return await sanityFetch<Experience[]>({
     query,

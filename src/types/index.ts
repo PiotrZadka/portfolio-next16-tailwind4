@@ -17,6 +17,8 @@ export interface Experience {
   description: string;
   technologies: string[];
   impact: string[];
+  parentId?: string;
+  children?: Experience[];
 }
 
 export interface CaseStudy {
