@@ -30,8 +30,7 @@ export function ContactSection({
           {heading}
         </h2>
         <p className="text-lg text-muted-foreground mb-10">
-          {text ||
-            "I'm always open to new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!"}
+          {text}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

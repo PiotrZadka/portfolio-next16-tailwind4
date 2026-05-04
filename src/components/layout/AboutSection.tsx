@@ -11,7 +11,7 @@ import { Link } from "@/i18n/navigation";
 interface AboutSectionProps {
   profile: {
     about: string;
-    location: string;
+    locationBio?: string;
     skills?: string[];
     resume?: string;
   };
@@ -33,6 +33,12 @@ export async function AboutSection({
           <div className="space-y-6">
             <div className="prose prose-lg dark:prose-invert">
               <p className="whitespace-pre-wrap">{profile.about}</p>
+
+              {profile.locationBio && (
+                <p className="text-muted-foreground italic">
+                  {profile.locationBio}
+                </p>
+              )}
 
               {profile.resume && (
                 <div className="pt-2">

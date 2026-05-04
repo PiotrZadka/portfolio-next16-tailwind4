@@ -56,7 +56,7 @@ export default async function AboutPage({
 
   const about = {
     about: aboutData.about,
-    location: aboutData.location,
+    locationBio: aboutData.locationBio,
     skills: aboutData.skills || [],
     resume: aboutData.resumeFile || aboutData.resume,
   };

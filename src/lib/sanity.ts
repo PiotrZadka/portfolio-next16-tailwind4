@@ -29,7 +29,7 @@ export async function getContact(locale: string, preview = false) {
 export async function getAbout(locale: string, preview = false) {
   const query = `*[_type == "about"][0] {
     "about": ${loc("about")}, 
-    "location": ${loc("location")}, 
+    "locationBio": ${loc("locationBio")}, 
     "skills": ${refTitles("skills")},
     resume, 
     "resumeFile": resumeFile.asset->url

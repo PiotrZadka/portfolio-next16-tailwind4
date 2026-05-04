@@ -12,9 +12,10 @@ export const about = defineType({
       description: "Longer bio for the about page",
     }),
     defineField({
-      name: "location",
-      title: "Location",
-      type: "localeString",
+      name: "locationBio",
+      title: "Location Sentence",
+      type: "localeText",
+      description: "Full sentence about your location & specialisation, e.g. 'Based in Leeds, UK, I specialize in...' — translatable.",
     }),
     defineField({
       name: "skills",
