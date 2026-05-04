@@ -27,7 +27,7 @@ export function ContactSection({
     <section id="contact" className="py-20 bg-muted/50">
       <Container className="text-center max-w-2xl">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-          {heading || "Get In Touch"}
+          {heading}
         </h2>
         <p className="text-lg text-muted-foreground mb-10">
           {text ||
@@ -38,7 +38,7 @@ export function ContactSection({
           <Link href={`mailto:${email}`}>
             <Button size="lg" className="gap-2">
               <Mail className="h-5 w-5" />
-              {cta || "Say Hello"}
+              {cta}
             </Button>
           </Link>
         </div>
@@ -52,7 +52,7 @@ export function ContactSection({
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               <Github className="h-6 w-6" />
-              <span className="sr-only">{githubLabel || "GitHub"}</span>
+              <span className="sr-only">{githubLabel}</span>
             </Link>
           )}
           {social.linkedin && (
@@ -63,7 +63,7 @@ export function ContactSection({
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               <Linkedin className="h-6 w-6" />
-              <span className="sr-only">{linkedinLabel || "LinkedIn"}</span>
+              <span className="sr-only">{linkedinLabel}</span>
             </Link>
           )}
         </div>
