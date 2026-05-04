@@ -71,7 +71,7 @@ export default async function Home({
             </Link>
           </div>
 
-          <ExperienceTimeline items={experience} />
+          <ExperienceTimeline items={experience} defaultExpanded={false} />
 
           <div className="mt-8 md:hidden text-center">
             <Link href="/experience">

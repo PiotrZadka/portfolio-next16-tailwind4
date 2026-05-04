@@ -18,6 +18,7 @@ import { getBadgeClassName } from "@/lib/skills";
 
 interface ExperienceTimelineProps {
   items: Experience[];
+  defaultExpanded?: boolean;
 }
 
 function ExperienceCard({
@@ -125,14 +126,12 @@ function ExperienceCard({
   );
 }
 
-export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
+export function ExperienceTimeline({ items, defaultExpanded = true }: ExperienceTimelineProps) {
   const t = useTranslations("experience");
-
-  // Only render top-level items (no parentId) — children are embedded in parent cards
   const topLevel = items.filter((item) => !item.parentId);
 
   const [expandedIds, setExpandedIds] = useState<Set<string>>(
-    () => new Set(topLevel.map((item) => item.id))
+    () => new Set(defaultExpanded ? topLevel.map((item) => item.id) : [])
   );
 
   const toggle = (id: string) => {
