@@ -43,7 +43,7 @@ export async function getExperiences(
   limit?: number
 ) {
   const limitStr = limit ? `[0...${limit}]` : "";
-  const query = `*[_type == "experience"] | order(order asc) ${limitStr} {
+  const query = `*[_type == "experience"] | order(order desc) ${limitStr} {
     "id": _id,
     company,
     "role": ${loc("role")},
