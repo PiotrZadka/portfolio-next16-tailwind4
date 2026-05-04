@@ -132,7 +132,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const topLevel = items.filter((item) => !item.parentId);
 
   const [expandedIds, setExpandedIds] = useState<Set<string>>(
-    () => new Set(topLevel[0] ? [topLevel[0].id] : [])
+    () => new Set(topLevel.map((item) => item.id))
   );
 
   const toggle = (id: string) => {
