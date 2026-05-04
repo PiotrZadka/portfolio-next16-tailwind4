@@ -60,7 +60,10 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar className="h-4 w-4" />
                 <span className="text-sm font-medium">
-                  {item.startDate} - {item.endDate}
+                  {item.startDate} -{" "}
+                  {item.endDate?.toLowerCase() === "present"
+                    ? t("present")
+                    : item.endDate}
                 </span>
               </div>
             </div>
@@ -88,7 +91,10 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                       <div className="flex md:hidden items-center gap-2 text-muted-foreground mt-2 text-sm">
                         <Calendar className="h-4 w-4" />
                         <span>
-                          {item.startDate} - {item.endDate}
+                          {item.startDate} -{" "}
+                          {item.endDate?.toLowerCase() === "present"
+                            ? t("present")
+                            : item.endDate}
                         </span>
                       </div>
                     </div>
