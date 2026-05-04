@@ -2,20 +2,32 @@ import { SocialLinks } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Mail, Github, Linkedin } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface ContactSectionProps {
   email: string;
   social: SocialLinks;
   text?: string;
+  heading: string;
+  cta: string;
+  githubLabel: string;
+  linkedinLabel: string;
 }
 
-export function ContactSection({ email, social, text }: ContactSectionProps) {
+export function ContactSection({
+  email,
+  social,
+  text,
+  heading,
+  cta,
+  githubLabel,
+  linkedinLabel,
+}: ContactSectionProps) {
   return (
     <section id="contact" className="py-20 bg-muted/50">
       <Container className="text-center max-w-2xl">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-          Get In Touch
+          {heading}
         </h2>
         <p className="text-lg text-muted-foreground mb-10">
           {text ||
@@ -26,7 +38,7 @@ export function ContactSection({ email, social, text }: ContactSectionProps) {
           <Link href={`mailto:${email}`}>
             <Button size="lg" className="gap-2">
               <Mail className="h-5 w-5" />
-              Say Hello
+              {cta}
             </Button>
           </Link>
         </div>
@@ -40,7 +52,7 @@ export function ContactSection({ email, social, text }: ContactSectionProps) {
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               <Github className="h-6 w-6" />
-              <span className="sr-only">GitHub</span>
+              <span className="sr-only">{githubLabel}</span>
             </Link>
           )}
           {social.linkedin && (
@@ -51,7 +63,7 @@ export function ContactSection({ email, social, text }: ContactSectionProps) {
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               <Linkedin className="h-6 w-6" />
-              <span className="sr-only">LinkedIn</span>
+              <span className="sr-only">{linkedinLabel}</span>
             </Link>
           )}
         </div>

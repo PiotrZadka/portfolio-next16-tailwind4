@@ -36,3 +36,4 @@ next-env.d.ts
 # Blog content
 docs/BLOG_PUBLICATION_PLAN_2026.md
 Blog Posts/
+pnpm-lock.yaml

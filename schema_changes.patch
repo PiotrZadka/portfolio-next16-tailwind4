@@ -1,0 +1,411 @@
+diff --git a/sanity/schemaTypes/about.ts b/sanity/schemaTypes/about.ts
+index f535a3a..4d267b4 100644
+--- a/sanity/schemaTypes/about.ts
++++ b/sanity/schemaTypes/about.ts
+@@ -8,22 +8,20 @@ export const about = defineType({
+     defineField({
+       name: "about",
+       title: "About",
+-      type: "text",
+-      rows: 4,
++      type: "localeText",
+       description: "Longer bio for the about page",
+-      validation: (Rule) => Rule.required(),
+     }),
+     defineField({
+       name: "location",
+       title: "Location",
+-      type: "string",
++      type: "localeString",
+     }),
+     defineField({
+       name: "skills",
+       title: "Featured Skills",
+       type: "array",
+       description: "List of top skills to display in the Technologies section",
+-      of: [{ type: "string" }],
++      of: [{ type: "reference", to: { type: "skill" } }],
+     }),
+     defineField({
+       name: "resume",
+@@ -38,18 +36,5 @@ export const about = defineType({
+       type: "file",
+       description: "Upload your CV/Resume directly to Sanity",
+     }),
+-    defineField({
+-      name: "language",
+-      title: "Language",
+-      type: "string",
+-      options: {
+-        list: [
+-          { title: "English", value: "en" },
+-          { title: "Polish", value: "pl" },
+-        ],
+-        layout: "radio",
+-      },
+-      initialValue: "en",
+-    }),
+   ],
+ });
+diff --git a/sanity/schemaTypes/contact.ts b/sanity/schemaTypes/contact.ts
+index 504f1e0..085fabb 100644
+--- a/sanity/schemaTypes/contact.ts
++++ b/sanity/schemaTypes/contact.ts
+@@ -14,7 +14,7 @@ export const contact = defineType({
+     defineField({
+       name: "text",
+       title: "Contact Text",
+-      type: "text",
++      type: "localeText",
+       description: "The text displayed in the contact section.",
+     }),
+     defineField({
+@@ -26,18 +26,5 @@ export const contact = defineType({
+         { name: "linkedin", title: "LinkedIn URL", type: "url" },
+       ],
+     }),
+-    defineField({
+-      name: "language",
+-      title: "Language",
+-      type: "string",
+-      options: {
+-        list: [
+-          { title: "English", value: "en" },
+-          { title: "Polish", value: "pl" },
+-        ],
+-        layout: "radio",
+-      },
+-      initialValue: "en",
+-    }),
+   ],
+ });
+diff --git a/sanity/schemaTypes/experience.ts b/sanity/schemaTypes/experience.ts
+index b1e63f9..428141b 100644
+--- a/sanity/schemaTypes/experience.ts
++++ b/sanity/schemaTypes/experience.ts
+@@ -14,44 +14,50 @@ export const experience = defineType({
+     defineField({
+       name: "role",
+       title: "Role",
+-      type: "string",
+-      validation: (Rule) => Rule.required(),
++      type: "localeString",
+     }),
+     defineField({
+       name: "startDate",
+       title: "Start Date",
+-      type: "string",
++      type: "localeString",
+       description: "e.g. Oct 2021",
+-      validation: (Rule) => Rule.required(),
+     }),
+     defineField({
+       name: "endDate",
+       title: "End Date",
+-      type: "string",
++      type: "localeString",
+       description: "e.g. Present or Dec 2023",
+-      validation: (Rule) => Rule.required(),
+     }),
+     defineField({
+       name: "description",
+       title: "Description",
+-      type: "text",
+-      rows: 3,
++      type: "localeText",
+     }),
+     defineField({
+       name: "impact",
+       title: "Key Impact",
+-      type: "array",
+-      of: [{ type: "string" }],
++      type: "object",
++      fields: [
++        {
++          name: "en",
++          title: "English",
++          type: "array",
++          of: [{ type: "string" }],
++        },
++        {
++          name: "pl",
++          title: "Polish",
++          type: "array",
++          of: [{ type: "string" }],
++        },
++      ],
+       description: "Bullet points of achievements",
+     }),
+     defineField({
+       name: "technologies",
+       title: "Technologies",
+       type: "array",
+-      of: [{ type: "string" }],
+-      options: {
+-        layout: "tags",
+-      },
++      of: [{ type: "reference", to: { type: "skill" } }],
+     }),
+     defineField({
+       name: "order",
+@@ -59,23 +65,10 @@ export const experience = defineType({
+       type: "number",
+       description: "Used to sort experience (higher numbers first)",
+     }),
+-    defineField({
+-      name: "language",
+-      title: "Language",
+-      type: "string",
+-      options: {
+-        list: [
+-          { title: "English", value: "en" },
+-          { title: "Polish", value: "pl" },
+-        ],
+-        layout: "radio",
+-      },
+-      initialValue: "en",
+-    }),
+   ],
+   preview: {
+     select: {
+-      title: "role",
++      title: "role.en",
+       subtitle: "company",
+     },
+   },
+diff --git a/sanity/schemaTypes/index.ts b/sanity/schemaTypes/index.ts
+index 3e86483..34433a3 100644
+--- a/sanity/schemaTypes/index.ts
++++ b/sanity/schemaTypes/index.ts
+@@ -5,7 +5,20 @@ import { experience } from "./experience";
+ import { profile } from "./profile";
+ import { about } from "./about";
+ import { contact } from "./contact";
++import { localeString } from "./localeString";
++import { localeText } from "./localeText";
++import { skill } from "./skill";
+ 
+ export const schema: { types: SchemaTypeDefinition[] } = {
+-  types: [post, project, experience, profile, about, contact],
++  types: [
++    localeString,
++    localeText,
++    skill,
++    post,
++    project,
++    experience,
++    profile,
++    about,
++    contact,
++  ],
+ };
+diff --git a/sanity/schemaTypes/post.ts b/sanity/schemaTypes/post.ts
+index 00b8263..1657b83 100644
+--- a/sanity/schemaTypes/post.ts
++++ b/sanity/schemaTypes/post.ts
+@@ -8,15 +8,14 @@ export const post = defineType({
+     defineField({
+       name: "title",
+       title: "Title",
+-      type: "string",
+-      validation: (Rule) => Rule.required(),
++      type: "localeString",
+     }),
+     defineField({
+       name: "slug",
+       title: "Slug",
+       type: "slug",
+       options: {
+-        source: "title",
++        source: "title.en",
+         maxLength: 96,
+       },
+       validation: (Rule) => Rule.required(),
+@@ -24,9 +23,7 @@ export const post = defineType({
+     defineField({
+       name: "excerpt",
+       title: "Excerpt",
+-      type: "text",
+-      rows: 3,
+-      validation: (Rule) => Rule.required(),
++      type: "localeText",
+     }),
+     defineField({
+       name: "date",
+@@ -59,11 +56,9 @@ export const post = defineType({
+     defineField({
+       name: "linkedinHook",
+       title: "LinkedIn Hook",
+-      type: "text",
+-      rows: 2,
++      type: "localeText",
+       description:
+         "2-line hook for LinkedIn post (150 chars max). Stops the scroll!",
+-      validation: (Rule) => Rule.max(150),
+     }),
+     defineField({
+       name: "socialImage",
+@@ -78,26 +73,26 @@ export const post = defineType({
+     defineField({
+       name: "content",
+       title: "Content",
+-      type: "array",
+-      of: [{ type: "block" }, { type: "image" }],
+-    }),
+-    defineField({
+-      name: "language",
+-      title: "Language",
+-      type: "string",
+-      options: {
+-        list: [
+-          { title: "English", value: "en" },
+-          { title: "Polish", value: "pl" },
+-        ],
+-        layout: "radio",
+-      },
+-      initialValue: "en",
++      type: "object",
++      fields: [
++        {
++          name: "en",
++          title: "English",
++          type: "array",
++          of: [{ type: "block" }, { type: "image" }],
++        },
++        {
++          name: "pl",
++          title: "Polish",
++          type: "array",
++          of: [{ type: "block" }, { type: "image" }],
++        },
++      ],
+     }),
+   ],
+   preview: {
+     select: {
+-      title: "title",
++      title: "title.en",
+       subtitle: "date",
+     },
+   },
+diff --git a/sanity/schemaTypes/profile.ts b/sanity/schemaTypes/profile.ts
+index b43bdd4..5f09feb 100644
+--- a/sanity/schemaTypes/profile.ts
++++ b/sanity/schemaTypes/profile.ts
+@@ -21,35 +21,19 @@ export const profile = defineType({
+     defineField({
+       name: "title",
+       title: "Professional Title",
+-      type: "string",
++      type: "localeString",
+     }),
+     defineField({
+       name: "tagline",
+       title: "Tagline",
+-      type: "string",
++      type: "localeString",
+       description: "A short, catchy phrase for the hero section.",
+     }),
+     defineField({
+       name: "skills",
+       title: "Skills",
+       type: "array",
+-      of: [{ type: "string" }],
+-      options: {
+-        layout: "tags",
+-      },
+-    }),
+-    defineField({
+-      name: "language",
+-      title: "Language",
+-      type: "string",
+-      options: {
+-        list: [
+-          { title: "English", value: "en" },
+-          { title: "Polish", value: "pl" },
+-        ],
+-        layout: "radio",
+-      },
+-      initialValue: "en",
++      of: [{ type: "reference", to: { type: "skill" } }],
+     }),
+   ],
+   preview: {
+diff --git a/sanity/schemaTypes/project.ts b/sanity/schemaTypes/project.ts
+index 04c0dd1..c033bf7 100644
+--- a/sanity/schemaTypes/project.ts
++++ b/sanity/schemaTypes/project.ts
+@@ -8,15 +8,14 @@ export const project = defineType({
+     defineField({
+       name: "title",
+       title: "Title",
+-      type: "string",
+-      validation: (Rule) => Rule.required(),
++      type: "localeString",
+     }),
+     defineField({
+       name: "slug",
+       title: "Slug",
+       type: "slug",
+       options: {
+-        source: "title",
++        source: "title.en",
+         maxLength: 96,
+       },
+       validation: (Rule) => Rule.required(),
+@@ -24,9 +23,7 @@ export const project = defineType({
+     defineField({
+       name: "summary",
+       title: "Summary",
+-      type: "text",
+-      rows: 3,
+-      validation: (Rule) => Rule.required(),
++      type: "localeText",
+     }),
+     defineField({
+       name: "coverImage",
+@@ -40,10 +37,7 @@ export const project = defineType({
+       name: "technologies",
+       title: "Technologies",
+       type: "array",
+-      of: [{ type: "string" }],
+-      options: {
+-        layout: "tags",
+-      },
++      of: [{ type: "reference", to: { type: "skill" } }],
+     }),
+     defineField({
+       name: "links",
+@@ -59,23 +53,16 @@ export const project = defineType({
+       title: "Content",
+       type: "object",
+       fields: [
+-        { name: "problem", title: "The Problem", type: "text", rows: 5 },
+-        { name: "approach", title: "The Approach", type: "text", rows: 5 },
+-        { name: "results", title: "The Results", type: "text", rows: 5 },
++        { name: "problem", title: "The Problem", type: "localeText" },
++        { name: "approach", title: "The Approach", type: "localeText" },
++        { name: "results", title: "The Results", type: "localeText" },
+       ],
+     }),
+-    defineField({
+-      name: "language",
+-      title: "Language",
+-      type: "string",
+-      options: {
+-        list: [
+-          { title: "English", value: "en" },
+-          { title: "Polish", value: "pl" },
+-        ],
+-        layout: "radio",
+-      },
+-      initialValue: "en",
+-    }),
+   ],
++  preview: {
++    select: {
++      title: "title.en",
++      media: "coverImage",
++    },
++  },
+ });

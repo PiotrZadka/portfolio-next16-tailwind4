@@ -1,34 +1,37 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Container } from "@/components/ui/Container";
 
-const navItems = [
-  { label: "Experience", href: "/experience" },
-  { label: "Projects", href: "/projects" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-];
-
 export function ConsoleNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("nav");
   const navRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  // Close menu when route changes
+  const navItems = useMemo(
+    () => [
+      { label: t("experience"), href: "/experience" },
+      { label: t("projects"), href: "/projects" },
+      { label: t("blog"), href: "/blog" },
+      { label: t("about"), href: "/about" },
+    ],
+    [t]
+  );
+
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Update indicator position based on active link
   useEffect(() => {
     const activeIndex = navItems.findIndex((item) => item.href === pathname);
     const activeLink = linkRefs.current[activeIndex];
@@ -44,9 +47,8 @@ export function ConsoleNav() {
     } else {
       setIndicatorStyle({ left: 0, width: 0 });
     }
-  }, [pathname]);
+  }, [pathname, navItems]);
 
-  // Prevent scrolling when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -62,7 +64,6 @@ export function ConsoleNav() {
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-background/40 backdrop-blur-xl">
         <Container>
           <div className="flex h-14 items-center justify-between">
-            {/* Logo Module */}
             <Link
               href="/"
               className="flex items-center justify-center px-4 md:px-6 h-full md:border-x border-border/40 hover:bg-primary/5 transition-colors group"
@@ -72,7 +73,6 @@ export function ConsoleNav() {
               </span>
             </Link>
 
-            {/* Desktop: Console Links */}
             <nav
               ref={navRef}
               className="hidden md:flex flex-1 h-full items-center relative"
@@ -95,7 +95,6 @@ export function ConsoleNav() {
                 </Link>
               ))}
 
-              {/* CSS-based sliding indicator */}
               <div
                 className={cn(
                   "absolute bottom-0 h-0.5 bg-primary transition-all duration-300 ease-out",
@@ -108,11 +107,38 @@ export function ConsoleNav() {
               />
             </nav>
 
-            {/* Actions Module */}
             <div className="flex items-center h-full md:border-x border-border/40 px-4 gap-4">
+              {/* Language toggle */}
+              <div className="flex items-center gap-1">
+                <Link
+                  href={pathname}
+                  locale="en"
+                  className={cn(
+                    "text-xs font-mono font-medium px-1.5 py-0.5 rounded transition-colors",
+                    locale === "en"
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-primary"
+                  )}
+                >
+                  EN
+                </Link>
+                <span className="text-muted-foreground text-xs">/</span>
+                <Link
+                  href={pathname}
+                  locale="pl"
+                  className={cn(
+                    "text-xs font-mono font-medium px-1.5 py-0.5 rounded transition-colors",
+                    locale === "pl"
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-primary"
+                  )}
+                >
+                  PL
+                </Link>
+              </div>
+
               <ThemeToggle />
 
-              {/* Mobile Menu Trigger */}
               <button
                 onClick={() => setIsOpen(true)}
                 className="md:hidden p-2 hover:text-primary transition-colors"
@@ -123,7 +149,6 @@ export function ConsoleNav() {
           </div>
         </Container>
 
-        {/* Dynamic Scanning Pulse (No static line) */}
         <motion.div
           initial={{ left: "-20%" }}
           animate={{ left: "120%" }}
@@ -137,7 +162,6 @@ export function ConsoleNav() {
         />
       </header>
 
-      {/* Fullscreen Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -147,7 +171,6 @@ export function ConsoleNav() {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center md:hidden"
           >
-            {/* Background Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
               <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px]" />
               <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px]" />
@@ -186,7 +209,7 @@ export function ConsoleNav() {
               ))}
 
               <div className="mt-8 text-[10px] font-mono text-muted-foreground tracking-[0.3em] uppercase">
-                piotrzadka.dev — 2026
+                piotrzadka.dev &mdash; 2026
               </div>
             </nav>
           </motion.div>

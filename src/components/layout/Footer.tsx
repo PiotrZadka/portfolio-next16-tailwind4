@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 
 interface FooterProps {
@@ -11,7 +12,8 @@ interface FooterProps {
   };
 }
 
-export function Footer({ contact }: FooterProps) {
+export async function Footer({ contact }: FooterProps) {
+  const t = await getTranslations("footer");
   const currentYear = new Date().getFullYear();
   const email = contact?.email || "piotr.zadka@gmail.com";
   const github = contact?.social?.github || "https://github.com/piotrzadka";
@@ -23,7 +25,7 @@ export function Footer({ contact }: FooterProps) {
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Piotr Zadka. All rights reserved.
+            &copy; {currentYear} Piotr Zadka. {t("allRightsReserved")}
           </p>
 
           <div className="flex items-center gap-6">
@@ -34,7 +36,7 @@ export function Footer({ contact }: FooterProps) {
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                GitHub
+                {t("github")}
               </Link>
             )}
             {linkedin && (
@@ -44,7 +46,7 @@ export function Footer({ contact }: FooterProps) {
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                LinkedIn
+                {t("linkedin")}
               </Link>
             )}
             {email && (
@@ -52,7 +54,7 @@ export function Footer({ contact }: FooterProps) {
                 href={`mailto:${email}`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Email
+                {t("email")}
               </Link>
             )}
           </div>

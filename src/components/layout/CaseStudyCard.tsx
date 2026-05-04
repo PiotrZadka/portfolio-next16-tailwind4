@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { CaseStudy } from "@/types";
 import {
@@ -57,10 +57,10 @@ export async function CaseStudyCard({ project }: CaseStudyCardProps) {
 
       <CardContent className="flex-1">
         <div className="flex flex-wrap gap-2">
-          {(project.technologies?.slice(0, 4) || []).map((tech) => {
+          {((project.technologies || []).filter(Boolean).slice(0, 4)).map((tech, index) => {
             return (
               <Badge
-                key={tech}
+                key={`${tech}-${index}`}
                 variant="none"
                 className={cn("text-xs", getBadgeClassName())}
               >
@@ -68,9 +68,9 @@ export async function CaseStudyCard({ project }: CaseStudyCardProps) {
               </Badge>
             );
           })}
-          {project.technologies?.length > 4 && (
+          {project.technologies?.filter(Boolean).length > 4 && (
             <Badge variant="outline" className="text-xs">
-              +{project.technologies.length - 4}
+              +{project.technologies.filter(Boolean).length - 4}
             </Badge>
           )}
         </div>

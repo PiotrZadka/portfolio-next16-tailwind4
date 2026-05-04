@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+import { draftMode } from "next/headers";
 import { HeroSection } from "@/components/layout/HeroSection";
 import { ExperienceTimeline } from "@/components/layout/ExperienceTimeline";
 import { CaseStudyCard } from "@/components/layout/CaseStudyCard";
@@ -5,6 +7,9 @@ import { ContactSection } from "@/components/layout/ContactSection";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Link } from "@/i18n/navigation";
+import { ArrowRight } from "lucide-react";
+import type { CaseStudy } from "@/types";
 import {
   getProfile,
   getContact,
@@ -12,36 +17,39 @@ import {
   getExperiences,
   getProjects,
 } from "@/lib/sanity";
-import { draftMode } from "next/headers";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-async function getData(preview: boolean) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const t = await getTranslations({ locale, namespace: "homepage" });
+  const heroT = await getTranslations({ locale, namespace: "hero" });
+  const tc = await getTranslations({ locale, namespace: "contact" });
+
   const [profileData, contactData, aboutData, experience, projects] =
     await Promise.all([
-      getProfile(preview),
-      getContact(preview),
-      getAbout(preview),
-      getExperiences(preview, 2),
-      getProjects(preview, 3),
+      getProfile(locale, preview),
+      getContact(locale, preview),
+      getAbout(locale, preview),
+      getExperiences(locale, preview, 2),
+      getProjects(locale, preview, 3),
     ]);
-
-  return { profileData, contactData, aboutData, experience, projects };
-}
-
-export default async function Home() {
-  const { isEnabled: preview } = await draftMode();
-  const { profileData, contactData, aboutData, experience, projects } =
-    await getData(preview);
 
   return (
     <div className="flex flex-col gap-0">
       <HeroSection
-        name={profileData?.name || "Piotr Zadka"}
+        name={profileData?.name || heroT("fallbackName")}
         tagline={profileData?.tagline || ""}
         resume={aboutData?.resumeFile || aboutData?.resume}
+        greeting={heroT("greeting")}
+        viewProjects={heroT("viewProjects")}
+        contactMe={heroT("contactMe")}
+        viewCV={heroT("viewCV")}
       />
 
       <Section className="bg-muted/50 pt-8 md:pt-12 lg:pt-16">
@@ -49,15 +57,15 @@ export default async function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-                Latest Experience
+                {t("experienceHeading")}
               </h2>
               <p className="text-muted-foreground max-w-2xl">
-                My professional journey in software engineering.
+                {t("experienceDesc")}
               </p>
             </div>
             <Link href="/experience" className="hidden md:block">
               <Button variant="ghost" className="gap-2">
-                View Full Timeline <ArrowRight className="h-4 w-4" />
+                {t("viewFullTimeline")} <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -67,7 +75,7 @@ export default async function Home() {
           <div className="mt-8 md:hidden text-center">
             <Link href="/experience">
               <Button variant="outline" className="w-full">
-                View Full Timeline
+                {t("viewFullTimeline")}
               </Button>
             </Link>
           </div>
@@ -79,21 +87,21 @@ export default async function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-                Featured Projects
+                {t("projectsHeading")}
               </h2>
               <p className="text-muted-foreground max-w-2xl">
-                A selection of projects that demonstrate my technical expertise.
+                {t("projectsDesc")}
               </p>
             </div>
             <Link href="/projects" className="hidden md:block">
               <Button variant="ghost" className="gap-2">
-                View All Projects <ArrowRight className="h-4 w-4" />
+                {t("viewAllProjects")} <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project: any) => (
+            {projects.map((project: CaseStudy) => (
               <CaseStudyCard key={project.id} project={project} />
             ))}
           </div>
@@ -101,7 +109,7 @@ export default async function Home() {
           <div className="mt-12 md:hidden text-center">
             <Link href="/projects">
               <Button variant="outline" className="w-full">
-                View All Projects
+                {t("viewAllProjects")}
               </Button>
             </Link>
           </div>
@@ -112,6 +120,10 @@ export default async function Home() {
         email={contactData?.email || ""}
         social={contactData?.social || { github: "", linkedin: "" }}
         text={contactData?.text}
+        heading={tc("heading")}
+        cta={tc("cta")}
+        githubLabel={tc("github")}
+        linkedinLabel={tc("linkedin")}
       />
     </div>
   );

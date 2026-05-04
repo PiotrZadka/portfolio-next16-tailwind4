@@ -14,7 +14,7 @@ export const contact = defineType({
     defineField({
       name: "text",
       title: "Contact Text",
-      type: "text",
+      type: "localeText",
       description: "The text displayed in the contact section.",
     }),
     defineField({

@@ -4,18 +4,28 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import { Link, usePathname } from "@/i18n/navigation";
 import { FileText } from "lucide-react";
 
 interface HeroSectionProps {
   name: string;
   tagline: string;
   resume?: string;
+  greeting: string;
+  viewProjects: string;
+  contactMe: string;
+  viewCV: string;
 }
 
-export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
+export function HeroSection({
+  name,
+  tagline,
+  resume,
+  greeting,
+  viewProjects,
+  contactMe,
+  viewCV,
+}: HeroSectionProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const pathname = usePathname();
@@ -32,7 +42,7 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
         setIsTyping(false);
         clearInterval(intervalId);
       }
-    }, 50); // Typing speed
+    }, 50);
 
     return () => clearInterval(intervalId);
   }, [tagline, isTyping]);
@@ -43,7 +53,6 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
       const contactSection = document.getElementById("contact");
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: "smooth" });
-        // Update URL without jumping
         window.history.pushState(null, "", "#contact");
       }
     }
@@ -58,7 +67,7 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            Hi, I'm <span className="text-primary">{name}</span>
+            {greeting} <span className="text-primary">{name}</span>
           </h1>
         </motion.div>
 
@@ -82,12 +91,12 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
         >
           <Link href="/projects">
             <Button size="lg" className="w-full sm:w-auto">
-              View My Projects
+              {viewProjects}
             </Button>
           </Link>
           <Link href="/#contact" onClick={handleContactClick}>
             <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              Contact Me
+              {contactMe}
             </Button>
           </Link>
           {resume && (
@@ -98,14 +107,13 @@ export function HeroSection({ name, tagline, resume }: HeroSectionProps) {
                 className="w-full sm:w-auto gap-2"
               >
                 <FileText className="h-5 w-5" />
-                View CV
+                {viewCV}
               </Button>
             </Link>
           )}
         </motion.div>
       </Container>
 
-      {/* Decorative background elements */}
       <div className="absolute top-1/2 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[100px]" />
     </section>
   );

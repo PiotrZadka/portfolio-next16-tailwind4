@@ -1,5 +1,6 @@
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { sanityFetch } from "../../../../sanity/lib/client";
+import { getProject } from "@/lib/sanity";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
@@ -8,42 +9,29 @@ import { Github, ExternalLink, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getBadgeClassName } from "@/lib/skills";
 import { draftMode } from "next/headers";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Metadata } from "next";
-import { CaseStudy } from "@/types";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
 interface ProjectPageProps {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
-}
-
-async function getProject(slug: string, preview: boolean) {
-  const query = `*[_type == "project" && slug.current == $slug][0] {
-    "id": _id,
-    title,
-    "slug": slug.current,
-    summary,
-    "coverImage": coverImage.asset->url,
-    technologies,
-    links,
-    content
-  }`;
-  return await sanityFetch<CaseStudy>({ query, params: { slug }, preview });
 }
 
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = await getProject(slug, false);
+  const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: "projects" });
+  const project = await getProject(slug, locale, false);
 
   if (!project) {
     return {
-      title: "Project Not Found",
+      title: t("projectNotFound"),
     };
   }
 
@@ -68,9 +56,10 @@ export async function generateMetadata({
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { locale, slug } = await params;
   const { isEnabled: preview } = await draftMode();
-  const { slug } = await params;
-  const project = await getProject(slug, preview);
+  const t = await getTranslations({ locale, namespace: "projects" });
+  const project = await getProject(slug, locale, preview);
 
   if (!project) {
     notFound();
@@ -85,7 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Projects
+            {t("backToProjects")}
           </Link>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
@@ -104,7 +93,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               >
                 <Button variant="outline" className="gap-2">
                   <Github className="h-4 w-4" />
-                  View Source
+                  {t("viewSource")}
                 </Button>
               </Link>
             )}
@@ -116,7 +105,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               >
                 <Button className="gap-2">
                   <ExternalLink className="h-4 w-4" />
-                  Live Demo
+                  {t("liveDemo")}
                 </Button>
               </Link>
             )}
@@ -155,7 +144,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="space-y-12">
             {project.content?.problem && (
               <div>
-                <h2 className="text-2xl font-bold mb-4">The Problem</h2>
+                <h2 className="text-2xl font-bold mb-4">{t("theProblem")}</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {project.content.problem}
                 </p>
@@ -164,7 +153,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
             {project.content?.approach && (
               <div>
-                <h2 className="text-2xl font-bold mb-4">The Approach</h2>
+                <h2 className="text-2xl font-bold mb-4">{t("theApproach")}</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {project.content.approach}
                 </p>
@@ -173,7 +162,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
             {project.content?.results && (
               <div>
-                <h2 className="text-2xl font-bold mb-4">The Results</h2>
+                <h2 className="text-2xl font-bold mb-4">{t("theResults")}</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {project.content.results}
                 </p>

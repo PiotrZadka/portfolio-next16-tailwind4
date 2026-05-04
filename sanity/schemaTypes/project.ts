@@ -8,15 +8,14 @@ export const project = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      type: "localeString",
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "title.en",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
@@ -24,9 +23,7 @@ export const project = defineType({
     defineField({
       name: "summary",
       title: "Summary",
-      type: "text",
-      rows: 3,
-      validation: (Rule) => Rule.required(),
+      type: "localeText",
     }),
     defineField({
       name: "coverImage",
@@ -40,10 +37,7 @@ export const project = defineType({
       name: "technologies",
       title: "Technologies",
       type: "array",
-      of: [{ type: "string" }],
-      options: {
-        layout: "tags",
-      },
+      of: [{ type: "reference", to: { type: "skill" } }],
     }),
     defineField({
       name: "links",
@@ -59,10 +53,16 @@ export const project = defineType({
       title: "Content",
       type: "object",
       fields: [
-        { name: "problem", title: "The Problem", type: "text", rows: 5 },
-        { name: "approach", title: "The Approach", type: "text", rows: 5 },
-        { name: "results", title: "The Results", type: "text", rows: 5 },
+        { name: "problem", title: "The Problem", type: "localeText" },
+        { name: "approach", title: "The Approach", type: "localeText" },
+        { name: "results", title: "The Results", type: "localeText" },
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: "title.en",
+      media: "coverImage",
+    },
+  },
 });
