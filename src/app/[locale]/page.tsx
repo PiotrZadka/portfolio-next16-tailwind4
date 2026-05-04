@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
+import type { CaseStudy } from "@/types";
 import {
   getProfile,
   getContact,
@@ -28,6 +29,7 @@ export default async function Home({
   const { isEnabled: preview } = await draftMode();
   const t = await getTranslations({ locale, namespace: "homepage" });
   const heroT = await getTranslations({ locale, namespace: "hero" });
+  const tc = await getTranslations({ locale, namespace: "contact" });
 
   const [profileData, contactData, aboutData, experience, projects] =
     await Promise.all([
@@ -99,7 +101,7 @@ export default async function Home({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project: any) => (
+            {projects.map((project: CaseStudy) => (
               <CaseStudyCard key={project.id} project={project} />
             ))}
           </div>
@@ -118,10 +120,10 @@ export default async function Home({
         email={contactData?.email || ""}
         social={contactData?.social || { github: "", linkedin: "" }}
         text={contactData?.text}
-        heading=""
-        cta=""
-        githubLabel=""
-        linkedinLabel=""
+        heading={tc("heading")}
+        cta={tc("cta")}
+        githubLabel={tc("github")}
+        linkedinLabel={tc("linkedin")}
       />
     </div>
   );

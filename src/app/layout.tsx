@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
@@ -78,9 +79,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // getLocale() reads the locale set by next-intl middleware. Falls back to
+  // "en" for routes outside the locale segment (e.g., /studio).
+  let locale = "en";
+  try {
+    locale = await getLocale();
+  } catch {
+    // Non-locale routes have no locale in request context
+  }
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
       <body className="antialiased font-sans bg-background text-foreground flex flex-col min-h-screen">

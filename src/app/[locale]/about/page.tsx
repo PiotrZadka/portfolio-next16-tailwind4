@@ -45,6 +45,7 @@ export default async function AboutPage({
     preview = false;
   }
   const t = await getTranslations({ locale, namespace: "about" });
+  const tc = await getTranslations({ locale, namespace: "contact" });
 
   const aboutData = await getAbout(locale, preview);
   const contactData = await getContact(locale, preview);
@@ -82,13 +83,13 @@ export default async function AboutPage({
       <AboutSection profile={about} viewCV={t("viewCV")} technologies={t("technologies")} />
 
       <ContactSection
-        email={contact.email}
-        social={contact.social}
+        email={contact.email ?? ""}
+        social={contact.social ?? { github: "", linkedin: "" }}
         text={contact.text}
-        heading=""
-        cta=""
-        githubLabel=""
-        linkedinLabel=""
+        heading={tc("heading")}
+        cta={tc("cta")}
+        githubLabel={tc("github")}
+        linkedinLabel={tc("linkedin")}
       />
     </div>
   );

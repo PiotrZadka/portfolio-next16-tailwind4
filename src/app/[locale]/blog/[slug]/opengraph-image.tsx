@@ -17,8 +17,10 @@ export default async function Image({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { locale, slug } = await params;
-  const post = await getBlogPost(slug, locale, false);
+  const { slug } = await params;
+  // OG images don't need locale filtering — fetch by slug only so posts
+  // without a language field set don't return null and break the image.
+  const post = await getBlogPost(slug, "en", false);
 
   const title = post?.title || "Blog Post";
   const tags = post?.tags?.slice(0, 3) || [];

@@ -1,4 +1,5 @@
 import createNextIntlPlugin from "next-intl/plugin";
+import type { NextConfig } from "next";
 
 if (process.env.NODE_ENV === "development") {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -6,8 +7,7 @@ if (process.env.NODE_ENV === "development") {
 
 const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
