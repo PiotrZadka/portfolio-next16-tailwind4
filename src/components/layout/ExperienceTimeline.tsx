@@ -130,12 +130,23 @@ function ExperienceCard({
 export function ExperienceTimeline({ items, defaultExpanded = true, initialLimit }: ExperienceTimelineProps) {
   const t = useTranslations("experience");
   const topLevel = items.filter((item) => !item.parentId);
-  const [showAll, setShowAll] = useState(!initialLimit);
-  const visibleItems = showAll ? topLevel : topLevel.slice(0, initialLimit);
+  const [showAll, setShowAll] = useState(false);
+  const visibleItems = initialLimit && !showAll ? topLevel.slice(0, initialLimit) : topLevel;
+
+  const allIds = [
+    ...topLevel.map((i) => i.id),
+    ...topLevel.flatMap((i) => (i.children ?? []).map((c) => c.id)),
+  ];
 
   const [expandedIds, setExpandedIds] = useState<Set<string>>(
-    () => new Set(defaultExpanded ? topLevel.map((item) => item.id) : [])
+    () => new Set(defaultExpanded ? allIds : [])
   );
+
+  const handleShowMore = () => {
+    setShowAll(true);
+    // Expand all when revealing more
+    setExpandedIds(new Set(allIds));
+  };
 
   const toggle = (id: string) => {
     setExpandedIds((prev) => {
@@ -231,18 +242,13 @@ export function ExperienceTimeline({ items, defaultExpanded = true, initialLimit
       {initialLimit && topLevel.length > initialLimit && (
         <div className="flex justify-center pt-2">
           <button
-            onClick={() => setShowAll((v) => !v)}
+            onClick={showAll ? () => setShowAll(false) : handleShowMore}
             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
           >
             {showAll ? (
-              <>
-                <ChevronUp className="h-4 w-4" /> Show less
-              </>
+              <><ChevronUp className="h-4 w-4" /> Show less</>
             ) : (
-              <>
-                <ChevronDown className="h-4 w-4" />
-                +{topLevel.length - initialLimit} more experience{topLevel.length - initialLimit !== 1 ? "s" : ""}
-              </>
+              <><ChevronDown className="h-4 w-4" /> Show more</>
             )}
           </button>
         </div>
