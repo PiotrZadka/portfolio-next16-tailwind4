@@ -45,6 +45,7 @@ export default async function Home({
       <HeroSection
         name={profileData?.name || heroT("fallbackName")}
         tagline={profileData?.tagline || ""}
+        bio={profileData?.bio || ""}
         resume={aboutData?.resumeFile || aboutData?.resume}
         greeting={heroT("greeting")}
         viewProjects={heroT("viewProjects")}

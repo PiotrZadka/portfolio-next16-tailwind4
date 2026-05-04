@@ -10,6 +10,7 @@ import { FileText } from "lucide-react";
 interface HeroSectionProps {
   name: string;
   tagline: string;
+  bio?: string;
   resume?: string;
   greeting: string;
   viewProjects: string;
@@ -20,6 +21,7 @@ interface HeroSectionProps {
 export function HeroSection({
   name,
   tagline,
+  bio,
   resume,
   greeting,
   viewProjects,
@@ -82,6 +84,17 @@ export function HeroSection({
             <span className="animate-pulse text-primary">|</span>
           </p>
         </motion.div>
+
+        {bio && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg"
+          >
+            {bio}
+          </motion.p>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

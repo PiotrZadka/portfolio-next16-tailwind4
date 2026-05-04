@@ -12,7 +12,8 @@ const refTitles = (field: string) =>
 export async function getProfile(locale: string, preview = false) {
   const query = `*[_type == "profile"][0] {
     name, 
-    "tagline": ${loc("tagline")}
+    "tagline": ${loc("tagline")},
+    "bio": ${loc("bio")}
   }`;
   return await sanityFetch<any>({ query, params: { locale }, preview });
 }

@@ -22,7 +22,13 @@ export const profile = defineType({
       name: "tagline",
       title: "Tagline",
       type: "localeString",
-      description: "A short, catchy phrase for the hero section.",
+      description: "A short, catchy phrase for the hero typing animation.",
+    }),
+    defineField({
+      name: "bio",
+      title: "Bio",
+      type: "localeText",
+      description: "Short paragraph shown below the tagline in the hero section (e.g. location, specialisation).",
     }),
   ],
   preview: {
