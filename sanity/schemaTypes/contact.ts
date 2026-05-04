@@ -27,4 +27,10 @@ export const contact = defineType({
       ],
     }),
   ],
+  preview: {
+    select: { subtitle: "email" },
+    prepare({ subtitle }: { subtitle?: string }) {
+      return { title: "Contact Section", subtitle };
+    },
+  },
 });

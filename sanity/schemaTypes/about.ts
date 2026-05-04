@@ -37,4 +37,14 @@ export const about = defineType({
       description: "Upload your CV/Resume directly to Sanity",
     }),
   ],
+  preview: {
+    select: {
+      subtitle: "location.en",
+    },
+    prepare() {
+      return {
+        title: "About Section",
+      };
+    },
+  },
 });
