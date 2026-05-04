@@ -5,14 +5,7 @@ export interface SocialLinks {
 
 export interface Profile {
   name: string;
-  title: string;
   tagline: string;
-  about: string;
-  location: string;
-  email: string;
-  social: SocialLinks;
-  resume?: string;
-  skills: string[];
 }
 
 export interface Experience {
@@ -23,7 +16,7 @@ export interface Experience {
   endDate: string | "Present";
   description: string;
   technologies: string[];
-  impact: string[]; // Bullet points of achievements
+  impact: string[];
 }
 
 export interface CaseStudy {
@@ -52,8 +45,7 @@ export interface BlogPost {
   date: string;
   readTime?: string;
   tags: string[];
-  content: string; // MDX content
-  externalUrl?: string; // Optional external link (e.g., Medium article)
-  linkedinHook?: string; // 2-line hook for LinkedIn sharing
-  socialImage?: string; // Custom social preview image URL
+  content: any; // Portable Text blocks
+  externalUrl?: string;
 }
+

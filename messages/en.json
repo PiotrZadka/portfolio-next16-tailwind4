@@ -40,7 +40,9 @@
     "twitterTitle": "Experience",
     "twitterDescription": "My professional journey and career timeline.",
     "heading": "Experience",
-    "subtitle": "A detailed timeline of my professional career, key roles, and the impact I've delivered across various organizations."
+    "subtitle": "A detailed timeline of my professional career, key roles, and the impact I've delivered across various organizations.",
+    "keyImpact": "Key Impact",
+    "technologies": "Technologies"
   },
   "blog": {
     "metaTitle": "Blog",

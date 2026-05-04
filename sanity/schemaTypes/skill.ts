@@ -8,28 +8,15 @@ export const skill = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
-      description: "Name of the skill or technology (e.g. React, Next.js)",
+      type: "localeString",
+      description:
+        "Name of the skill or technology. Polish is optional — falls back to English if not set.",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "icon",
-      title: "Icon",
-      type: "image",
-      description: "Optional icon for the skill",
-    }),
-    defineField({
-      name: "category",
-      title: "Category",
-      type: "string",
-      options: {
-        list: [
-          { title: "Frontend", value: "frontend" },
-          { title: "Backend", value: "backend" },
-          { title: "Tools", value: "tools" },
-          { title: "Other", value: "other" },
-        ],
-      },
-    }),
   ],
+  preview: {
+    select: {
+      title: "title.en",
+    },
+  },
 });
