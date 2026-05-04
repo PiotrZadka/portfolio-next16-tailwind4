@@ -8,7 +8,7 @@ export const experience = defineType({
     defineField({
       name: "company",
       title: "Company",
-      type: "string",
+      type: "localeString",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -69,7 +69,7 @@ export const experience = defineType({
   preview: {
     select: {
       title: "role.en",
-      subtitle: "company",
+      subtitle: "company.en",
     },
   },
 });
