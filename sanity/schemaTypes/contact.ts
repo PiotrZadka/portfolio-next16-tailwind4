@@ -14,7 +14,7 @@ export const contact = defineType({
     defineField({
       name: "text",
       title: "Contact Text",
-      type: "text",
+      type: "localeText",
       description: "The text displayed in the contact section.",
     }),
     defineField({
@@ -25,19 +25,6 @@ export const contact = defineType({
         { name: "github", title: "GitHub URL", type: "url" },
         { name: "linkedin", title: "LinkedIn URL", type: "url" },
       ],
-    }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "string",
-      options: {
-        list: [
-          { title: "English", value: "en" },
-          { title: "Polish", value: "pl" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "en",
     }),
   ],
 });

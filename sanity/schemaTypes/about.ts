@@ -8,22 +8,20 @@ export const about = defineType({
     defineField({
       name: "about",
       title: "About",
-      type: "text",
-      rows: 4,
+      type: "localeText",
       description: "Longer bio for the about page",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "location",
       title: "Location",
-      type: "string",
+      type: "localeString",
     }),
     defineField({
       name: "skills",
       title: "Featured Skills",
       type: "array",
       description: "List of top skills to display in the Technologies section",
-      of: [{ type: "string" }],
+      of: [{ type: "reference", to: { type: "skill" } }],
     }),
     defineField({
       name: "resume",
@@ -37,19 +35,6 @@ export const about = defineType({
       title: "Resume File",
       type: "file",
       description: "Upload your CV/Resume directly to Sanity",
-    }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "string",
-      options: {
-        list: [
-          { title: "English", value: "en" },
-          { title: "Polish", value: "pl" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "en",
     }),
   ],
 });

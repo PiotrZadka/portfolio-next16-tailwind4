@@ -120,9 +120,11 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                               Key Impact
                             </h4>
                             <ul className="list-disc list-outside ml-4 space-y-1 text-sm">
-                              {item.impact.map((point, i) => (
-                                <li key={i}>{point}</li>
-                              ))}
+                              {item.impact &&
+                                Array.isArray(item.impact) &&
+                                item.impact.map((point, i) => (
+                                  <li key={i}>{point}</li>
+                                ))}
                             </ul>
                           </div>
 
@@ -131,15 +133,17 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                               Technologies
                             </h4>
                             <div className="flex flex-wrap gap-2">
-                              {item.technologies.map((tech) => (
-                                <Badge
-                                  key={tech}
-                                  variant="none"
-                                  className={cn("text-xs", getBadgeClassName())}
-                                >
-                                  {tech}
-                                </Badge>
-                              ))}
+                              {item.technologies &&
+                                Array.isArray(item.technologies) &&
+                                item.technologies.filter(Boolean).map((tech, i) => (
+                                  <Badge
+                                    key={`${tech}-${i}`}
+                                    variant="none"
+                                    className={cn("text-xs", getBadgeClassName())}
+                                  >
+                                    {tech}
+                                  </Badge>
+                                ))}
                             </div>
                           </div>
                         </div>

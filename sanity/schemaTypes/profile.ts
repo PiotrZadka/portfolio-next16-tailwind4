@@ -21,35 +21,19 @@ export const profile = defineType({
     defineField({
       name: "title",
       title: "Professional Title",
-      type: "string",
+      type: "localeString",
     }),
     defineField({
       name: "tagline",
       title: "Tagline",
-      type: "string",
+      type: "localeString",
       description: "A short, catchy phrase for the hero section.",
     }),
     defineField({
       name: "skills",
       title: "Skills",
       type: "array",
-      of: [{ type: "string" }],
-      options: {
-        layout: "tags",
-      },
-    }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "string",
-      options: {
-        list: [
-          { title: "English", value: "en" },
-          { title: "Polish", value: "pl" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "en",
+      of: [{ type: "reference", to: { type: "skill" } }],
     }),
   ],
   preview: {

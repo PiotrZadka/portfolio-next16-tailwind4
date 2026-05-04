@@ -80,7 +80,11 @@ export default async function AboutPage({
         </Container>
       </Section>
 
-      <AboutSection profile={about} viewCV={t("viewCV")} technologies={t("technologies")} />
+      <AboutSection
+        profile={about}
+        viewCV={t("viewCV")}
+        technologies={t("technologies")}
+      />
 
       <ContactSection
         email={contact.email ?? ""}

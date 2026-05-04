@@ -8,15 +8,14 @@ export const post = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      type: "localeString",
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "title.en",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
@@ -24,9 +23,7 @@ export const post = defineType({
     defineField({
       name: "excerpt",
       title: "Excerpt",
-      type: "text",
-      rows: 3,
-      validation: (Rule) => Rule.required(),
+      type: "localeText",
     }),
     defineField({
       name: "date",
@@ -59,11 +56,9 @@ export const post = defineType({
     defineField({
       name: "linkedinHook",
       title: "LinkedIn Hook",
-      type: "text",
-      rows: 2,
+      type: "localeText",
       description:
         "2-line hook for LinkedIn post (150 chars max). Stops the scroll!",
-      validation: (Rule) => Rule.max(150),
     }),
     defineField({
       name: "socialImage",
@@ -78,26 +73,26 @@ export const post = defineType({
     defineField({
       name: "content",
       title: "Content",
-      type: "array",
-      of: [{ type: "block" }, { type: "image" }],
-    }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "string",
-      options: {
-        list: [
-          { title: "English", value: "en" },
-          { title: "Polish", value: "pl" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "en",
+      type: "object",
+      fields: [
+        {
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [{ type: "block" }, { type: "image" }],
+        },
+        {
+          name: "pl",
+          title: "Polish",
+          type: "array",
+          of: [{ type: "block" }, { type: "image" }],
+        },
+      ],
     }),
   ],
   preview: {
     select: {
-      title: "title",
+      title: "title.en",
       subtitle: "date",
     },
   },

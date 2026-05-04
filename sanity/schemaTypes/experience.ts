@@ -14,44 +14,50 @@ export const experience = defineType({
     defineField({
       name: "role",
       title: "Role",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      type: "localeString",
     }),
     defineField({
       name: "startDate",
       title: "Start Date",
-      type: "string",
+      type: "localeString",
       description: "e.g. Oct 2021",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "endDate",
       title: "End Date",
-      type: "string",
+      type: "localeString",
       description: "e.g. Present or Dec 2023",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
-      type: "text",
-      rows: 3,
+      type: "localeText",
     }),
     defineField({
       name: "impact",
       title: "Key Impact",
-      type: "array",
-      of: [{ type: "string" }],
+      type: "object",
+      fields: [
+        {
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [{ type: "string" }],
+        },
+        {
+          name: "pl",
+          title: "Polish",
+          type: "array",
+          of: [{ type: "string" }],
+        },
+      ],
       description: "Bullet points of achievements",
     }),
     defineField({
       name: "technologies",
       title: "Technologies",
       type: "array",
-      of: [{ type: "string" }],
-      options: {
-        layout: "tags",
-      },
+      of: [{ type: "reference", to: { type: "skill" } }],
     }),
     defineField({
       name: "order",
@@ -59,23 +65,10 @@ export const experience = defineType({
       type: "number",
       description: "Used to sort experience (higher numbers first)",
     }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "string",
-      options: {
-        list: [
-          { title: "English", value: "en" },
-          { title: "Polish", value: "pl" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "en",
-    }),
   ],
   preview: {
     select: {
-      title: "role",
+      title: "role.en",
       subtitle: "company",
     },
   },

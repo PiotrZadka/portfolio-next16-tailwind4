@@ -53,10 +53,10 @@ export async function AboutSection({
             <div>
               <h3 className="text-lg font-semibold mb-4">{technologies}</h3>
               <div className="flex flex-wrap gap-2">
-                {displaySkills.map((skill) => {
+                {displaySkills.filter(Boolean).map((skill, index) => {
                   return (
                     <Badge
-                      key={skill}
+                      key={`${skill}-${index}`}
                       variant="none"
                       className={cn("text-sm py-1 px-3", getBadgeClassName())}
                     >
