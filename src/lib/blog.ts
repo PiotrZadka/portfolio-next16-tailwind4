@@ -8,15 +8,13 @@ export async function getBlogPosts(
   const query = `*[_type == "post"] | order(date desc) {
     "id": _id,
     "slug": slug.current,
-    "title": title[$locale],
-    "excerpt": excerpt[$locale],
+    "title": coalesce(title[$locale], title.en),
+    "excerpt": coalesce(excerpt[$locale], excerpt.en),
     date,
     readTime,
     tags,
     externalUrl,
-    "linkedinHook": linkedinHook[$locale],
-    "socialImage": socialImage.asset->url,
-    "content": content[$locale]
+    "content": coalesce(content[$locale], content.en)
   }`;
 
   return await sanityFetch<BlogPost[]>({ query, params: { locale }, preview });
@@ -30,15 +28,13 @@ export async function getBlogPost(
   const query = `*[_type == "post" && slug.current == $slug][0] {
     "id": _id,
     "slug": slug.current,
-    "title": title[$locale],
-    "excerpt": excerpt[$locale],
+    "title": coalesce(title[$locale], title.en),
+    "excerpt": coalesce(excerpt[$locale], excerpt.en),
     date,
     readTime,
     tags,
     externalUrl,
-    "linkedinHook": linkedinHook[$locale],
-    "socialImage": socialImage.asset->url,
-    "content": content[$locale]
+    "content": coalesce(content[$locale], content.en)
   }`;
 
   return await sanityFetch<BlogPost | null>({

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Experience } from "@/types";
 import {
@@ -23,6 +24,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const [expandedId, setExpandedId] = useState<string | null>(
     items[0]?.id || null
   );
+  const t = useTranslations("experience");
 
   const toggleExpand = (id: string) => {
     setExpandedId(expandedId === id ? null : id);
@@ -117,7 +119,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                         <div className="space-y-4 pt-2 border-t border-border">
                           <div>
                             <h4 className="font-semibold mb-2 text-sm uppercase tracking-wider text-muted-foreground">
-                              Key Impact
+                              {t("keyImpact")}
                             </h4>
                             <ul className="list-disc list-outside ml-4 space-y-1 text-sm">
                               {item.impact &&
@@ -130,7 +132,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
 
                           <div>
                             <h4 className="font-semibold mb-2 text-sm uppercase tracking-wider text-muted-foreground">
-                              Technologies
+                              {t("technologies")}
                             </h4>
                             <div className="flex flex-wrap gap-2">
                               {item.technologies &&

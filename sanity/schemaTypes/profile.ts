@@ -19,21 +19,10 @@ export const profile = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "title",
-      title: "Professional Title",
-      type: "localeString",
-    }),
-    defineField({
       name: "tagline",
       title: "Tagline",
       type: "localeString",
       description: "A short, catchy phrase for the hero section.",
-    }),
-    defineField({
-      name: "skills",
-      title: "Skills",
-      type: "array",
-      of: [{ type: "reference", to: { type: "skill" } }],
     }),
   ],
   preview: {
@@ -43,3 +32,4 @@ export const profile = defineType({
     },
   },
 });
+
