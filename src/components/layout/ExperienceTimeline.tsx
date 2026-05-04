@@ -19,6 +19,7 @@ import { getBadgeClassName } from "@/lib/skills";
 interface ExperienceTimelineProps {
   items: Experience[];
   defaultExpanded?: boolean;
+  initialLimit?: number;
 }
 
 function ExperienceCard({
@@ -126,9 +127,11 @@ function ExperienceCard({
   );
 }
 
-export function ExperienceTimeline({ items, defaultExpanded = true }: ExperienceTimelineProps) {
+export function ExperienceTimeline({ items, defaultExpanded = true, initialLimit }: ExperienceTimelineProps) {
   const t = useTranslations("experience");
   const topLevel = items.filter((item) => !item.parentId);
+  const [showAll, setShowAll] = useState(!initialLimit);
+  const visibleItems = showAll ? topLevel : topLevel.slice(0, initialLimit);
 
   const [expandedIds, setExpandedIds] = useState<Set<string>>(
     () => new Set(defaultExpanded ? topLevel.map((item) => item.id) : [])
@@ -147,7 +150,7 @@ export function ExperienceTimeline({ items, defaultExpanded = true }: Experience
       {/* Vertical Line */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-1/2" />
 
-      {topLevel.map((item, index) => {
+      {visibleItems.map((item, index) => {
         const isEven = index % 2 === 0;
         const isExpanded = expandedIds.has(item.id);
         const hasChildren = item.children && item.children.length > 0;
@@ -223,6 +226,27 @@ export function ExperienceTimeline({ items, defaultExpanded = true }: Experience
           </div>
         );
       })}
+
+      {/* Show more / less */}
+      {initialLimit && topLevel.length > initialLimit && (
+        <div className="flex justify-center pt-2">
+          <button
+            onClick={() => setShowAll((v) => !v)}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+          >
+            {showAll ? (
+              <>
+                <ChevronUp className="h-4 w-4" /> Show less
+              </>
+            ) : (
+              <>
+                <ChevronDown className="h-4 w-4" />
+                +{topLevel.length - initialLimit} more experience{topLevel.length - initialLimit !== 1 ? "s" : ""}
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

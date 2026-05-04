@@ -36,7 +36,7 @@ export default async function Home({
       getProfile(locale, preview),
       getContact(locale, preview),
       getAbout(locale, preview),
-      getExperiences(locale, preview, 2),
+      getExperiences(locale, preview),
       getProjects(locale, preview, 3),
     ]);
 
@@ -71,7 +71,7 @@ export default async function Home({
             </Link>
           </div>
 
-          <ExperienceTimeline items={experience} defaultExpanded={false} />
+          <ExperienceTimeline items={experience} defaultExpanded={false} initialLimit={2} />
 
           <div className="mt-8 md:hidden text-center">
             <Link href="/experience">
