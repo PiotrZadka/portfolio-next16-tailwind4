@@ -246,9 +246,9 @@ export function ExperienceTimeline({ items, defaultExpanded = true, initialLimit
             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
           >
             {showAll ? (
-              <><ChevronUp className="h-4 w-4" /> Show less</>
+              <><ChevronUp className="h-4 w-4" /> {t("showLess")}</>
             ) : (
-              <><ChevronDown className="h-4 w-4" /> Show more</>
+              <><ChevronDown className="h-4 w-4" /> {t("showMore")}</>
             )}
           </button>
         </div>

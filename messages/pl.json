@@ -46,7 +46,9 @@
     "keyImpact": "Kluczowy wpływ",
     "technologies": "Technologie",
     "present": "Obecnie",
-    "clientPlacements": "Projekty klienckie"
+    "clientPlacements": "Projekty klienckie",
+    "showMore": "Pokaż więcej",
+    "showLess": "Pokaż mniej"
   },
   "blog": {
     "metaTitle": "Blog",

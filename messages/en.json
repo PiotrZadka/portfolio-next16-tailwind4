@@ -46,7 +46,9 @@
     "keyImpact": "Key Impact",
     "technologies": "Technologies",
     "present": "Present",
-    "clientPlacements": "Client Placements"
+    "clientPlacements": "Client Placements",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
   "blog": {
     "metaTitle": "Blog",
