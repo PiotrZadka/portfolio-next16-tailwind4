@@ -10,6 +10,7 @@
     "viewProjects": "View My Projects",
     "contactMe": "Contact Me",
     "viewCV": "View CV",
+    "viewCVAlt": "View CV in Polish",
     "fallbackName": "Piotr Zadka"
   },
   "homepage": {
@@ -30,6 +31,7 @@
     "heading": "About Me",
     "subtitle": "Learn more about my background, skills, and professional journey.",
     "viewCV": "View CV",
+    "viewCVAlt": "View CV in Polish",
     "technologies": "Technologies"
   },
   "experience": {

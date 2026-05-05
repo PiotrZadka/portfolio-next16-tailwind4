@@ -31,8 +31,8 @@ export async function getAbout(locale: string, preview = false) {
     "about": ${loc("about")}, 
     "locationBio": ${loc("locationBio")}, 
     "skills": ${refTitles("skills")},
-    resume, 
-    "resumeFile": resumeFile.asset->url
+    "resumeEn": coalesce(resumeFileEn.asset->url, resumeEn),
+    "resumePl": coalesce(resumeFilePl.asset->url, resumePl)
   }`;
   return await sanityFetch<any>({ query, params: { locale }, preview });
 }

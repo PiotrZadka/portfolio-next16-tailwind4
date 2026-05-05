@@ -2,28 +2,33 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { CodeTerminal } from "@/components/ui/CodeTerminal";
-import { Button } from "@/components/ui/Button";
+import { CvButton } from "@/components/ui/CvButton";
 import { cn } from "@/lib/utils";
 import { getBadgeClassName } from "@/lib/skills";
-import { FileText } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 
 interface AboutSectionProps {
   profile: {
     about: string;
     locationBio?: string;
     skills?: string[];
-    resume?: string;
+    resumeEn?: string;
+    resumePl?: string;
   };
+  locale: string;
   viewCV: string;
+  viewCVAlt: string;
   technologies: string;
 }
 
 export async function AboutSection({
   profile,
+  locale,
   viewCV,
+  viewCVAlt,
   technologies,
 }: AboutSectionProps) {
+  const primaryResume = locale === "pl" ? profile.resumePl : profile.resumeEn;
+  const altResume = locale === "pl" ? profile.resumeEn : profile.resumePl;
   const displaySkills = profile.skills || [];
 
   return (
@@ -40,18 +45,15 @@ export async function AboutSection({
                 </p>
               )}
 
-              {profile.resume && (
+              {primaryResume && (
                 <div className="pt-2">
-                  <Link
-                    href={profile.resume}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button variant="outline" className="gap-2">
-                      <FileText className="h-4 w-4" />
-                      {viewCV}
-                    </Button>
-                  </Link>
+                  <CvButton
+                    primaryUrl={primaryResume}
+                    alternativeUrl={altResume}
+                    label={viewCV}
+                    alternativeLabel={viewCVAlt}
+                    size="md"
+                  />
                 </div>
               )}
             </div>

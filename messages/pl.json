@@ -10,6 +10,7 @@
     "viewProjects": "Zobacz projekty",
     "contactMe": "Kontakt",
     "viewCV": "Zobacz CV",
+    "viewCVAlt": "Zobacz CV po angielsku",
     "fallbackName": "Piotr Zadka"
   },
   "homepage": {
@@ -30,6 +31,7 @@
     "heading": "O mnie",
     "subtitle": "Dowiedz się więcej o moim backgroundzie, umiejętnościach i ścieżce zawodowej.",
     "viewCV": "Zobacz CV",
+    "viewCVAlt": "Zobacz CV po angielsku",
     "technologies": "Technologie"
   },
   "experience": {

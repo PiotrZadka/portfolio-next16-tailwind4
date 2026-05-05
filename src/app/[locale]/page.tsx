@@ -46,11 +46,14 @@ export default async function Home({
         name={profileData?.name || heroT("fallbackName")}
         tagline={profileData?.tagline || ""}
         bio={profileData?.bio || ""}
-        resume={aboutData?.resumeFile || aboutData?.resume}
+        resumeEn={aboutData?.resumeEn}
+        resumePl={aboutData?.resumePl}
+        locale={locale}
         greeting={heroT("greeting")}
         viewProjects={heroT("viewProjects")}
         contactMe={heroT("contactMe")}
         viewCV={heroT("viewCV")}
+        viewCVAlt={heroT("viewCVAlt")}
       />
 
       <Section className="bg-muted/50 pt-8 md:pt-12 lg:pt-16">

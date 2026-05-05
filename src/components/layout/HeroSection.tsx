@@ -3,30 +3,36 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { CvButton } from "@/components/ui/CvButton";
 import { Container } from "@/components/ui/Container";
 import { Link, usePathname } from "@/i18n/navigation";
-import { FileText } from "lucide-react";
 
 interface HeroSectionProps {
   name: string;
   tagline: string;
   bio?: string;
-  resume?: string;
+  resumeEn?: string;
+  resumePl?: string;
+  locale: string;
   greeting: string;
   viewProjects: string;
   contactMe: string;
   viewCV: string;
+  viewCVAlt: string;
 }
 
 export function HeroSection({
   name,
   tagline,
   bio,
-  resume,
+  resumeEn,
+  resumePl,
+  locale,
   greeting,
   viewProjects,
   contactMe,
   viewCV,
+  viewCVAlt,
 }: HeroSectionProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
@@ -59,6 +65,10 @@ export function HeroSection({
       }
     }
   };
+
+  // Decide primary/alternative CV based on current locale
+  const primaryResume = locale === "pl" ? resumePl : resumeEn;
+  const altResume = locale === "pl" ? resumeEn : resumePl;
 
   return (
     <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden py-20">
@@ -100,10 +110,10 @@ export function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.5 }}
-          className="mt-16 flex flex-col gap-4 sm:flex-row"
+          className="mt-16 flex flex-col gap-4 sm:flex-row sm:items-center"
         >
           <Link href="/projects">
-            <Button size="lg" className="w-full sm:w-auto">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
               {viewProjects}
             </Button>
           </Link>
@@ -112,17 +122,16 @@ export function HeroSection({
               {contactMe}
             </Button>
           </Link>
-          {resume && (
-            <Link href={resume} target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto gap-2"
-              >
-                <FileText className="h-5 w-5" />
-                {viewCV}
-              </Button>
-            </Link>
+          {primaryResume && (
+            <CvButton
+              primaryUrl={primaryResume}
+              alternativeUrl={altResume}
+              label={viewCV}
+              alternativeLabel={viewCVAlt}
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto"
+            />
           )}
         </motion.div>
       </Container>

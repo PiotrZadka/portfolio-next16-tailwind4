@@ -4,6 +4,7 @@ export const about = defineType({
   name: "about",
   title: "About Section",
   type: "document",
+  liveEdit: true,
   fields: [
     defineField({
       name: "about",
@@ -25,17 +26,30 @@ export const about = defineType({
       of: [{ type: "reference", to: { type: "skill" } }],
     }),
     defineField({
-      name: "resume",
-      title: "Resume URL",
+      name: "resumeEn",
+      title: "Resume (English) — URL",
       type: "url",
       description:
-        "URL to your CV/Resume (e.g. Google Drive, Dropbox, or Sanity file)",
+        "URL to your English CV/Resume (Google Drive, Dropbox, etc.)",
     }),
     defineField({
-      name: "resumeFile",
-      title: "Resume File",
+      name: "resumeFileEn",
+      title: "Resume (English) — File Upload",
       type: "file",
-      description: "Upload your CV/Resume directly to Sanity",
+      description: "Upload your English CV/Resume directly to Sanity",
+    }),
+    defineField({
+      name: "resumePl",
+      title: "Resume (Polish) — URL",
+      type: "url",
+      description:
+        "URL to your Polish CV/Resume (Google Drive, Dropbox, etc.)",
+    }),
+    defineField({
+      name: "resumeFilePl",
+      title: "Resume (Polish) — File Upload",
+      type: "file",
+      description: "Upload your Polish CV/Resume directly to Sanity",
     }),
   ],
   preview: {

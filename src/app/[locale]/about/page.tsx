@@ -58,7 +58,8 @@ export default async function AboutPage({
     about: aboutData.about,
     locationBio: aboutData.locationBio,
     skills: aboutData.skills || [],
-    resume: aboutData.resumeFile || aboutData.resume,
+    resumeEn: aboutData.resumeEn,
+    resumePl: aboutData.resumePl,
   };
 
   const contact = {
@@ -82,7 +83,9 @@ export default async function AboutPage({
 
       <AboutSection
         profile={about}
+        locale={locale}
         viewCV={t("viewCV")}
+        viewCVAlt={t("viewCVAlt")}
         technologies={t("technologies")}
       />
 
